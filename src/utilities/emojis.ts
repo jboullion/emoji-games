@@ -1,3 +1,7 @@
+/**
+ * TODO: This is pretty poorly organized. Would this be better used as a large single object?
+ */
+
 export const EmojiAnimals = {
   monkey: '🐒',
   dog: '🐕',
@@ -61,8 +65,7 @@ export const EmojiAnimals = {
   scorpion: '🦂',
   mosquito: '🦟',
   microbe: '🦠',
-}
-
+};
 
 export const EmojiFood = {
   grapes: '🍇',
@@ -180,10 +183,9 @@ export const EmojiFood = {
   beverage_box: '🧃',
   mate: '🧉',
   ice: '🧊',
-}
+};
 
-
-export const EmojiEmotions = {
+export const EmojiReactions = {
   kiss: '💋',
   love_letter: '💌',
   heart_with_arrow: '💘',
@@ -205,9 +207,13 @@ export const EmojiEmotions = {
   brown_heart: '🤎',
   black_heart: '🖤',
   white_heart: '🤍',
+  rainbow: '🌈',
   hundred: '💯',
   anger: '💢',
   collision: '💥',
+  sparkles: '✨',
+  baloon: '🎈',
+  party_popper: '🎉',
   dizzy: '💫',
   sweat_droplets: '💦',
   dashing_away: '💨',
@@ -218,8 +224,11 @@ export const EmojiEmotions = {
   anger_bubble: '🗯',
   thought_baloon: '💭',
   zzz: '💤',
-}
-
+  red_question_mark: '❓',
+  white_question_mark: '❔',
+  red_exclamation_mark: '❗',
+  white_exclamation_mark: '❕',
+};
 
 export const EmojiMasks = {
   pile_of_poo: '💩',
@@ -230,8 +239,7 @@ export const EmojiMasks = {
   alien: '👽',
   alien_monster: '👾',
   robot: '🤖',
-}
-
+};
 
 export const EmojiFaces = {
   slightly_smiling_face: '🙂',
@@ -335,4 +343,106 @@ export const EmojiFaces = {
   angry_face_with_horns: '👿',
   skull: '💀',
   skull_and_crossBone: '☠',
-}
+};
+
+export const EmojiPrizes = {
+  red_envelope: '🧧',
+  ribbon: '🎀',
+  wrapped_gift: '🎁',
+  reminder_ribbon: '🎗',
+  admission_ticket: '🎟',
+  ticket: '🎫',
+  military_medal: '🎖',
+  trophy: '🏆',
+  sports_medal: '🏅',
+  gold_medal: '🥇',
+  silver_medal: '🥈',
+  bronze_medal: '🥉',
+  money_bag: '💰',
+  yen_banknote: '💴',
+  dollar_banknote: '💵',
+  euro_banknote: '💶',
+  pound_banknote: '💷',
+  money_with_wings: '💸',
+  credit_card: '💳',
+};
+
+export const EmojiAudio = {
+  muted_speaker: '🔇',
+  low_volume_speaker: '🔈',
+  mid_volume_speaker: '🔉',
+  high_volume_speaker: '🔊',
+  loudspeaker: '📢',
+  bell: '🔔',
+  bell_with_slash: '🔕',
+};
+
+export const EmojiFlags = {
+  chequered_flag: '🏁',
+  triangular_flag: '🚩',
+  crossed_flag: '🎌',
+  black_flag: '🏴',
+  pirate_flag: '️🏴‍☠',
+};
+
+export const EmojiShapes = {
+  red_circle: '🔴',
+  orange_circle: '🟠',
+  yellow_circle: '🟡',
+  green_circle: '🟢',
+  blue_circle: '🔵',
+  purple_circle: '🟣',
+  brown_circle: '🟤',
+  black_circle: '⚫',
+  white_circle: '⚪',
+  red_square: '🟥',
+  orange_square: '🟧',
+  yellow_square: '🟨',
+  green_square: '🟩',
+  blue_square: '🟦',
+  purple_square: '🟪',
+  brown_square: '🟫',
+  black_square: '⬛',
+  white_square: '⬜',
+  large_orange_diamond: '🔶',
+  large_blue_diamond: '🔷',
+  small_orange_diamond: '🔸',
+  small_blue_diamond: '🔹',
+  red_triangle_pointed_up: '🔺',
+  red_triangle_pointed_down: '🔻',
+  diamond_with_a_dot: '💠',
+  radio_button: '🔘',
+  white_square_button: '🔳',
+  black_square_button: '🔲',
+};
+
+export const EmojiTools = {
+  hammer: '🔨',
+  axe: '🪓',
+  pick: '⛏️',
+  dagger: '🗡️',
+  cross_swords: '⚔️',
+  trident: '🔱',
+  water_gun: '🔫',
+  bow_and_arrow: '🏹',
+  scissors: '✂️',
+  shield: '🛡️',
+  wrench: '🔧',
+  clamp: '🗜',
+  balance_scale: '⚖',
+  white_cane: '🦯',
+  link: '🔗',
+  chains: '⛓',
+  toolbox: '🧰',
+  magnet: '🧲',
+  firecracker: '🧨',
+};
+
+export const EmojiMisc = {
+  bullseye: '🎯',
+  teddy_bear: '🧸',
+  game_die: '🎲',
+  puzzle_piece: '🧩',
+  //   🔑 Key
+  // 🗝️ Old Key
+};

@@ -1,0 +1,23 @@
+.bg-dark {
+  background-color: #111 !important;
+}
+
+.btn:active,
+.btn:focus {
+  box-shadow: none;
+}
+
+.modal .btn-close,
+.toast .btn-close {
+  background-image: none;
+  width: auto;
+  height: auto;
+}
+
+.fade {
+  transition: opacity 0.1s linear;
+}
+
+h1 {
+  font-size: 48px;
+}

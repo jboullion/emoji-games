@@ -1,3 +1,7 @@
+/**
+ * These functions are for working with the HTML document
+ */
+
 export function toggleFullscreen() {
   if (document.fullscreenElement) {
     document.exitFullscreen();

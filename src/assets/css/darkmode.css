@@ -1,0 +1,17 @@
+#app-wrapper,
+.card,
+.modal-content {
+  transition: color 0.15s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out;
+}
+
+#app-wrapper.bg-dark {
+  color: #f1f1f1;
+}
+
+#app-wrapper.bg-dark .card,
+#app-wrapper.bg-dark .modal-content {
+  background-color: #111;
+  border-color: #fefefe;
+  color: #f1f1f1;
+}

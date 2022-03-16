@@ -1,61 +1,36 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { toggleFullscreen } from '../../utilities/document';
+import { Games } from '../../types/Games';
 
-// defineProps<{ msg: string }>()
+import GameCard from './home/GameCard.vue';
 
-// const count = ref(0)
-
-// $('#toggle_fullscreen').on('click', function(){
-//   // if already full screen; exit
-//   // else go fullscreen
-//   if (
-//     document.fullscreenElement
-//   ) {
-//     if (document.exitFullscreen) {
-//       document.exitFullscreen();
-//     }
-//   } else {
-//     element = $('#container').get(0);
-//     if (element.requestFullscreen) {
-//       element.requestFullscreen();
-//     }
-//   }
-// });
-
-// function toggleFullScreen() {
-//   fullScreen.value = !fullScreen.value;
-//   if (!fullScreen.value) {
-//     document.exitFullscreen();
-//   } else {
-//     if (element) {
-//       element.requestFullscreen();
-//     }
-//   }
-// }
-
-onMounted(() => {
-  const element = document.getElementById('play');
-
-  if (element) {
-    element.onclick = function (event) {
-      toggleFullscreen();
-    };
-  }
-});
+function playGame(game: String) {
+  console.log(game);
+}
 </script>
 
 <template>
   <div id="home" class="">
-    <div class="row">
-      <div class="col-lg-4"></div>
-      <div class="col-lg-8">
-        <h3>Emoji Battle!</h3>
-        <p>This is a description for the game!</p>
-        <button type="button" id="play" class="btn btn-primary">Play</button>
+    <div class="row my-5">
+      <div class="col-12 text-center">
+        <h1>Emoji Games</h1>
+        <p>Simple games for simple people</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div
+        class="col-xl-3 col-lg-4 col-md-6 mb-4"
+        v-for="game in Games"
+        :key="game.name"
+      >
+        <GameCard
+          :emoji="game.emoji"
+          :title="game.name"
+          :description="game.description"
+          @play="playGame(game.name)"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style></style>
