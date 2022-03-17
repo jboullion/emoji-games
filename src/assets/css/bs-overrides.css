@@ -66,3 +66,11 @@ h1 {
   font-size: 36px;
   margin: 0;
 }
+
+@media (max-width: 768px) {
+  .card-body,
+  .modal-body,
+  .modal-header {
+    padding: 20px;
+  }
+}

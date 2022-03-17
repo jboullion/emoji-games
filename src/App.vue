@@ -45,10 +45,10 @@ body,
 #app-wrapper {
   min-height: 100vh;
 }
+
 .menus-btn {
   background-color: transparent;
   border: none;
   margin-left: 10px;
-  font-size: 34px;
 }
 </style>

@@ -15,14 +15,13 @@
 
 <style scoped>
 #menu-toggle {
-  transform-origin: 50% 50%;
-  width: 59px;
-  height: 59px;
+  font-size: 34px;
 }
 
 #menu-toggle:hover {
+  font-size: 34px;
   animation-name: spin;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
 }

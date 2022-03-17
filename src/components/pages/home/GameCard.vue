@@ -66,6 +66,7 @@ onMounted(() => {
 .game-image {
   font-size: 80px;
   padding-top: 10px;
+  transition: transform 2s ease-in-out;
 }
 
 .card:hover .game-image {

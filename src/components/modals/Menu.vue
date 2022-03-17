@@ -49,7 +49,7 @@ const reactiveProps = reactive(props);
 
           <button
             class="menus-btn audio-toggle"
-            style="width: 50px; text-align: left"
+            style="width: 82px; text-align: left"
             @click="emit('toggleAudio')"
           >
             <span v-show="reactiveProps.audioEnabled">🔈</span>
@@ -61,4 +61,8 @@ const reactiveProps = reactive(props);
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.menus-btn {
+  font-size: 50px;
+}
+</style>
