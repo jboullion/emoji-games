@@ -49,6 +49,5 @@ body,
 .menus-btn {
   background-color: transparent;
   border: none;
-  margin-left: 10px;
 }
 </style>

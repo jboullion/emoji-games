@@ -16,10 +16,13 @@
 <style scoped>
 #menu-toggle {
   font-size: 34px;
+
+  /* transition: transform 0.2s linear; */
 }
 
 #menu-toggle:hover {
   font-size: 34px;
+  /* transform: rotate(360deg); */
   animation-name: spin;
   animation-duration: 0.5s;
   animation-iteration-count: 1;

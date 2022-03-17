@@ -18,12 +18,7 @@ function playGame(game: String) {
         v-for="game in Games"
         :key="game.name"
       >
-        <GameCard
-          :emoji="game.emoji"
-          :title="game.name"
-          :description="game.description"
-          @play="playGame(game.name)"
-        />
+        <GameCard :game="game" />
       </div>
     </div>
   </div>

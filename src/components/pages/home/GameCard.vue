@@ -1,61 +1,42 @@
 <script setup lang="ts">
 // TODO: Need to create images for these games instead of simple emoji's eventually...right?
 
-import { ref, onMounted } from 'vue';
-import { toggleFullscreen } from '../../../utilities/document';
+import { ref, onMounted, PropType } from 'vue';
 
-// const count = ref(0)
-const emit = defineEmits(['play']);
+import { Game } from '../../../types/Games';
 
 defineProps({
-  title: {
-    type: String,
+  game: {
+    type: Object as PropType<Game>,
     required: true,
   },
-  emoji: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-});
-
-onMounted(() => {
-  const element = document.getElementById('play');
-
-  if (element) {
-    element.onclick = function (event) {
-      toggleFullscreen();
-    };
-  }
 });
 </script>
 
 <template>
-  <div @click="emit('play')" class="card text-center h-100">
-    <span class="game-image">{{ emoji }}</span>
+  <router-link :to="game.link" class="card text-center h-100">
+    <span class="game-image">{{ game.emoji }}</span>
     <div class="card-body">
-      <h4 class="card-title">{{ title }}</h4>
+      <h4 class="card-title">{{ game.name }}</h4>
       <p class="card-text flex-fill">
-        {{ description }}
+        {{ game.description }}
       </p>
-      <!-- <button
-        type="button"
-        class="btn d-block btn-primary"
-        @click="emit('play')"
-      >
-        Play <span class="visually-hidden">{{ title }}</span>
-      </button> -->
     </div>
-  </div>
+  </router-link>
 </template>
 
 <style scoped>
 .card {
   cursor: pointer;
   user-select: none;
+  text-decoration: none;
+  color: black;
+  transition: box-shadow 0.15s linear;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
 }
 
 .card-body {

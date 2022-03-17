@@ -4,6 +4,9 @@ import { createWebHistory, createRouter } from 'vue-router';
 const Home = () => import('../components/pages/Home.vue');
 const Contact = () => import('../components/pages/Contact.vue');
 const Privacy = () => import('../components/pages/Privacy.vue');
+
+const Search = () => import('../components/games/Search.vue');
+
 // const About = () => import("../components/pages/About.vue");
 // const Experiments = () => import("../components/pages/Experiments.vue");
 // const Futurist = () => import("../components/pages/Futurist.vue");
@@ -29,6 +32,11 @@ const routes = [
     path: '/privacy',
     name: 'Privacy',
     component: Privacy,
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search,
   },
   // {
   //   path: "/about",

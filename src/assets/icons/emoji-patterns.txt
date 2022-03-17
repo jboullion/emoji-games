@@ -1,0 +1,19 @@
+(U\+.+?)	(\W)	([\w ]+)
+^(\W+?)	([\w\(\)\.&:\-,’ ]+)
+
+{
+  code: ['$1'],
+  icon: '$2',
+  parent_cat: 'face',
+  child_cat: 'smiling',
+  short_name: '$3',
+},
+
+
+{
+  code: ['$1'],
+  icon: '$2',
+  parent_cat: 'person',
+  child_cat: 'gesture',
+  short_name: '$3',
+},

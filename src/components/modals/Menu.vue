@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { toRefs, reactive } from 'vue';
+import { toggleFullscreen } from '../../utilities/document';
 
 const emit = defineEmits(['toggleDark', 'toggleAudio']);
 
@@ -54,6 +55,10 @@ const reactiveProps = reactive(props);
           >
             <span v-show="reactiveProps.audioEnabled">🔈</span>
             <span v-show="!reactiveProps.audioEnabled">🔊</span>
+          </button>
+
+          <button class="menus-btn fullscreen" @click="toggleFullscreen">
+            🖥️
           </button>
         </div>
       </div>
