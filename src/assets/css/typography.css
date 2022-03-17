@@ -8,7 +8,7 @@ h2,
 h3,
 h4,
 h5 {
-  color: #222;
+  color: var(--gray);
   font-family: 'Bangers', cursive;
   transition: color 0.15s linear;
 }

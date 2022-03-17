@@ -148,16 +148,10 @@ function copy(emoji: string) {
 </template>
 
 <style scoped>
-.form-select {
-  box-shadow: inset 0 2px 0 rgb(0 0 0 / 8%);
-}
-
-.form-control,
-.form-select {
-  border: 3px solid #ced4da;
-  border-radius: 15px;
-  font-weight: bold;
-  line-height: 1.8;
+#app-wrapper.bg-dark .emoji {
+  background-color: var(--dark);
+  box-shadow: 0 2px 0 2px rgba(255, 255, 255, 0.5);
+  border: 2px solid var(--gray);
 }
 
 #emoji-list {
@@ -172,7 +166,7 @@ function copy(emoji: string) {
   cursor: grab;
   position: relative;
   user-select: none;
-  border: 2px solid #111;
+  border: 2px solid var(--dark);
   border-radius: 15px;
   box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.5);
 }
@@ -187,13 +181,16 @@ function copy(emoji: string) {
   content: 'Copied! ' attr(title);
   font-size: 16px;
   background: #fff;
+  color: black;
   padding: 5px;
-  border: 2px solid #222;
+  border: 2px solid var(--gray);
   border-radius: 15px;
   position: absolute;
   bottom: 95%;
-  left: -25%;
+  left: 50%;
   width: 150%;
+  max-width: 320px;
+  transform: translate(-50%, 0);
   z-index: 10;
 }
 

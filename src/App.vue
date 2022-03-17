@@ -34,6 +34,7 @@ const audioEnabled = ref(false);
 /* @import './assets/css/bootswatch/sketchy/bootstrap.min.css'; */
 @import './assets/css/bootswatch/lumen/bootstrap.min.css';
 
+@import './assets/css/variables.css';
 @import './assets/css/utilities.css';
 @import './assets/css/bs-overrides.css';
 @import './assets/css/darkmode.css';

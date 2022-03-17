@@ -6,18 +6,18 @@
 }
 
 #app-wrapper.bg-dark {
-  color: #f1f1f1;
+  color: var(--soft-white);
 }
 
 #app-wrapper.bg-dark .card,
 #app-wrapper.bg-dark .modal-content {
-  background-color: #111;
-  border-color: #fefefe;
-  color: #f1f1f1;
+  background-color: var(--dark);
+  border-color: var(--soft-white);
+  color: var(--soft-white);
 }
 
 #app-wrapper.bg-dark .modal {
-  background-color: #222;
+  background-color: var(--gray);
 }
 
 #app-wrapper.bg-dark h1,
@@ -25,9 +25,21 @@
 #app-wrapper.bg-dark h3,
 #app-wrapper.bg-dark h4,
 #app-wrapper.bg-dark h5 {
-  color: #fefefe;
+  color: var(--soft-white);
 }
 
 #app-wrapper.bg-dark p {
-  color: #fefefe;
+  color: var(--soft-white);
+}
+
+/**
+ * FORMS
+ */
+.form-select {
+  box-shadow: inset 0 2px 0 rgb(0 0 0 / 8%);
+}
+
+.form-control,
+.form-select {
+  border: 3px solid var(--gray);
 }
