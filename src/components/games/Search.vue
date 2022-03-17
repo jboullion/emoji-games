@@ -31,11 +31,16 @@ Emojis.forEach((emoji) => {
 filters.sort((a, b) => (a.name > b.name ? 1 : -1));
 
 function searchEmojis() {
+  const searchTerms = search.value.split(' ');
   emojiResults.value = Emojis.filter((emoji) => {
     let valid = true;
 
-    if (search.value) {
-      valid = emoji.short_name.includes(search.value);
+    if (searchTerms) {
+      // search by multiple terms
+      searchTerms.forEach((term) => {
+        if (!valid) return;
+        valid = emoji.short_name.includes(term);
+      });
     }
 
     if (valid && parentFilter.value) {
