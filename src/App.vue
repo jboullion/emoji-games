@@ -3,7 +3,6 @@ import { ref } from 'vue';
 
 import ModalMenu from './components/modals/Menu.vue';
 import Footer from './components/Footer.vue';
-import ModalSettings from './components/modals/Settings.vue';
 import Header from './components/Header.vue';
 
 const darkMode = ref(false);
@@ -12,7 +11,7 @@ const audioEnabled = ref(false);
 
 <template>
   <div id="app-wrapper" :class="{ 'bg-dark': darkMode }">
-    <div class="container">
+    <div class="container d-flex flex-column justify-content-between">
       <Header />
 
       <router-view></router-view>
@@ -39,6 +38,11 @@ const audioEnabled = ref(false);
 @import './assets/css/darkmode.css';
 @import './assets/css/typography.css';
 
+body,
+#app,
+#app-wrapper {
+  min-height: 100vh;
+}
 .menus-btn {
   background-color: transparent;
   border: none;

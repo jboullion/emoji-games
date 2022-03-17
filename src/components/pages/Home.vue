@@ -10,7 +10,7 @@ function playGame(game: String) {
 
 <template>
   <div id="home" class="">
-    <div class="row my-5">
+    <div class="row mb-5">
       <div class="col-12 text-center">
         <h1>Emoji Games</h1>
         <p>Simple games for simple people</p>

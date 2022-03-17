@@ -32,35 +32,24 @@ const reactiveProps = reactive(props);
             ✖️
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body d-flex justify-content-between">
+          <router-link to="/" class="menus-btn" data-bs-dismiss="modal"
+            >🏠</router-link
+          >
+
           <button class="menus-btn dark-mode" @click="emit('toggleDark')">
             <span v-show="reactiveProps.darkMode">☀️</span>
             <span v-show="!reactiveProps.darkMode">🌑</span>
           </button>
 
-          <button class="menus-btn audio-toggle" @click="emit('toggleAudio')">
+          <button
+            class="menus-btn audio-toggle"
+            style="width: 50px"
+            @click="emit('toggleAudio')"
+          >
             <span v-show="reactiveProps.audioEnabled">🔈</span>
             <span v-show="!reactiveProps.audioEnabled">🔊</span>
           </button>
-
-          <!-- <button
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#settings-modal"
-          >
-            Settings
-          </button> -->
-
-          <!-- <div class="d-flex justify-content-between mt-5">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div> -->
         </div>
       </div>
     </div>

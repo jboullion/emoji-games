@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// TODO: THIS HAS BEEN DEPRICATED
 import { toRefs, reactive } from 'vue';
 
 const emit = defineEmits(['toggleDark', 'toggleAudio']);
