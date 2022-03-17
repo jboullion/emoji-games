@@ -2,6 +2,11 @@
   background-color: #222 !important;
 }
 
+.btn {
+  border-radius: 15px;
+  padding: 10px;
+}
+
 .btn:active,
 .btn:focus,
 .btn-close:active,

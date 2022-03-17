@@ -5,6 +5,7 @@ import ModalMenu from './components/modals/Menu.vue';
 import Footer from './components/Footer.vue';
 import Header from './components/Header.vue';
 
+// TODO: These values need to be tracked locally or in a DB so the user doesn't have to redo each visit
 const darkMode = ref(false);
 const audioEnabled = ref(false);
 </script>
@@ -37,6 +38,7 @@ const audioEnabled = ref(false);
 @import './assets/css/bs-overrides.css';
 @import './assets/css/darkmode.css';
 @import './assets/css/typography.css';
+@import './assets/css/animations.css';
 
 body,
 #app,

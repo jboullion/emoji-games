@@ -8,9 +8,22 @@
       data-bs-toggle="modal"
       data-bs-target="#menu-modal"
     >
-      ➕
+      ⚙️
     </button>
   </div>
 </template>
 
-<style></style>
+<style scoped>
+#menu-toggle {
+  transform-origin: 50% 50%;
+  width: 59px;
+  height: 59px;
+}
+
+#menu-toggle:hover {
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+}
+</style>

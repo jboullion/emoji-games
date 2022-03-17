@@ -34,25 +34,30 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="card text-center h-100">
+  <div @click="emit('play')" class="card text-center h-100">
     <span class="game-image">{{ emoji }}</span>
     <div class="card-body">
       <h4 class="card-title">{{ title }}</h4>
       <p class="card-text flex-fill">
         {{ description }}
       </p>
-      <button
+      <!-- <button
         type="button"
         class="btn d-block btn-primary"
         @click="emit('play')"
       >
         Play <span class="visually-hidden">{{ title }}</span>
-      </button>
+      </button> -->
     </div>
   </div>
 </template>
 
 <style scoped>
+.card {
+  cursor: pointer;
+  user-select: none;
+}
+
 .card-body {
   display: flex;
   flex-direction: column;
@@ -60,5 +65,13 @@ onMounted(() => {
 
 .game-image {
   font-size: 80px;
+  padding-top: 10px;
+}
+
+.card:hover .game-image {
+  animation-name: bob;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 </style>

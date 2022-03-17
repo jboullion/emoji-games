@@ -2,6 +2,7 @@
 import { Games } from '../../types/Games';
 
 import GameCard from './home/GameCard.vue';
+import Title from './common/Title.vue';
 
 function playGame(game: String) {
   console.log(game);
@@ -10,12 +11,7 @@ function playGame(game: String) {
 
 <template>
   <div id="home" class="">
-    <div class="row mb-5">
-      <div class="col-12 text-center">
-        <h1>Emoji Games</h1>
-        <p>Simple games for simple people</p>
-      </div>
-    </div>
+    <Title />
     <div class="row justify-content-center">
       <div
         class="col-xl-3 col-lg-4 col-md-6 mb-4"

@@ -421,6 +421,7 @@ export const EmojiTools = {
   axe: '🪓',
   pick: '⛏️',
   dagger: '🗡️',
+  knife: '🔪',
   // 🪒 Razor
   cross_swords: '⚔️',
   trident: '🔱',
