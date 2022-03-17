@@ -8,6 +8,7 @@ const search = ref('');
 const emojiResults = ref<Emoji[]>([]);
 const filters: SearchFilter[] = [];
 const parentFilter = ref();
+const childFilter = ref();
 
 // setup filters
 Emojis.forEach((emoji) => {
@@ -18,12 +19,16 @@ Emojis.forEach((emoji) => {
   if (parentID === -1) {
     filters.push({
       name: emoji.parent_cat,
-      children: [emoji],
+      children: [emoji.child_cat],
     });
   } else {
-    filters[parentID].children.push(emoji);
+    if (!filters[parentID].children.includes(emoji.child_cat)) {
+      filters[parentID].children.push(emoji.child_cat);
+    }
   }
 });
+
+filters.sort((a, b) => (a.name > b.name ? 1 : -1));
 
 function searchEmojis() {
   emojiResults.value = Emojis.filter((emoji) => {
@@ -37,6 +42,10 @@ function searchEmojis() {
       valid = emoji.parent_cat === parentFilter.value.name;
     }
 
+    if (valid && childFilter.value) {
+      valid = emoji.child_cat === childFilter.value;
+    }
+
     return valid;
   });
 }
@@ -48,37 +57,61 @@ function copy(emoji: string) {
 
 <template>
   <div id="home" class="">
-    <Title />
+    <!-- <Title /> -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>Search</h1>
+      </div>
+    </div>
 
     <p class="text-center">
       <strong>Note:</strong> Not all emojis will appear for all users.
       Difference devices use different emoji sets.
     </p>
     <div class="container text-center">
-      <form @submit.prevent="searchEmojis">
-        <div class="input-group mb-3">
+      <form @submit.prevent="searchEmojis" class="row mb-5">
+        <div class="col-md-4 mb-3">
           <input
             type="search"
             class="form-control"
             placeholder="Search"
             v-model="search"
           />
-          <button class="btn btn-outline-secondary" id="button-addon2">
-            🔎
-          </button>
         </div>
 
-        <select
-          class="form-select"
-          aria-label="Select Category"
-          v-model="parentFilter"
-          @change="searchEmojis"
-        >
-          <option selected>- Select Category -</option>
-          <option v-for="(filter, i) in filters" :key="i" :value="filter">
-            {{ capitalize(filter.name) }}
-          </option>
-        </select>
+        <div class="col-md-4 mb-3">
+          <select
+            class="form-select"
+            aria-label="Select Category"
+            placeholder="Category"
+            v-model="parentFilter"
+            @change="searchEmojis"
+          >
+            <option selected :value="null">All</option>
+            <option v-for="(filter, i) in filters" :key="i" :value="filter">
+              {{ capitalize(filter.name) }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-4 mb-3" v-if="parentFilter">
+          <select
+            class="form-select"
+            aria-label="Select Sub Category"
+            placeholder="Sub Category"
+            v-model="childFilter"
+            @change="searchEmojis"
+          >
+            <option selected :value="null">All</option>
+            <option
+              v-for="(filter, i) in parentFilter.children"
+              :key="i"
+              :value="filter"
+            >
+              {{ capitalize(filter) }}
+            </option>
+          </select>
+        </div>
 
         <!-- <div
           class="btn-group"
@@ -115,6 +148,18 @@ function copy(emoji: string) {
 </template>
 
 <style scoped>
+.form-select {
+  box-shadow: inset 0 2px 0 rgb(0 0 0 / 8%);
+}
+
+.form-control,
+.form-select {
+  border: 3px solid #ced4da;
+  border-radius: 15px;
+  font-weight: bold;
+  line-height: 1.8;
+}
+
 #emoji-list {
   display: flex;
   flex-wrap: wrap;
@@ -122,7 +167,7 @@ function copy(emoji: string) {
 }
 #emoji-list .emoji {
   font-size: 64px;
-  margin: 10px;
+  margin: 15px;
   flex: 1;
   cursor: grab;
   position: relative;
@@ -135,17 +180,18 @@ function copy(emoji: string) {
 #emoji-list .emoji:active {
   cursor: grabbing;
   top: 1px;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.5);
 }
 
 #emoji-list .emoji:active:after {
-  content: attr(title);
+  content: 'Copied! ' attr(title);
   font-size: 16px;
   background: #fff;
   padding: 5px;
   border: 2px solid #222;
   border-radius: 15px;
   position: absolute;
-  top: 100%;
+  bottom: 95%;
   left: -25%;
   width: 150%;
   z-index: 10;
