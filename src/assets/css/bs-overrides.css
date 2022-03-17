@@ -1,10 +1,18 @@
 .bg-dark {
-  background-color: #111 !important;
+  background-color: #222 !important;
 }
 
 .btn:active,
-.btn:focus {
-  box-shadow: none;
+.btn:focus,
+.btn-close:active,
+.btn-close:focus {
+  box-shadow: none !important;
+}
+
+.btn:focus,
+.btn-close:focus {
+  outline: auto 2px Highlight;
+  outline: auto 2px -webkit-focus-ring-color;
 }
 
 .modal .btn-close,
@@ -12,6 +20,9 @@
   background-image: none;
   width: auto;
   height: auto;
+  opacity: 1;
+  font-size: 30px;
+  padding: 0;
 }
 
 .fade {
@@ -20,4 +31,28 @@
 
 h1 {
   font-size: 48px;
+}
+
+.card,
+.modal-content {
+  border-radius: 15px;
+  border: 5px solid #222;
+}
+
+.card-body,
+.modal-body,
+.modal-header {
+  padding: 30px;
+}
+
+.modal {
+  transition: all 0.15s linear;
+  background-color: #aaa;
+  opacity: 1;
+}
+
+.modal-header {
+  border: 0;
+  padding-top: 20px;
+  padding-bottom: 0;
 }

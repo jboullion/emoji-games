@@ -46,7 +46,7 @@ onMounted(() => {
         class="btn d-block btn-primary"
         @click="emit('play')"
       >
-        Play
+        Play <span class="visually-hidden">{{ title }}</span>
       </button>
     </div>
   </div>
