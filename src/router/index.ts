@@ -5,7 +5,7 @@ const Home = () => import('../components/pages/Home.vue');
 const Contact = () => import('../components/pages/Contact.vue');
 const Privacy = () => import('../components/pages/Privacy.vue');
 
-const Search = () => import('../components/pages/Search.vue');
+const Search = () => import('../components/pages/old_Search.vue');
 const Memory = () => import('../components/pages/Memory.vue');
 
 // const About = () => import("../components/pages/About.vue");
@@ -34,11 +34,11 @@ const routes = [
     name: 'Privacy',
     component: Privacy,
   },
-  {
-    path: '/search',
-    name: 'Search',
-    component: Search,
-  },
+  // {
+  //   path: '/search',
+  //   name: 'Search',
+  //   component: Search,
+  // },
   {
     path: '/games/memory',
     name: 'Memory',

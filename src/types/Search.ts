@@ -7419,7 +7419,7 @@ export const Emojis: Emoji[] = [
   },
   {
     code: [''],
-    icon: '🎟',
+    icon: '🎟️',
     parent_cat: 'activity',
     child_cat: 'event',
     short_name: 'admission tickets',
@@ -8414,7 +8414,7 @@ export const Emojis: Emoji[] = [
   },
   {
     code: [''],
-    icon: '☎',
+    icon: '☎️',
     parent_cat: 'electronics',
     child_cat: 'phone',
     short_name: 'telephone',

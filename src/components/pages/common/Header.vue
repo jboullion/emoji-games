@@ -7,36 +7,57 @@
       type="button"
       @click="$router.push('/')"
       class="menus-btn"
-      data-bs-dismiss="modal"
     >
       🏠 <span class="visually-hidden">Home</span>
     </button>
-    <button
-      id="menu-toggle"
-      class="menus-btn"
-      data-bs-toggle="modal"
-      data-bs-target="#menu-modal"
-    >
-      ⚙️ <span class="visually-hidden">Settings</span>
-    </button>
+    <div>
+      <button
+        id="search"
+        type="button"
+        class="menus-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#search-modal"
+      >
+        🔍 <span class="visually-hidden">Search</span>
+      </button>
+
+      <button
+        id="menu-toggle"
+        type="button"
+        class="menus-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#settings-modal"
+      >
+        ⚙️ <span class="visually-hidden">Settings</span>
+      </button>
+    </div>
   </div>
 </template>
 
 <style scoped>
-#home,
-#menu-toggle {
+.menus-btn {
+  position: relative;
   font-size: 34px;
+  transition: transform 0.1s linear;
+}
+
+.menus-btn:active {
+  top: 1px;
 }
 
 #home:hover {
   transform: scale(1.2);
 }
 
+#search:hover {
+  transform: rotate(45deg);
+}
+
 #menu-toggle:hover {
-  /* transform: rotate(360deg); */
-  animation-name: spin;
+  transform: rotate(-360deg);
+  /* animation-name: spin;
   animation-duration: 0.5s;
   animation-iteration-count: 1;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out; */
 }
 </style>

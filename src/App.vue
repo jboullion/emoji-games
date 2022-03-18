@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import ModalSettings from './components/modals/Settings.vue';
 import Footer from './components/pages/common/Footer.vue';
 import Header from './components/pages/common/Header.vue';
+import ModalSearch from './components/modals/Search.vue';
 
 // TODO: These values need to be tracked locally or in a DB so the user doesn't have to redo each visit
 const darkMode = ref(false);
@@ -30,6 +31,7 @@ const audioEnabled = ref(false);
       @toggleDark="darkMode = !darkMode"
       @toggleAudio="audioEnabled = !audioEnabled"
     />
+    <ModalSearch />
   </div>
 </template>
 

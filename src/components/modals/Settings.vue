@@ -19,7 +19,7 @@ const reactiveProps = reactive(props);
 </script>
 
 <template>
-  <div id="menu-modal" class="modal fade" tabindex="-1">
+  <div id="settings-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">

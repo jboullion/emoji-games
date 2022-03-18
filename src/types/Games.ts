@@ -7,6 +7,27 @@ export type Game = {
 };
 
 export const Games: Game[] = [
+  // {
+  //   name: 'Search',
+  //   emoji: '🔍',
+  //   description: 'Search Emojis',
+  //   link: '/search',
+  //   maxPlayers: 1,
+  // },
+  {
+    name: 'Memory',
+    emoji: '🧠',
+    description: 'How many emoji can you remember?',
+    link: '/games/memory',
+    maxPlayers: 5,
+  },
+  {
+    name: 'Random',
+    emoji: '🎰',
+    description: 'Take a spin and win!',
+    link: '/games/renadom',
+    maxPlayers: 4,
+  },
   {
     name: 'Battle',
     emoji: '⚔️',
@@ -22,13 +43,7 @@ export const Games: Game[] = [
     link: '/games/puzzle',
     maxPlayers: 5,
   },
-  {
-    name: 'Search',
-    emoji: '🔍',
-    description: 'Search Emojis',
-    link: '/search',
-    maxPlayers: 1,
-  },
+
   {
     name: 'Fly',
     emoji: '🐦',
@@ -56,13 +71,6 @@ export const Games: Game[] = [
     emoji: '✂️',
     description: '1-5 players try to guess what emoji the others will show',
     link: '/games/rpsls',
-    maxPlayers: 5,
-  },
-  {
-    name: 'Memory',
-    emoji: '🧠',
-    description: 'How many emoji can you remember?',
-    link: '/games/memory',
     maxPlayers: 5,
   },
 ];
