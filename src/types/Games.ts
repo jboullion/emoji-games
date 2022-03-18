@@ -11,7 +11,7 @@ export const Games: Game[] = [
     name: 'Battle',
     emoji: '⚔️',
     description: 'Control a team of emojis in a battle with a friend or an AI',
-    link: '/game/battle',
+    link: '/games/battle',
     maxPlayers: 2,
   },
   {
@@ -19,7 +19,7 @@ export const Games: Game[] = [
     emoji: '🧩',
     description:
       'Put together a random puzzle of emojis by yourself or with friends',
-    link: '/game/puzzle',
+    link: '/games/puzzle',
     maxPlayers: 5,
   },
   {
@@ -33,14 +33,14 @@ export const Games: Game[] = [
     name: 'Fly',
     emoji: '🐦',
     description: 'Fly emojis, score points!',
-    link: '/game/fly',
+    link: '/games/fly',
     maxPlayers: 2,
   },
   {
     name: 'Sets',
     emoji: '💎',
     description: 'Match a set of emojis and watch more drop into place!',
-    link: '/game/sets',
+    link: '/games/sets',
     maxPlayers: 2,
   },
   {
@@ -48,21 +48,21 @@ export const Games: Game[] = [
     emoji: '🤔',
     description:
       'Ask questions to figure out which emoji the other person has!',
-    link: '/game/guess',
+    link: '/games/guess',
     maxPlayers: 2,
   },
   {
     name: 'RPSLS',
     emoji: '✂️',
     description: '1-5 players try to guess what emoji the others will show',
-    link: '/game/rpsls',
+    link: '/games/rpsls',
     maxPlayers: 5,
   },
   {
     name: 'Memory',
     emoji: '🧠',
     description: 'How many emoji can you remember?',
-    link: '/game/memory',
+    link: '/games/memory',
     maxPlayers: 5,
   },
 ];

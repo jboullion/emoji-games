@@ -2,6 +2,7 @@
 // TODO: Should this be turned into a modal instead? Can used to search emoji's from any page?
 import { ref } from 'vue';
 import { capitalize } from '../../utilities/filters';
+import { copy } from '../../utilities/document';
 import { Emoji, Emojis, SearchFilter } from '../../types/Search';
 
 const search = ref('');
@@ -48,7 +49,6 @@ function searchEmojis() {
     }
 
     if (valid && childFilter.value) {
-      console.log('searching childfilter', childFilter.value);
       valid = emoji.child_cat === childFilter.value;
     }
 
@@ -61,95 +61,84 @@ function updateParentFilter() {
   childFilter.value = null;
   searchEmojis();
 }
-
-function copy(emoji: string) {
-  navigator.clipboard.writeText(emoji);
-}
 </script>
 
 <template>
   <div id="search" class="page">
-    <!-- <Title /> -->
     <div class="row">
       <div class="col-12 text-center">
         <h1>Emoji Search</h1>
       </div>
     </div>
 
-    <div class="container">
-      <form @submit.prevent="searchEmojis" class="row justify-content-center">
-        <div class="col-md-4 mb-3">
-          <label class="col-form-label" for="search">Search</label>
-          <div class="input-group">
-            <input
-              id="search"
-              type="search"
-              class="form-control"
-              placeholder="Search"
-              v-model="search"
-              maxlength="30"
-            />
-            <button type="submit" class="btn btn-secondary">🔎</button>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-          <label class="col-form-label" for="inputLarge">Category</label>
-          <select
-            class="form-select"
-            aria-label="Select Category"
-            placeholder="Category"
-            v-model="parentFilter"
-            @change="updateParentFilter"
-          >
-            <option selected :value="null">All</option>
-            <option v-for="(filter, i) in filters" :key="i" :value="filter">
-              {{ capitalize(filter.name) }}
-            </option>
-          </select>
-        </div>
-
-        <div class="col-md-4 mb-3" v-if="parentFilter && parentFilter.children">
-          <label class="col-form-label" for="inputLarge">Sub Category</label>
-          <select
-            class="form-select"
-            aria-label="Select Sub Category"
-            placeholder="Sub Category"
-            v-model="childFilter"
-            @change="searchEmojis"
-          >
-            <option selected :value="null">All</option>
-            <option
-              v-for="(filter, i) in parentFilter.children"
-              :key="i"
-              :value="filter"
-            >
-              {{ capitalize(filter) }}
-            </option>
-          </select>
-        </div>
-      </form>
-      <p class="text-center mb-5">
-        <strong>Note:</strong> Not all emojis will appear for all users.
-        Different devices use different emojis.
-      </p>
-
-      <div id="emoji-list" class="text-center">
-        <div
-          class="emoji"
-          :title="emoji.short_name"
-          @click="copy(emoji.icon)"
-          v-for="(emoji, i) in emojiResults"
-          :key="i"
-        >
-          <!-- <svg viewBox="0 0 110 110">
-            <text y=".9em" font-size="90">{{ emoji.icon }}</text>
-          </svg> -->
-          {{ emoji.icon }}
-          <span class="visually-hidden">{{ emoji.short_name }}</span>
+    <form @submit.prevent="searchEmojis" class="row justify-content-center">
+      <div class="col-md-4 mb-3">
+        <label class="col-form-label" for="search">Search</label>
+        <div class="input-group">
+          <input
+            id="search"
+            type="search"
+            class="form-control"
+            placeholder="Search"
+            v-model="search"
+            maxlength="30"
+          />
+          <button type="submit" class="btn btn-secondary">🔎</button>
         </div>
       </div>
-      <!-- <div class="emoji-list" v-for="emoji in Emojis">{{ emoji.icon }}</div> -->
+
+      <div class="col-md-4 mb-3">
+        <label class="col-form-label" for="inputLarge">Category</label>
+        <select
+          class="form-select"
+          aria-label="Select Category"
+          placeholder="Category"
+          v-model="parentFilter"
+          @change="updateParentFilter"
+        >
+          <option selected :value="null">All</option>
+          <option v-for="(filter, i) in filters" :key="i" :value="filter">
+            {{ capitalize(filter.name) }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-4 mb-3" v-if="parentFilter && parentFilter.children">
+        <label class="col-form-label" for="inputLarge">Sub Category</label>
+        <select
+          class="form-select"
+          aria-label="Select Sub Category"
+          placeholder="Sub Category"
+          v-model="childFilter"
+          @change="searchEmojis"
+        >
+          <option selected :value="null">All</option>
+          <option
+            v-for="(filter, i) in parentFilter.children"
+            :key="i"
+            :value="filter"
+          >
+            {{ capitalize(filter) }}
+          </option>
+        </select>
+      </div>
+    </form>
+    <p class="text-center mb-5">
+      <strong>Note:</strong> Not all emojis will appear for all users. Different
+      devices use different emojis.
+    </p>
+
+    <div id="emoji-list" class="text-center">
+      <div
+        class="emoji"
+        :title="emoji.short_name"
+        @click="copy(emoji.icon)"
+        v-for="(emoji, i) in emojiResults"
+        :key="i"
+      >
+        {{ emoji.icon }}
+        <span class="visually-hidden">{{ emoji.short_name }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -159,6 +148,9 @@ function copy(emoji: string) {
   background-color: var(--dark);
   box-shadow: 0 2px 0 2px rgba(255, 255, 255, 0.5);
   border: 2px solid var(--gray);
+}
+
+#search {
 }
 
 #emoji-list {

@@ -26,17 +26,41 @@ defineProps({
 </template>
 
 <style scoped>
-.card {
-  cursor: pointer;
+/* #emoji-list .emoji {
+  font-size: 64px;
+  margin: 10px;
+  padding: 0 10px;
+  flex: 1;
+  cursor: grab;
+  position: relative;
   user-select: none;
-  text-decoration: none;
-  color: black;
-  transition: box-shadow 0.15s linear;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  border: 2px solid var(--dark);
+  border-radius: 15px;
+  box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.5);
 }
 
-.card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+#emoji-list .emoji:active {
+  cursor: grabbing;
+  top: 1px;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.5);
+} */
+
+.card {
+  flex: 1;
+  cursor: grab;
+  position: relative;
+  user-select: none;
+  border: 2px solid var(--dark);
+  border-radius: 15px;
+  box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  color: black;
+}
+
+.card:active {
+  cursor: grabbing;
+  top: 1px;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.5);
 }
 
 .card-body {

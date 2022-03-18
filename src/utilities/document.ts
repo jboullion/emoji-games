@@ -11,3 +11,8 @@ export function toggleFullscreen() {
     document.documentElement.requestFullscreen();
   }
 }
+
+// copy an emoji to the users clipboard!
+export function copy(string: string) {
+  navigator.clipboard.writeText(string);
+}
