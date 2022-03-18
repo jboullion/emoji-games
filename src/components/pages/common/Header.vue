@@ -26,8 +26,10 @@
 #home,
 #menu-toggle {
   font-size: 34px;
+}
 
-  /* transition: transform 0.2s linear; */
+#home:hover {
+  transform: scale(1.2);
 }
 
 #menu-toggle:hover {

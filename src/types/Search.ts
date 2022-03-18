@@ -692,7 +692,7 @@ export const Emojis: Emoji[] = [
   },
   {
     code: ['U+2639'],
-    icon: '☹',
+    icon: '☹️',
     parent_cat: 'face',
     child_cat: 'concerned',
     short_name: 'frowning face',

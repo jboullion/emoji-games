@@ -49,6 +49,7 @@ body,
 #app,
 #app-wrapper {
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 #app-wrapper {

@@ -2,10 +2,10 @@
 
 <template>
   <div class="row mb-5">
-    <router-link to="/" class="col-12 text-center">
+    <div class="col-12 text-center">
       <h1>Emoji Games</h1>
       <p>Simple games for simple people</p>
-    </router-link>
+    </div>
   </div>
 </template>
 

@@ -77,7 +77,7 @@ function copy(emoji: string) {
     </div>
 
     <div class="container">
-      <form @submit.prevent="searchEmojis" class="row">
+      <form @submit.prevent="searchEmojis" class="row justify-content-center">
         <div class="col-md-4 mb-3">
           <label class="col-form-label" for="search">Search</label>
           <div class="input-group">
