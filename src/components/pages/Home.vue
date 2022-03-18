@@ -10,7 +10,7 @@ function playGame(game: String) {
 </script>
 
 <template>
-  <div id="home" class="">
+  <div id="home" class="page">
     <Title />
     <div class="row justify-content-center">
       <div

@@ -12,7 +12,7 @@
 #app-wrapper.bg-dark .card,
 #app-wrapper.bg-dark .modal-content {
   background-color: var(--dark);
-  border-color: var(--soft-white);
+  border-color: var(--light-gray);
   color: var(--soft-white);
 }
 
@@ -35,11 +35,11 @@
 /**
  * FORMS
  */
-.form-select {
+#app-wrapper.bg-dark .form-select {
   box-shadow: inset 0 2px 0 rgb(0 0 0 / 8%);
 }
 
-.form-control,
-.form-select {
-  border: 3px solid var(--gray);
-}
+/* #app-wrapper.bg-dark .form-control,
+#app-wrapper.bg-dark .form-select {
+  border: 3px solid var(--soft-white);
+} */

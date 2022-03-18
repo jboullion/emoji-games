@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import ModalMenu from './components/modals/Menu.vue';
-import Footer from './components/Footer.vue';
-import Header from './components/Header.vue';
+import ModalSettings from './components/modals/Settings.vue';
+import Footer from './components/pages/common/Footer.vue';
+import Header from './components/pages/common/Header.vue';
 
 // TODO: These values need to be tracked locally or in a DB so the user doesn't have to redo each visit
 const darkMode = ref(false);
@@ -12,15 +12,19 @@ const audioEnabled = ref(false);
 
 <template>
   <div id="app-wrapper" :class="{ 'bg-dark': darkMode }">
-    <div class="container d-flex flex-column justify-content-between">
+    <div class="container d-flex flex-fill flex-column justify-content-between">
       <Header />
 
-      <router-view></router-view>
+      <router-view v-slot="{ Component }">
+        <transition name="slide">
+          <component :is="Component" />
+        </transition>
+      </router-view>
 
       <Footer />
     </div>
 
-    <ModalMenu
+    <ModalSettings
       :darkMode="darkMode"
       :audioEnabled="audioEnabled"
       @toggleDark="darkMode = !darkMode"
@@ -47,8 +51,19 @@ body,
   min-height: 100vh;
 }
 
+#app-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+#app-wrapper .page {
+  flex: 1;
+}
+
 .menus-btn {
   background-color: transparent;
   border: none;
 }
+
+/* TODO: Do we want to animate our routes? */
 </style>

@@ -1,5 +1,6 @@
 :root {
-  --soft-white: #fefefe;
   --dark: #111;
   --gray: #222;
+  --light-gray: #ddd;
+  --soft-white: #fefefe;
 }

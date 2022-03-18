@@ -3,7 +3,7 @@ import Title from './common/Title.vue';
 </script>
 
 <template>
-  <div id="privacy" class="">
+  <div id="privacy" class="page">
     <Title />
 
     <h2>Privacy</h2>

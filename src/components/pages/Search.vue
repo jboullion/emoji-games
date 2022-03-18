@@ -1,6 +1,6 @@
 <script setup lang="ts">
+// TODO: Should this be turned into a modal instead? Can used to search emoji's from any page?
 import { ref } from 'vue';
-import Title from '../pages/common/Title.vue';
 import { capitalize } from '../../utilities/filters';
 import { Emoji, Emojis, SearchFilter } from '../../types/Search';
 
@@ -48,11 +48,18 @@ function searchEmojis() {
     }
 
     if (valid && childFilter.value) {
+      console.log('searching childfilter', childFilter.value);
       valid = emoji.child_cat === childFilter.value;
     }
 
     return valid;
   });
+}
+
+// When updating our parent filter, we need to clear our childFilter so it doesn't affect the search
+function updateParentFilter() {
+  childFilter.value = null;
+  searchEmojis();
 }
 
 function copy(emoji: string) {
@@ -61,36 +68,39 @@ function copy(emoji: string) {
 </script>
 
 <template>
-  <div id="home" class="">
+  <div id="search" class="page">
     <!-- <Title /> -->
     <div class="row">
       <div class="col-12 text-center">
-        <h1>Search</h1>
+        <h1>Emoji Search</h1>
       </div>
     </div>
 
-    <p class="text-center">
-      <strong>Note:</strong> Not all emojis will appear for all users.
-      Difference devices use different emoji sets.
-    </p>
-    <div class="container text-center">
-      <form @submit.prevent="searchEmojis" class="row mb-5">
+    <div class="container">
+      <form @submit.prevent="searchEmojis" class="row">
         <div class="col-md-4 mb-3">
-          <input
-            type="search"
-            class="form-control"
-            placeholder="Search"
-            v-model="search"
-          />
+          <label class="col-form-label" for="search">Search</label>
+          <div class="input-group">
+            <input
+              id="search"
+              type="search"
+              class="form-control"
+              placeholder="Search"
+              v-model="search"
+              maxlength="30"
+            />
+            <button type="submit" class="btn btn-secondary">🔎</button>
+          </div>
         </div>
 
         <div class="col-md-4 mb-3">
+          <label class="col-form-label" for="inputLarge">Category</label>
           <select
             class="form-select"
             aria-label="Select Category"
             placeholder="Category"
             v-model="parentFilter"
-            @change="searchEmojis"
+            @change="updateParentFilter"
           >
             <option selected :value="null">All</option>
             <option v-for="(filter, i) in filters" :key="i" :value="filter">
@@ -99,7 +109,8 @@ function copy(emoji: string) {
           </select>
         </div>
 
-        <div class="col-md-4 mb-3" v-if="parentFilter">
+        <div class="col-md-4 mb-3" v-if="parentFilter && parentFilter.children">
+          <label class="col-form-label" for="inputLarge">Sub Category</label>
           <select
             class="form-select"
             aria-label="Select Sub Category"
@@ -117,22 +128,13 @@ function copy(emoji: string) {
             </option>
           </select>
         </div>
-
-        <!-- <div
-          class="btn-group"
-          role="group"
-          aria-label="Basic checkbox toggle button group"
-        >
-          <FilterBtn
-            v-for="(filter, i) in filters"
-            :key="i"
-            :filter="filter"
-            :id="'parent-' + i"
-          />
-        </div> -->
       </form>
+      <p class="text-center mb-5">
+        <strong>Note:</strong> Not all emojis will appear for all users.
+        Different devices use different emojis.
+      </p>
 
-      <div id="emoji-list">
+      <div id="emoji-list" class="text-center">
         <div
           class="emoji"
           :title="emoji.short_name"
@@ -166,7 +168,8 @@ function copy(emoji: string) {
 }
 #emoji-list .emoji {
   font-size: 64px;
-  margin: 15px;
+  margin: 10px;
+  padding: 0 10px;
   flex: 1;
   cursor: grab;
   position: relative;
@@ -183,7 +186,7 @@ function copy(emoji: string) {
 }
 
 #emoji-list .emoji:active:after {
-  content: 'Copied! ' attr(title);
+  content: 'Copied: ' attr(title);
   font-size: 16px;
   background: #fff;
   color: black;

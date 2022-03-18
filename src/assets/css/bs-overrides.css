@@ -59,7 +59,7 @@ h1 {
 }
 
 .modal {
-  transition: all 0.15s linear;
+  transition: all 0.1s linear;
   background-color: #aaa;
   opacity: 1;
 }
@@ -92,8 +92,14 @@ h1 {
 
 .form-control,
 .form-select {
-  border: 3px solid var(--soft-white);
+  /* border: 3px solid var(--gray); */
   border-radius: 15px;
-  font-weight: bold;
+
   line-height: 1.8;
+  border-width: 3px;
 }
+
+/* .input-group .btn.btn-secondary {
+  border-color: var(--gray);
+  border-left: 0;
+} */

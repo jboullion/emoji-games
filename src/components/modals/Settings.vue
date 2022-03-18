@@ -23,7 +23,7 @@ const reactiveProps = reactive(props);
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5>Menu</h5>
+          <h5>Settings</h5>
           <button
             type="button"
             class="btn-close"
@@ -34,15 +34,6 @@ const reactiveProps = reactive(props);
           </button>
         </div>
         <div class="modal-body d-flex justify-content-between">
-          <button
-            type="button"
-            @click="$router.push('/')"
-            class="menus-btn"
-            data-bs-dismiss="modal"
-          >
-            🏠
-          </button>
-
           <button class="menus-btn dark-mode" @click="emit('toggleDark')">
             <span v-show="reactiveProps.darkMode">☀️</span>
             <span v-show="!reactiveProps.darkMode">🌑</span>
