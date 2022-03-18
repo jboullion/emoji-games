@@ -3,7 +3,12 @@
 import { onMounted, ref } from 'vue';
 import { capitalize } from '../../utilities/filters';
 import { copy } from '../../utilities/document';
-import { Emoji, Emojis, SearchFilter } from '../../types/Search';
+import { Emoji, Emojis } from '../../types/Emoji';
+
+type SearchFilter = {
+  name: string;
+  children: string[];
+};
 
 const search = ref('');
 const emojiResults = ref<Emoji[]>([]);

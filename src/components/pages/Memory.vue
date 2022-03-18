@@ -1,18 +1,13 @@
 <script setup lang="ts">
 // TODO: Make the setup page a prettier version?
 import { reactive, ref } from 'vue';
-import { Emojis } from '../../types/Search';
-import { Emoji } from '../../utilities/search-emojis';
+import { MemoryGame, MemoryEmojis } from '../../types/Memory';
+import { Emoji } from '../../types/Emoji';
+import { getRandomInt } from '../../utilities/common';
 
 const maxSets = 100;
 const maxEmojiPerSet = 10;
-
-type MemoryGame = {
-  sets: number;
-  emojiPerSet: number;
-  emojis: Emoji[];
-  foundSets: Emoji[];
-};
+const randomEmojis = ref<Emoji[]>([]);
 
 const memoryGame = reactive<MemoryGame>({
   sets: 10,
@@ -21,22 +16,19 @@ const memoryGame = reactive<MemoryGame>({
   foundSets: [],
 });
 
-// Emojis.forEach((emoji) => {
-//   const parentID = filters.findIndex(
-//     (filter) => filter.name === emoji.parent_cat,
-//   );
+// Build the sets of emojis the user will be memorizing
+function generateRandomEmojis() {
+  randomEmojis.value = [];
+  const randomIndexes = [];
+  while (randomIndexes.length < memoryGame.sets) {
+    var r = Math.floor(Math.random() * MemoryEmojis.length) + 1;
+    if (randomIndexes.indexOf(r) === -1) randomIndexes.push(r);
+  }
 
-//   if (parentID === -1) {
-//     filters.push({
-//       name: emoji.parent_cat,
-//       children: [emoji.child_cat],
-//     });
-//   } else {
-//     if (!filters[parentID].children.includes(emoji.child_cat)) {
-//       filters[parentID].children.push(emoji.child_cat);
-//     }
-//   }
-// });
+  randomIndexes.forEach((index) => {
+    randomEmojis.value.push(MemoryEmojis[index]);
+  });
+}
 </script>
 
 <template>
@@ -58,7 +50,7 @@ const memoryGame = reactive<MemoryGame>({
               <button
                 type="button"
                 class="btn btn-outline-secondary decrement"
-                @click="memoryGame.sets > 1 ? memoryGame.sets-- : false"
+                @click="memoryGame.sets > 2 ? memoryGame.sets-- : false"
               >
                 ➖
               </button>
@@ -106,6 +98,29 @@ const memoryGame = reactive<MemoryGame>({
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="col-12 d-grid">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          style="font-size: 50px"
+          @click="generateRandomEmojis"
+        >
+          ✔️
+        </button>
+      </div>
+    </div>
+
+    <div id="emoji-list" class="text-center">
+      <div
+        class="emoji"
+        :title="emoji.short_name"
+        v-for="(emoji, i) in randomEmojis"
+        :key="i"
+      >
+        {{ emoji.icon }}
+        <span class="visually-hidden">{{ emoji.short_name }}</span>
       </div>
     </div>
   </div>
