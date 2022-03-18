@@ -10,5 +10,5 @@ h4,
 h5 {
   color: var(--gray);
   font-family: 'Bangers', cursive;
-  transition: color 0.15s linear;
+  transition: color 0.1s linear;
 }

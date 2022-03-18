@@ -68,7 +68,7 @@ function updateParentFilter() {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5>Search</h5>
+          <h5>Emoji Search</h5>
           <button
             type="button"
             class="btn-close"
@@ -116,7 +116,7 @@ function updateParentFilter() {
 
             <div
               class="col-md-4 mb-3"
-              v-if="parentFilter && parentFilter.children"
+              v-if="parentFilter && parentFilter.children[0]"
             >
               <label class="col-form-label" for="inputLarge"
                 >Sub Category</label
@@ -219,16 +219,18 @@ function updateParentFilter() {
 }
 
 @media (max-width: 768px) {
-  .modal-dialog {
-    padding: 0;
-  }
-
   #emoji-list .emoji {
     font-size: 50px;
   }
 
   #emoji-list .emoji:active:after {
     width: 200%;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-dialog {
+    padding: 0;
   }
 }
 </style>
