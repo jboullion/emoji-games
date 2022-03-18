@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // TODO: Should this be turned into a modal instead? Can used to search emoji's from any page?
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { capitalize } from '../../utilities/filters';
 import { copy } from '../../utilities/document';
 import { Emoji, Emojis, SearchFilter } from '../../types/Search';
@@ -61,6 +61,19 @@ function updateParentFilter() {
   childFilter.value = null;
   searchEmojis();
 }
+
+onMounted(() => {
+  console.log('Modal onMounted');
+  const searchModal = document.getElementById('search-modal');
+  const searchInput = document.getElementById('search');
+
+  if (searchModal && searchInput) {
+    searchModal.addEventListener('shown.bs.modal', function () {
+      console.log('Modal showing', searchInput);
+      searchInput.focus();
+    });
+  }
+});
 </script>
 
 <template>
@@ -94,7 +107,9 @@ function updateParentFilter() {
                   v-model="search"
                   maxlength="30"
                 />
-                <button type="submit" class="btn btn-secondary">🔎</button>
+                <button type="submit" class="btn btn-outline-secondary">
+                  🔎
+                </button>
               </div>
             </div>
 
@@ -192,13 +207,13 @@ function updateParentFilter() {
   user-select: none;
   border: 2px solid var(--dark);
   border-radius: 15px;
-  box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.5);
+  border-width: 1px 2px 4px 2px;
 }
 
 #emoji-list .emoji:active {
   cursor: grabbing;
   top: 1px;
-  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.5);
+  border-width: 1px 2px 3px 2px;
 }
 
 #emoji-list .emoji:active:after {

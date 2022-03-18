@@ -43,7 +43,7 @@ const memoryGame = reactive<MemoryGame>({
   <div id="search" class="page">
     <div class="row">
       <div class="col-12 text-center">
-        <h1>Emoji Memory</h1>
+        <h1>🧠 Memory</h1>
       </div>
     </div>
 
@@ -55,23 +55,22 @@ const memoryGame = reactive<MemoryGame>({
           <div class="card-body text-center">
             <h3 class="card-title mb-0"># Sets</h3>
             <div class="d-flex justify-content-between align-items-center">
+              <button
+                type="button"
+                class="btn btn-outline-secondary decrement"
+                @click="memoryGame.sets > 1 ? memoryGame.sets-- : false"
+              >
+                ➖
+              </button>
               <h2 class="flex-fill text-center">{{ memoryGame.sets }}</h2>
-              <div class="btn-group-vertical my-3">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  @click="memoryGame.sets < maxSets ? memoryGame.sets++ : false"
-                >
-                  +
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  @click="memoryGame.sets > 1 ? memoryGame.sets-- : false"
-                >
-                  -
-                </button>
-              </div>
+
+              <button
+                type="button"
+                class="btn btn-outline-secondary increment"
+                @click="memoryGame.sets < maxSets ? memoryGame.sets++ : false"
+              >
+                ➕
+              </button>
             </div>
           </div>
         </div>
@@ -81,33 +80,29 @@ const memoryGame = reactive<MemoryGame>({
           <div class="card-body text-center">
             <h3 class="card-title mb-0"># Emojis per Set</h3>
             <div class="d-flex justify-content-between align-items-center">
+              <button
+                type="button"
+                class="btn btn-outline-secondary decrement"
+                @click="
+                  memoryGame.emojiPerSet > 2 ? memoryGame.emojiPerSet-- : false
+                "
+              >
+                ➖
+              </button>
               <h2 class="flex-fill text-center">
                 {{ memoryGame.emojiPerSet }}
               </h2>
-              <div class="btn-group-vertical my-3">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  @click="
-                    memoryGame.emojiPerSet < maxEmojiPerSet
-                      ? memoryGame.emojiPerSet++
-                      : false
-                  "
-                >
-                  +
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  @click="
-                    memoryGame.emojiPerSet > 2
-                      ? memoryGame.emojiPerSet--
-                      : false
-                  "
-                >
-                  -
-                </button>
-              </div>
+              <button
+                type="button"
+                class="btn btn-outline-secondary increment"
+                @click="
+                  memoryGame.emojiPerSet < maxEmojiPerSet
+                    ? memoryGame.emojiPerSet++
+                    : false
+                "
+              >
+                ➕
+              </button>
             </div>
           </div>
         </div>
@@ -120,5 +115,11 @@ const memoryGame = reactive<MemoryGame>({
 .card-body h2 {
   font-size: 64px;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.decrement {
+  position: relative;
+  z-index: 10;
+  margin-left: 10px;
 }
 </style>

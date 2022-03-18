@@ -12,7 +12,7 @@
     </button>
     <div>
       <button
-        id="search"
+        id="search-toggle"
         type="button"
         class="menus-btn"
         data-bs-toggle="modal"
@@ -22,7 +22,7 @@
       </button>
 
       <button
-        id="menu-toggle"
+        id="settings-toggle"
         type="button"
         class="menus-btn"
         data-bs-toggle="modal"
