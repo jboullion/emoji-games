@@ -1100,13 +1100,13 @@ export const Emojis: Emoji[] = [
     short_name: 'eye in speech bubble',
   },
   {
-    icon: '🗨',
+    icon: '🗨️',
     parent_cat: 'emotion',
     child_cat: 'reaction',
     short_name: 'left speech bubble',
   },
   {
-    icon: '🗯',
+    icon: '🗯️',
     parent_cat: 'emotion',
     child_cat: 'reaction',
     short_name: 'right anger bubble',
@@ -4915,7 +4915,7 @@ export const Emojis: Emoji[] = [
     short_name: 'chopsticks',
   },
   {
-    icon: '🍽',
+    icon: '🍽️',
     parent_cat: 'food',
     child_cat: 'dishware',
     short_name: 'fork and knife with plate',

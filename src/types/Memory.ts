@@ -1,4 +1,4 @@
-export type MemoryGame = {
+export type MemoryGameType = {
   sets: number;
   emojiPerSet: number;
   emojis: string[]; // Emoji[];

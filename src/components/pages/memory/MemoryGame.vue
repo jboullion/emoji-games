@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
+import { computed, PropType, reactive, ref } from 'vue';
+
 import { shuffle } from '../../../utilities/common';
 import FlipCard from './FlipCard.vue';
 
@@ -12,6 +13,10 @@ const start = ref(false);
 const found = ref(0);
 const guesses = ref<Guess[]>([]);
 const showingCard = ref(false);
+const emojisPerSet = 2; // TODO: This should be a prop. It is coming from setup.
+
+let lastGuess: number = 0;
+let numGuesses: number = 0; // ? Currently not used
 
 const props = defineProps({
   emojis: {
@@ -20,6 +25,10 @@ const props = defineProps({
   },
 });
 
+const remaining = computed(() => props.emojis.length - found.value);
+const complete = computed(() => remaining.value <= 0);
+
+// Randomize our emoji array on create
 const emojiSets = shuffle(props.emojis.concat(props.emojis));
 
 function guess(guessIndex: number) {
@@ -28,21 +37,25 @@ function guess(guessIndex: number) {
 
   // TODO: Need to check N times based on the number of emojis in a set. Pass from setup
 
-  if (!guesses.value[0]) {
+  if (!guesses.value[lastGuess]) {
     guesses.value.push({ index: guessIndex, emoji: emojiSets[guessIndex] });
   } else if (
-    guesses.value[0].index !== guessIndex &&
-    guesses.value[0].emoji === emojiSets[guessIndex]
+    guesses.value[lastGuess].index !== guessIndex &&
+    guesses.value[lastGuess].emoji === emojiSets[guessIndex]
   ) {
     // Mathing Set!
+
     guesses.value.push({ index: guessIndex, emoji: emojiSets[guessIndex] });
+    lastGuess = guesses.value.length;
     found.value++;
+    numGuesses++;
   } else {
     guesses.value.push({ index: guessIndex, emoji: emojiSets[guessIndex] });
     showingCard.value = true;
+    numGuesses++;
     setTimeout(() => {
       showingCard.value = false;
-      guesses.value.pop();
+      guesses.value.splice(-emojisPerSet, emojisPerSet);
     }, 1000);
   }
 }
@@ -62,7 +75,7 @@ function showCard(cardIndex: number) {
           <div class="card-body text-center">
             <h3 class="card-title mb-0">Remaining</h3>
             <h2 class="flex-fill text-center">
-              {{ emojis.length - found }}
+              {{ remaining }}
             </h2>
           </div>
         </div>
@@ -77,6 +90,10 @@ function showCard(cardIndex: number) {
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="col-12" v-if="complete">
+      <div class="alert alert-success">✨🎆 🎫 🎊🎉</div>
     </div>
 
     <div class="col-12 mb-3" v-if="!start">

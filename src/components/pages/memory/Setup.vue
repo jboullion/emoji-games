@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
-import { MemoryGame, MemoryEmojis } from '../../../types/Memory';
+import { PropType, reactive, ref } from 'vue';
+import { MemoryGameType, MemoryEmojis } from '../../../types/Memory';
 
 const maxSets = 100;
 const maxEmojiPerSet = 10;
 const randomEmojis = ref<string[]>([]);
 
-const memoryGame = reactive<MemoryGame>({
-  sets: 10,
-  emojiPerSet: 2,
-  emojis: [],
-  foundIndexes: [],
+const props = defineProps({
+  memoryGame: {
+    type: Object as PropType<MemoryGameType>,
+    required: true,
+  },
 });
 
 const emit = defineEmits(['start']);
@@ -19,7 +19,7 @@ const emit = defineEmits(['start']);
 function generateRandomEmojis() {
   randomEmojis.value = [];
   const randomIndexes = [];
-  while (randomIndexes.length < memoryGame.sets) {
+  while (randomIndexes.length < props.memoryGame.sets) {
     var r = Math.floor(Math.random() * MemoryEmojis.length) + 1;
     if (randomIndexes.indexOf(r) === -1) randomIndexes.push(r);
   }

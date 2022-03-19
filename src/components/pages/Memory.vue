@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import Setup from './memory/Setup.vue';
 import MemoryGame from './memory/MemoryGame.vue';
+import { MemoryGameType } from '../../types/Memory';
 
 const emojiList = ref<string[]>([]);
 const setup = ref(true);
+
+const memoryGame = reactive<MemoryGameType>({
+  sets: 10,
+  emojiPerSet: 2,
+  emojis: [],
+  foundIndexes: [],
+});
 
 function start(emojis: string[]) {
   setup.value = false;
@@ -20,7 +28,7 @@ function start(emojis: string[]) {
       </div>
     </div>
 
-    <Setup v-if="setup" @start="start" />
+    <Setup v-if="setup" :memoryGame="memoryGame" @start="start" />
     <MemoryGame v-else :emojis="emojiList" />
   </div>
 </template>
