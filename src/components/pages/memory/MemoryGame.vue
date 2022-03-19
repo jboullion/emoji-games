@@ -1,26 +1,62 @@
 <script setup lang="ts">
 import { PropType, ref } from 'vue';
+import { shuffle } from '../../../utilities/common';
 import FlipCard from './FlipCard.vue';
 
-const found = ref(0);
+type Guess = {
+  index: number;
+  emoji: string;
+};
 
-defineProps({
+const start = ref(false);
+const found = ref(0);
+const guesses = ref<Guess[]>([]);
+const showingCard = ref(false);
+
+const props = defineProps({
   emojis: {
     type: Array as PropType<string[]>,
     required: true,
   },
 });
+
+const emojiSets = shuffle(props.emojis.concat(props.emojis));
+
+function guess(guessIndex: number) {
+  if (showingCard.value) return;
+  // guessed the same card
+
+  // TODO: Need to check N times based on the number of emojis in a set. Pass from setup
+
+  if (!guesses.value[0]) {
+    guesses.value.push({ index: guessIndex, emoji: emojiSets[guessIndex] });
+  } else if (
+    guesses.value[0].index !== guessIndex &&
+    guesses.value[0].emoji === emojiSets[guessIndex]
+  ) {
+    // Mathing Set!
+    guesses.value.push({ index: guessIndex, emoji: emojiSets[guessIndex] });
+    found.value++;
+  } else {
+    guesses.value.push({ index: guessIndex, emoji: emojiSets[guessIndex] });
+    showingCard.value = true;
+    setTimeout(() => {
+      showingCard.value = false;
+      guesses.value.pop();
+    }, 1000);
+  }
+}
+
+function showCard(cardIndex: number) {
+  return (
+    !start.value || guesses.value.find((guess) => guess.index === cardIndex)
+  );
+}
 </script>
 
 <template>
   <div class="my-4 text-center">
     <div class="row">
-      <!-- <h2 class="score">
-        Remaining <span>{{ emojis.length - found }}</span>
-      </h2>
-      <h2 class="score">
-        Found <span>{{ found }}</span>
-      </h2> -->
       <div class="col-sm-6 mb-3">
         <div class="card">
           <div class="card-body text-center">
@@ -43,13 +79,28 @@ defineProps({
       </div>
     </div>
 
-    <div id="card-list" class="col-12 row mb-3">
-      <FlipCard
-        class="col-lg-4 col-sm-6 mb-3"
-        v-for="(emoji, i) in emojis"
-        :emoji="emoji"
-        :key="i"
-      />
+    <div class="col-12 mb-3" v-if="!start">
+      <button
+        type="button"
+        class="btn btn-outline-secondary w-100"
+        style="font-size: 50px"
+        @click="start = true"
+      >
+        Start
+      </button>
+    </div>
+
+    <div id="card-list" class="col-12">
+      <div class="row justify-content-center">
+        <FlipCard
+          class="mb-3"
+          :class="{ flip: showCard(i) }"
+          @click="guess(i)"
+          v-for="(emoji, i) in emojiSets"
+          :emoji="emoji"
+          :key="i"
+        />
+      </div>
     </div>
   </div>
 </template>

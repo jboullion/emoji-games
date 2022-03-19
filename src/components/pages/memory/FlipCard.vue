@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const flipped = ref(false);
+//const flipped = ref(false);
+
+//const emit = defineEmits(['flip']);
 
 defineProps({
   emoji: {
@@ -9,10 +11,15 @@ defineProps({
     required: true,
   },
 });
+
+// function flip() {
+//   flipped.value = true; // !flipped.value;
+//   emit('flip');
+// }
 </script>
 
 <template>
-  <div class="flip-card" :class="{ flip: flipped }" @click="flipped = !flipped">
+  <div class="flip-card">
     <div class="flip-card-inner">
       <div class="flip-card-front">🧠</div>
       <div class="flip-card-back">
@@ -22,7 +29,7 @@ defineProps({
   </div>
 </template>
 
-<style>
+<style scoped>
 #app-wrapper.bg-dark .flip-card-front {
   background-color: var(--dark);
   border: 4px solid var(--light-gray);
@@ -36,10 +43,28 @@ defineProps({
 .flip-card {
   background-color: transparent;
   cursor: pointer;
-  width: 25%;
+  width: 20%;
   height: 200px;
   font-size: 64px;
   perspective: 500px; /* Remove this if you don't want the 3D effect */
+}
+
+@media (max-width: 992px) {
+  .flip-card {
+    width: 25%;
+  }
+}
+
+@media (max-width: 768px) {
+  .flip-card {
+    width: 33%;
+  }
+}
+
+@media (max-width: 576px) {
+  .flip-card {
+    width: 50%;
+  }
 }
 
 /* This container is needed to position the front and back side */
@@ -75,8 +100,7 @@ defineProps({
 
 /* Style the front side */
 .flip-card-front {
-  background-color: #bbb;
-  color: black;
+  background-color: var(--light-gray);
 }
 
 /* Style the back side */
