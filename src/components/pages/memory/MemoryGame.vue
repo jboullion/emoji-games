@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, PropType, reactive, ref } from 'vue';
+import { MemoryGameType } from '../../../types/Memory';
 
 import { shuffle } from '../../../utilities/common';
 import FlipCard from './FlipCard.vue';
@@ -10,17 +11,20 @@ type Guess = {
 };
 
 const start = ref(false);
+const wrong = ref(false);
 const found = ref(0);
-const guesses = ref<Guess[]>([]);
-const showingCard = ref(false);
-const emojisPerSet = 2; // TODO: This should be a prop. It is coming from setup.
+const foundGuesses = ref<Guess[]>([]);
+const currentGuesses = ref<Guess[]>([]);
 
-let lastGuess: number = 0;
 let numGuesses: number = 0; // ? Currently not used
 
 const props = defineProps({
   emojis: {
     type: Array as PropType<string[]>,
+    required: true,
+  },
+  memoryGame: {
+    type: Object as PropType<MemoryGameType>,
     required: true,
   },
 });
@@ -29,40 +33,91 @@ const remaining = computed(() => props.emojis.length - found.value);
 const complete = computed(() => remaining.value <= 0);
 
 // Randomize our emoji array on create
-const emojiSets = shuffle(props.emojis.concat(props.emojis));
+
+// Build our set of emojis based on the number of emojis per set
+let emojiDeck: string[] = [];
+for (let i = 0; i < props.memoryGame.emojiPerSet; i++) {
+  emojiDeck = emojiDeck.concat(props.emojis);
+}
+
+const emojiSets = shuffle(emojiDeck);
 
 function guess(guessIndex: number) {
-  if (showingCard.value) return;
-  // guessed the same card
+  // Guess Steps
+  // 1. Click on guess reveal
+  // 2. If first guess in set, continue
+  // 3. If 2+ guess compare to previous guess
+  // 4. if guesses match
+  // 4a. If number of equal guesses === emojisPerSet set found
+  // 4b. else continue;
+  // 5. else no match
+  // 5a. clear all guesses from current guess
 
-  // TODO: Need to check N times based on the number of emojis in a set. Pass from setup
+  if (!start || wrong.value) return;
 
-  if (!guesses.value[lastGuess]) {
-    guesses.value.push({ index: guessIndex, emoji: emojiSets[guessIndex] });
+  // Don't guess the same card twice
+  if (
+    (currentGuesses.value.length &&
+      currentGuesses.value.find((guess) => guess.index === guessIndex)) ||
+    (foundGuesses.value.length &&
+      foundGuesses.value.find((guess) => guess.index === guessIndex))
+  )
+    return;
+
+  if (!currentGuesses.value.length) {
+    // initial guess
+    currentGuesses.value.push({
+      index: guessIndex,
+      emoji: emojiSets[guessIndex],
+    });
   } else if (
-    guesses.value[lastGuess].index !== guessIndex &&
-    guesses.value[lastGuess].emoji === emojiSets[guessIndex]
+    currentGuesses.value[currentGuesses.value.length - 1].index !==
+      guessIndex &&
+    currentGuesses.value[currentGuesses.value.length - 1].emoji ===
+      emojiSets[guessIndex]
   ) {
-    // Mathing Set!
+    currentGuesses.value.push({
+      index: guessIndex,
+      emoji: emojiSets[guessIndex],
+    });
 
-    guesses.value.push({ index: guessIndex, emoji: emojiSets[guessIndex] });
-    lastGuess = guesses.value.length;
-    found.value++;
-    numGuesses++;
+    if (currentGuesses.value.length % props.memoryGame.emojiPerSet === 0) {
+      found.value++;
+      numGuesses++;
+
+      // Remove all our guesses from currentGuesses and move them into foundGuesses
+      foundGuesses.value = foundGuesses.value.concat(
+        currentGuesses.value.splice(0, props.memoryGame.emojiPerSet),
+      );
+    }
   } else {
-    guesses.value.push({ index: guessIndex, emoji: emojiSets[guessIndex] });
-    showingCard.value = true;
+    currentGuesses.value.push({
+      index: guessIndex,
+      emoji: emojiSets[guessIndex],
+    });
+    wrong.value = true;
     numGuesses++;
+
     setTimeout(() => {
-      showingCard.value = false;
-      guesses.value.splice(-emojisPerSet, emojisPerSet);
+      wrong.value = false;
+      currentGuesses.value = [];
     }, 1000);
   }
 }
 
 function showCard(cardIndex: number) {
   return (
-    !start.value || guesses.value.find((guess) => guess.index === cardIndex)
+    !start.value ||
+    currentGuesses.value.find((guess) => guess.index === cardIndex) ||
+    foundGuesses.value.find((guess) => guess.index === cardIndex)
+  );
+}
+
+function showWrong(cardIndex: number) {
+  return (
+    wrong.value &&
+    currentGuesses.value[currentGuesses.value.length - 1].index === cardIndex
+    //currentGuesses.value.find((guess) => guess.index === cardIndex)
   );
 }
 </script>
@@ -111,7 +166,7 @@ function showCard(cardIndex: number) {
       <div class="row justify-content-center">
         <FlipCard
           class="mb-3"
-          :class="{ flip: showCard(i) }"
+          :class="{ flip: showCard(i), wrong: showWrong(i) }"
           @click="guess(i)"
           v-for="(emoji, i) in emojiSets"
           :emoji="emoji"

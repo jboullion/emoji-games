@@ -1076,7 +1076,7 @@ export const Emojis: Emoji[] = [
     short_name: 'dashing away',
   },
   {
-    icon: '🕳',
+    icon: '🕳️',
     parent_cat: 'emotion',
     child_cat: 'reaction',
     short_name: 'hole',

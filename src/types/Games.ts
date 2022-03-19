@@ -21,6 +21,7 @@ export const Games: Game[] = [
     link: '/games/memory',
     maxPlayers: 5,
   },
+  /*
   {
     name: 'Random',
     emoji: '🎰',
@@ -73,4 +74,5 @@ export const Games: Game[] = [
     link: '/games/rpsls',
     maxPlayers: 5,
   },
+  */
 ];

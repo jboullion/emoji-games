@@ -29,7 +29,7 @@ function start(emojis: string[]) {
     </div>
 
     <Setup v-if="setup" :memoryGame="memoryGame" @start="start" />
-    <MemoryGame v-else :emojis="emojiList" />
+    <MemoryGame v-else :memoryGame="memoryGame" :emojis="emojiList" />
   </div>
 </template>
 

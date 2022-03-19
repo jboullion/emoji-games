@@ -49,6 +49,10 @@ defineProps({
   perspective: 500px; /* Remove this if you don't want the 3D effect */
 }
 
+.flip-card.wrong .flip-card-back {
+  background-color: rgb(219, 46, 46);
+}
+
 @media (max-width: 992px) {
   .flip-card {
     width: 25%;
@@ -96,6 +100,7 @@ defineProps({
   justify-content: center;
   border-radius: 15px;
   border: 4px solid var(--gray);
+  transition: background-color 0.3s ease-in;
 }
 
 /* Style the front side */

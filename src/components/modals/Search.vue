@@ -68,13 +68,11 @@ function updateParentFilter() {
 }
 
 onMounted(() => {
-  console.log('Modal onMounted');
   const searchModal = document.getElementById('search-modal');
   const searchInput = document.getElementById('search');
 
   if (searchModal && searchInput) {
     searchModal.addEventListener('shown.bs.modal', function () {
-      console.log('Modal showing', searchInput);
       searchInput.focus();
     });
   }
