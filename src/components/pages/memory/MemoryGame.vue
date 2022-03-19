@@ -1,9 +1,20 @@
 <script setup lang="ts">
+// TODOS:
+// 1. Victory display and animation
+// 2. New Game / Reset Game Buttons
+
+// ! Bugs:
+
+// ? Improvements
+// 1. Add Audio: Flip Card, Wrong Guess, Matched Set, Victory
+// 2. Save tickets to database
+// 3. Track games played
+
 import { computed, PropType, reactive, ref } from 'vue';
 import { MemoryGameType } from '../../../types/Memory';
 
 import { shuffle } from '../../../utilities/common';
-import FlipCard from './FlipCard.vue';
+import MemoryFlipCard from './MemoryFlipCard.vue';
 
 type Guess = {
   index: number;
@@ -19,17 +30,13 @@ const currentGuesses = ref<Guess[]>([]);
 let numGuesses: number = 0; // ? Currently not used
 
 const props = defineProps({
-  emojis: {
-    type: Array as PropType<string[]>,
-    required: true,
-  },
   memoryGame: {
     type: Object as PropType<MemoryGameType>,
     required: true,
   },
 });
 
-const remaining = computed(() => props.emojis.length - found.value);
+const remaining = computed(() => props.memoryGame.emojis.length - found.value);
 const complete = computed(() => remaining.value <= 0);
 
 // Randomize our emoji array on create
@@ -37,7 +44,7 @@ const complete = computed(() => remaining.value <= 0);
 // Build our set of emojis based on the number of emojis per set
 let emojiDeck: string[] = [];
 for (let i = 0; i < props.memoryGame.emojiPerSet; i++) {
-  emojiDeck = emojiDeck.concat(props.emojis);
+  emojiDeck = emojiDeck.concat(props.memoryGame.emojis);
 }
 
 const emojiSets = shuffle(emojiDeck);
@@ -53,7 +60,7 @@ function guess(guessIndex: number) {
   // 5. else no match
   // 5a. clear all guesses from current guess
 
-  if (!start || wrong.value) return;
+  if (!start.value || wrong.value) return;
 
   // Don't guess the same card twice
   if (
@@ -148,7 +155,23 @@ function showWrong(cardIndex: number) {
     </div>
 
     <div class="col-12" v-if="complete">
-      <div class="alert alert-success">✨🎆 🎫 🎊🎉</div>
+      <div class="alert alert-success">
+        🎉 Good Job! You Collected {{ found }} 🎫!
+      </div>
+      <!-- ✨🎆 🎫 🎊🎉 -->
+    </div>
+
+    <div id="card-list" class="col-12">
+      <div class="row justify-content-center">
+        <MemoryFlipCard
+          class="mb-3"
+          :class="{ flip: showCard(i), wrong: showWrong(i) }"
+          @click="guess(i)"
+          v-for="(emoji, i) in emojiSets"
+          :emoji="emoji"
+          :key="i"
+        />
+      </div>
     </div>
 
     <div class="col-12 mb-3" v-if="!start">
@@ -160,19 +183,6 @@ function showWrong(cardIndex: number) {
       >
         Start
       </button>
-    </div>
-
-    <div id="card-list" class="col-12">
-      <div class="row justify-content-center">
-        <FlipCard
-          class="mb-3"
-          :class="{ flip: showCard(i), wrong: showWrong(i) }"
-          @click="guess(i)"
-          v-for="(emoji, i) in emojiSets"
-          :emoji="emoji"
-          :key="i"
-        />
-      </div>
     </div>
   </div>
 </template>

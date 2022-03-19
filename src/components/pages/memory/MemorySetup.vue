@@ -2,8 +2,6 @@
 import { PropType, reactive, ref } from 'vue';
 import { MemoryGameType, MemoryEmojis } from '../../../types/Memory';
 
-const maxSets = 100;
-const maxEmojiPerSet = 10;
 const randomEmojis = ref<string[]>([]);
 
 const props = defineProps({
@@ -13,7 +11,9 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['start']);
+const reactiveProps = reactive(props);
+
+const emit = defineEmits(['start', 'updateSets', 'updateEmojiPerSet']);
 
 // Build the sets of emojis the user will be memorizing
 function generateRandomEmojis() {
@@ -42,16 +42,23 @@ function generateRandomEmojis() {
             <button
               type="button"
               class="btn btn-outline-secondary decrement"
-              @click="memoryGame.sets > 2 ? memoryGame.sets-- : false"
+              :disabled="reactiveProps.memoryGame.sets === 2"
+              @click="emit('updateSets', reactiveProps.memoryGame.sets - 1)"
             >
               ➖
             </button>
-            <h2 class="flex-fill text-center">{{ memoryGame.sets }}</h2>
+            <h2 class="flex-fill text-center">
+              {{ reactiveProps.memoryGame.sets }}
+            </h2>
 
             <button
               type="button"
               class="btn btn-outline-secondary increment"
-              @click="memoryGame.sets < maxSets ? memoryGame.sets++ : false"
+              :disabled="
+                reactiveProps.memoryGame.sets ===
+                reactiveProps.memoryGame.maxSets
+              "
+              @click="emit('updateSets', reactiveProps.memoryGame.sets + 1)"
             >
               ➕
             </button>
@@ -67,22 +74,31 @@ function generateRandomEmojis() {
             <button
               type="button"
               class="btn btn-outline-secondary decrement"
+              :disabled="reactiveProps.memoryGame.emojiPerSet === 2"
               @click="
-                memoryGame.emojiPerSet > 2 ? memoryGame.emojiPerSet-- : false
+                emit(
+                  'updateEmojiPerSet',
+                  reactiveProps.memoryGame.emojiPerSet - 1,
+                )
               "
             >
               ➖
             </button>
             <h2 class="flex-fill text-center">
-              {{ memoryGame.emojiPerSet }}
+              {{ reactiveProps.memoryGame.emojiPerSet }}
             </h2>
             <button
               type="button"
               class="btn btn-outline-secondary increment"
+              :disabled="
+                reactiveProps.memoryGame.emojiPerSet ===
+                reactiveProps.memoryGame.maxEmojiPerSet
+              "
               @click="
-                memoryGame.emojiPerSet < maxEmojiPerSet
-                  ? memoryGame.emojiPerSet++
-                  : false
+                emit(
+                  'updateEmojiPerSet',
+                  reactiveProps.memoryGame.emojiPerSet + 1,
+                )
               "
             >
               ➕
@@ -126,6 +142,13 @@ function generateRandomEmojis() {
 .card-body h2 {
   font-size: 64px;
   text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+.btn.disabled,
+.btn:disabled {
+  opacity: 0.3;
+  /* background-color: #222; */
 }
 
 #emoji-list .emoji {
@@ -137,6 +160,10 @@ function generateRandomEmojis() {
   user-select: none;
   border: 4px solid var(--dark);
   border-radius: 15px;
+}
+
+#app-wrapper.bg-dark .emoji {
+  background-color: var(--light-gray);
 }
 
 @media (max-width: 576px) {

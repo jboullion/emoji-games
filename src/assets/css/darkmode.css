@@ -43,3 +43,9 @@
 #app-wrapper.bg-dark .form-select {
   border: 3px solid var(--soft-white);
 } */
+
+#app-wrapper.bg-dark .btn.btn-outline-secondary {
+  background-color: var(--dark);
+  border-color: var(--light-gray);
+  color: var(--soft-white);
+}

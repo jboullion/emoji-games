@@ -1,8 +1,9 @@
 export type MemoryGameType = {
   sets: number;
+  maxSets: number;
   emojiPerSet: number;
+  maxEmojiPerSet: number;
   emojis: string[]; // Emoji[];
-  foundIndexes: number[];
 };
 
 // TODO: Do we want to store these in a DB or perhaps add a "games[]" parameter to the Emoji type so we can store all our emojis in a single place?

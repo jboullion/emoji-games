@@ -43,14 +43,20 @@ defineProps({
 .flip-card {
   background-color: transparent;
   cursor: pointer;
-  width: 20%;
-  height: 200px;
+  width: 16.6%;
+  height: 150px;
   font-size: 64px;
   perspective: 500px; /* Remove this if you don't want the 3D effect */
 }
 
 .flip-card.wrong .flip-card-back {
   background-color: rgb(219, 46, 46);
+}
+
+@media (max-width: 1200px) {
+  .flip-card {
+    width: 20%;
+  }
 }
 
 @media (max-width: 992px) {
