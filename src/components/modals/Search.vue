@@ -168,12 +168,12 @@ onMounted(() => {
             <div
               class="emoji"
               :title="emoji.short_name"
-              @click="copy(emoji.icon)"
+              @mousedown="copy(emoji.icon)"
               v-for="(emoji, i) in emojiResults"
               :key="i"
             >
               {{ emoji.icon }}
-              <span class="visually-hidden">{{ emoji.short_name }}</span>
+              <!-- <span class="visually-hidden">{{ emoji.short_name }}</span> -->
             </div>
           </div>
         </div>
@@ -216,7 +216,7 @@ onMounted(() => {
 }
 
 #emoji-list .emoji:active {
-  cursor: grabbing;
+  cursor: grabbing; /* 'copy' is an option as well, but grabbing looks nicer imo  */
   top: 1px;
   border-width: 1px 2px 3px 2px;
 }
