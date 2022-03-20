@@ -16,9 +16,28 @@ h1 {
   border-width: 2px 3px 5px 3px;
   padding: 8px;
   transition: opacity 0.15s linear;
+  font-family: 'Bangers', cursive;
   /* box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.5) !important; */
   /* transform: rotate3d(1, 0, 0, 35deg); */
   /* padding: 0px 8px 8px 8px; */
+}
+
+.btn-primary {
+  background-color: var(--emoji-yellow) !important;
+}
+
+.btn-primary:focus,
+.btn-primary:not(.disabled):active,
+.btn-primary:not(.disabled):hover {
+  border-color: black !important;
+}
+
+.btn-check:active + .btn-primary:focus,
+.btn-check:checked + .btn-primary:focus,
+.btn-primary.active:focus,
+.btn-primary:active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 200, 61, 0.5) !important;
 }
 
 .btn:not(.disabled):hover {

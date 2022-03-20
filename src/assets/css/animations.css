@@ -1,12 +1,36 @@
 @keyframes bob {
   0% {
-    transform: translate(0, 0px);
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(-3px);
   }
   50% {
-    transform: translate(0, -5px);
+    transform: translateY(-5px);
+  }
+  75% {
+    transform: translateY(-3px);
   }
   100% {
-    transform: translate(0, -0px);
+    transform: translateY(0px);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scaleY(1) rotate(0);
+  }
+  25% {
+    transform: scaleY(0.85) rotate(10deg);
+  }
+  50% {
+    transform: scaleY(1) rotate(0);
+  }
+  75% {
+    transform: scaleY(0.85) rotate(-10deg);
+  }
+  100% {
+    transform: scaleY(1) rotate(0);
   }
 }
 
@@ -17,4 +41,29 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+@keyframes expand {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+
+  /* 0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.15);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  90% {
+    transform: scale(1);
+  } */
 }

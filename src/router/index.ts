@@ -1,12 +1,12 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
 // Lazy Load pages
-const Home = () => import('../components/pages/Home.vue');
-const Contact = () => import('../components/pages/Contact.vue');
-const Privacy = () => import('../components/pages/Privacy.vue');
-const Profile = () => import('../components/pages/Profile.vue');
+const Home = () => import('../components/Home.vue');
+const Contact = () => import('../components/Contact.vue');
+const Privacy = () => import('../components/Privacy.vue');
+const Profile = () => import('../components/Profile.vue');
 
-const Memory = () => import('../components/pages/Memory.vue');
+const Memory = () => import('../components/Memory.vue');
 
 // const About = () => import("../components/pages/About.vue");
 // const Experiments = () => import("../components/pages/Experiments.vue");

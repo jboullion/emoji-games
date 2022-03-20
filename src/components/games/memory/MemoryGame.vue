@@ -181,7 +181,7 @@ function showWrong(cardIndex: number) {
         style="font-size: 50px"
         @click="start = true"
       >
-        Start
+        ▶️ Start
       </button>
     </div>
   </div>

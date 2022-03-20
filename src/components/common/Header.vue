@@ -55,6 +55,7 @@
   transition: transform 0.15s linear;
   text-decoration: none;
   text-align: center;
+  margin-left: 15px;
 }
 
 #settings-toggle {
@@ -62,56 +63,40 @@
   transform-origin: 48% 50%;
 }
 
-/* #settings-toggle::after {
-  position: absolute;
-  top: 50%;
-  left: 48%;
-  width: 5px;
-  height: 5px;
-  content: '';
-  background-color: #f0f;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-} */
-
 .menus-btn:active {
   top: 1px;
 }
 
-#home:hover {
+/* #home:hover {
   transform: scale(1.2);
-}
+} */
 
 #search-toggle:hover {
   transform: rotate(45deg);
 }
-
-/* #profile {
-  width: 48px;
-  border-radius: 50%;
-  display: inline-block;
-  transition: all 0.15s linear;
-}
-#profile:hover {
-  background-color: rgba(211, 211, 211, 0.5);
-  box-shadow: 0px 0px 10px 5px rgba(189, 189, 189, 0.5);
-} */
 
 #profile {
   display: inline-block;
 }
 
 #profile:hover {
-  transform: scale(1.2);
-  /* background-color: rgba(211, 211, 211, 0.5);
-  box-shadow: 0px 0px 10px 5px rgba(189, 189, 189, 0.5); */
+  transition: transform 0.1s linear;
+
+  animation-name: expand;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 
 #settings-toggle:hover {
   transform: rotate(90deg);
-  /* animation-name: spin;
-  animation-duration: 0.5s;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in-out; */
+}
+
+#home:hover {
+  transform-origin: bottom;
+  animation-name: bounce;
+  animation-duration: 0.45s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 </style>

@@ -43,7 +43,7 @@ function generateRandomEmojis() {
           <div class="d-flex justify-content-between align-items-center">
             <button
               type="button"
-              class="btn btn-outline-secondary decrement"
+              class="btn btn-primary decrement"
               :disabled="reactiveProps.memoryGame.sets === 2"
               @click="emit('updateSets', reactiveProps.memoryGame.sets - 1)"
             >
@@ -55,7 +55,7 @@ function generateRandomEmojis() {
 
             <button
               type="button"
-              class="btn btn-outline-secondary increment"
+              class="btn btn-primary increment"
               :disabled="
                 reactiveProps.memoryGame.sets ===
                 reactiveProps.memoryGame.maxSets
@@ -75,7 +75,7 @@ function generateRandomEmojis() {
           <div class="d-flex justify-content-between align-items-center">
             <button
               type="button"
-              class="btn btn-outline-secondary decrement"
+              class="btn btn-primary decrement"
               :disabled="reactiveProps.memoryGame.emojiPerSet === 2"
               @click="
                 emit(
@@ -91,7 +91,7 @@ function generateRandomEmojis() {
             </h2>
             <button
               type="button"
-              class="btn btn-outline-secondary increment"
+              class="btn btn-primary increment"
               :disabled="
                 reactiveProps.memoryGame.emojiPerSet ===
                 reactiveProps.memoryGame.maxEmojiPerSet
@@ -117,7 +117,7 @@ function generateRandomEmojis() {
         style="font-size: 50px"
         @click="generateRandomEmojis"
       >
-        ♻️
+        ♻️ Randomize
       </button>
     </div>
 
@@ -134,7 +134,7 @@ function generateRandomEmojis() {
         style="font-size: 50px"
         @click="emit('start', randomEmojis)"
       >
-        ✔️
+        ✔️ Accept
       </button>
     </div>
   </div>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import MemorySetup from './memory/MemorySetup.vue';
-import MemoryGame from './memory/MemoryGame.vue';
-import { MemoryGameType } from '../../types/Memory';
+import MemorySetup from './games/memory/MemorySetup.vue';
+import MemoryGame from './games/memory/MemoryGame.vue';
+import { MemoryGameType } from '../types/Memory';
 
 const setup = ref(true);
 

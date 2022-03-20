@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Games } from '../../types/Games';
+import { Games } from '../types/Games';
 
 import GameCard from './home/GameCard.vue';
 import Title from './common/Title.vue';
