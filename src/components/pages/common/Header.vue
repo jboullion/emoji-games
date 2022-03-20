@@ -30,6 +30,20 @@
       >
         ⚙️ <span class="visually-hidden">Settings</span>
       </button>
+
+      <!-- <span class="menus-btn position-relative"
+        >🎫
+        <span
+          class="fs-6 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+        >
+          99+
+          <span class="visually-hidden">unread messages</span>
+        </span></span
+      > -->
+
+      <router-link to="/profile" id="profile" class="menus-btn"
+        >👤<span class="visually-hidden">Profile</span>
+      </router-link>
     </div>
   </div>
 </template>
@@ -38,8 +52,27 @@
 .menus-btn {
   position: relative;
   font-size: 34px;
-  transition: transform 0.1s linear;
+  transition: transform 0.15s linear;
+  text-decoration: none;
+  text-align: center;
 }
+
+#settings-toggle {
+  position: relative;
+  transform-origin: 48% 50%;
+}
+
+/* #settings-toggle::after {
+  position: absolute;
+  top: 50%;
+  left: 48%;
+  width: 5px;
+  height: 5px;
+  content: '';
+  background-color: #f0f;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+} */
 
 .menus-btn:active {
   top: 1px;
@@ -49,12 +82,33 @@
   transform: scale(1.2);
 }
 
-#search:hover {
+#search-toggle:hover {
   transform: rotate(45deg);
 }
 
-#menu-toggle:hover {
-  transform: rotate(-360deg);
+/* #profile {
+  width: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  transition: all 0.15s linear;
+}
+#profile:hover {
+  background-color: rgba(211, 211, 211, 0.5);
+  box-shadow: 0px 0px 10px 5px rgba(189, 189, 189, 0.5);
+} */
+
+#profile {
+  display: inline-block;
+}
+
+#profile:hover {
+  transform: scale(1.2);
+  /* background-color: rgba(211, 211, 211, 0.5);
+  box-shadow: 0px 0px 10px 5px rgba(189, 189, 189, 0.5); */
+}
+
+#settings-toggle:hover {
+  transform: rotate(90deg);
   /* animation-name: spin;
   animation-duration: 0.5s;
   animation-iteration-count: 1;

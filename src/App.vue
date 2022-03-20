@@ -16,11 +16,13 @@ const audioEnabled = ref(false);
     <div class="container d-flex flex-fill flex-column justify-content-between">
       <Header />
 
-      <router-view v-slot="{ Component }">
+      <router-view></router-view>
+
+      <!-- <router-view v-slot="{ Component }">
         <transition name="slide">
           <component :is="Component" />
         </transition>
-      </router-view>
+      </router-view> -->
 
       <Footer />
     </div>

@@ -1,4 +1,8 @@
 // TODO: Do we want to store emojis in a DB? Or just keep them in this file?
+// TODO: This file is nearly 0.5MB. That is a lot to load. If we do include this entire thing possible display a loading modal.
+// ? Since this is currently only used in the search perhaps we can show a "loading" icon when opening the search the first time?
+// ? Or perhaps there is a way to set this up to be cached? Perhaps that happens already with the bundle
+// ? PWA also might help to keep things in memory
 // https://unicode.org/emoji/charts/full-emoji-list.html
 // https://www.kaggle.com/eliasdabbas/emoji-data-descriptions-codepoints?select=emoji-test.txt
 
@@ -143,147 +147,7 @@ export const Emojis: Emoji[] = [
     child_cat: 'affection',
     short_name: 'smiling face with tear',
   },
-  {
-    icon: '🙂',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'grinning face',
-  },
-  {
-    icon: '😀',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'grinning face',
-  },
-  {
-    icon: '😃',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'grinning face with big eyes',
-  },
-  {
-    icon: '😄',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'grinning face with smiling eyes',
-  },
-  {
-    icon: '😁',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'beaming face with smiling eyes',
-  },
-  {
-    icon: '😆',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'grinning squinting face',
-  },
-  {
-    icon: '😅',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'grinning face with sweat',
-  },
-  {
-    icon: '🤣',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'rolling on the floor laughing',
-  },
-  {
-    icon: '😂',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'face with tears of joy',
-  },
-  {
-    icon: '🙂',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'slightly smiling face',
-  },
-  {
-    icon: '🙃',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'upside-down face',
-  },
-  //🫠	melting face
-  {
-    icon: '😉',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'winking face',
-  },
-  {
-    icon: '😊',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'smiling face with smiling eyes',
-  },
-  {
-    icon: '😇',
-    parent_cat: 'face',
-    child_cat: 'smiling',
-    short_name: 'smiling face with halo',
-  },
-  //face-affection
 
-  {
-    icon: '🥰',
-    parent_cat: 'face',
-    child_cat: 'affection',
-    short_name: 'smiling face with hearts',
-  },
-  {
-    icon: '😍',
-    parent_cat: 'face',
-    child_cat: 'affection',
-    short_name: 'smiling face with heart-eyes',
-  },
-  {
-    icon: '🤩',
-    parent_cat: 'face',
-    child_cat: 'affection',
-    short_name: 'star-struck',
-  },
-  {
-    icon: '😘',
-    parent_cat: 'face',
-    child_cat: 'affection',
-    short_name: 'face blowing a kiss',
-  },
-  {
-    icon: '😗',
-    parent_cat: 'face',
-    child_cat: 'affection',
-    short_name: 'kissing face',
-  },
-  {
-    icon: '☺️',
-    parent_cat: 'face',
-    child_cat: 'affection',
-    short_name: 'smiling face',
-  },
-  {
-    icon: '😚',
-    parent_cat: 'face',
-    child_cat: 'affection',
-    short_name: 'kissing face with closed eyes',
-  },
-  {
-    icon: '😙',
-    parent_cat: 'face',
-    child_cat: 'affection',
-    short_name: 'kissing face with smiling eyes',
-  },
-  {
-    icon: '🥲',
-    parent_cat: 'face',
-    child_cat: 'affection',
-    short_name: 'smiling face with tear',
-  },
   //face-tongue
 
   {
@@ -960,7 +824,7 @@ export const Emojis: Emoji[] = [
     short_name: 'heart decoration',
   },
   {
-    icon: '❣',
+    icon: '❣️',
     parent_cat: 'emotion',
     child_cat: 'heart',
     short_name: 'heart exclamation',
@@ -984,7 +848,7 @@ export const Emojis: Emoji[] = [
     short_name: 'mending heart',
   },
   {
-    icon: '❤',
+    icon: '❤️',
     parent_cat: 'emotion',
     child_cat: 'heart',
     short_name: 'red heart',
@@ -3115,61 +2979,61 @@ export const Emojis: Emoji[] = [
     icon: '👨‍👨‍👦',
     parent_cat: 'family',
     child_cat: '',
-    short_name: 'family: man, man, boy',
+    short_name: 'family: man, boy',
   },
   {
     icon: '👨‍👨‍👧',
     parent_cat: 'family',
     child_cat: '',
-    short_name: 'family: man, man, girl',
+    short_name: 'family: man, girl',
   },
   {
     icon: '👨‍👨‍👧‍👦',
     parent_cat: 'family',
     child_cat: '',
-    short_name: 'family: man, man, girl, boy',
+    short_name: 'family: man, girl, boy',
   },
   {
     icon: '👨‍👨‍👦‍👦',
     parent_cat: 'family',
     child_cat: '',
-    short_name: 'family: man, man, boy, boy',
+    short_name: 'family: man, boy, boy',
   },
   {
     icon: '👨‍👨‍👧‍👧',
     parent_cat: 'family',
     child_cat: '',
-    short_name: 'family: man, man, girl, girl',
+    short_name: 'family: man, girl, girl',
   },
   {
     icon: '👩‍👩‍👦',
     parent_cat: 'family',
     child_cat: '',
-    short_name: 'family: woman, woman, boy',
+    short_name: 'family: woman, boy',
   },
   {
     icon: '👩‍👩‍👧',
     parent_cat: 'family',
     child_cat: '',
-    short_name: 'family: woman, woman, girl',
+    short_name: 'family: woman, girl',
   },
   {
     icon: '👩‍👩‍👧‍👦',
     parent_cat: 'family',
     child_cat: '',
-    short_name: 'family: woman, woman, girl, boy',
+    short_name: 'family: woman, girl, boy',
   },
   {
     icon: '👩‍👩‍👦‍👦',
     parent_cat: 'family',
     child_cat: '',
-    short_name: 'family: woman, woman, boy, boy',
+    short_name: 'family: woman, boy, boy',
   },
   {
     icon: '👩‍👩‍👧‍👧',
     parent_cat: 'family',
     child_cat: '',
-    short_name: 'family: woman, woman, girl, girl',
+    short_name: 'family: woman, girl, girl',
   },
   {
     icon: '👨‍👦',
@@ -7606,7 +7470,7 @@ export const Emojis: Emoji[] = [
   // mail
 
   {
-    icon: '✉',
+    icon: '✉️',
     parent_cat: 'mail',
     child_cat: '',
     short_name: 'envelope',
@@ -11295,9 +11159,6 @@ export const Emojis: Emoji[] = [
     short_name: 'flag: Wales',
   },
 
-  // People & Body
-  // hand-fingers-open
-
   {
     icon: '👋🏻',
     parent_cat: 'people',
@@ -11448,28 +11309,6 @@ export const Emojis: Emoji[] = [
     child_cat: 'hand-fingers-open',
     short_name: 'vulcan salute: dark skin tone',
   },
-  // 🫱🏻	rightwards hand: light skin tone
-  // 🫱🏼	rightwards hand: medium-light skin tone
-  // 🫱🏽	rightwards hand: medium skin tone
-  // 🫱🏾	rightwards hand: medium-dark skin tone
-  // 🫱🏿	rightwards hand: dark skin tone
-  // 🫲🏻	leftwards hand: light skin tone
-  // 🫲🏼	leftwards hand: medium-light skin tone
-  // 🫲🏽	leftwards hand: medium skin tone
-  // 🫲🏾	leftwards hand: medium-dark skin tone
-  // 🫲🏿	leftwards hand: dark skin tone
-  // 🫳🏻	palm down hand: light skin tone
-  // 🫳🏼	palm down hand: medium-light skin tone
-  // 🫳🏽	palm down hand: medium skin tone
-  // 🫳🏾	palm down hand: medium-dark skin tone
-  // 🫳🏿	palm down hand: dark skin tone
-
-  // 🫴🏻	palm up hand: light skin tone
-  // 🫴🏼	palm up hand: medium-light skin tone
-  // 🫴🏽	palm up hand: medium skin tone
-  // 🫴🏾	palm up hand: medium-dark skin tone
-  // 🫴🏿	palm up hand: dark skin tone
-  // hand-fingers-partial
 
   {
     icon: '👌🏻',
@@ -11621,11 +11460,7 @@ export const Emojis: Emoji[] = [
     child_cat: 'hand-fingers-partial',
     short_name: 'crossed fingers: dark skin tone',
   },
-  // 🫰🏻	hand with index finger and thumb crossed: light skin tone
-  // 🫰🏼	hand with index finger and thumb crossed: medium-light skin tone
-  // 🫰🏽	hand with index finger and thumb crossed: medium skin tone
-  // 🫰🏾	hand with index finger and thumb crossed: medium-dark skin tone
-  // 🫰🏿	hand with index finger and thumb crossed: dark skin tone
+
   {
     icon: '🤟🏻',
     parent_cat: 'people',
@@ -20488,125 +20323,121 @@ export const Emojis: Emoji[] = [
     icon: '🧑🏻‍❤️‍💋‍🧑🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, light skin tone, medium-light skin tone',
+    short_name: 'kiss: person, light skin tone, medium-light skin tone',
   },
   {
     icon: '🧑🏻‍❤️‍💋‍🧑🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, light skin tone, medium skin tone',
+    short_name: 'kiss: person, light skin tone, medium skin tone',
   },
   {
     icon: '🧑🏻‍❤️‍💋‍🧑🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, light skin tone, medium-dark skin tone',
+    short_name: 'kiss: person, light skin tone, medium-dark skin tone',
   },
   {
     icon: '🧑🏻‍❤️‍💋‍🧑🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, light skin tone, dark skin tone',
+    short_name: 'kiss: person, light skin tone, dark skin tone',
   },
   {
     icon: '🧑🏼‍❤️‍💋‍🧑🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, medium-light skin tone, light skin tone',
+    short_name: 'kiss: person, medium-light skin tone, light skin tone',
   },
   {
     icon: '🧑🏼‍❤️‍💋‍🧑🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name:
-      'kiss: person, person, medium-light skin tone, medium skin tone',
+    short_name: 'kiss: person, medium-light skin tone, medium skin tone',
   },
   {
     icon: '🧑🏼‍❤️‍💋‍🧑🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name:
-      'kiss: person, person, medium-light skin tone, medium-dark skin tone',
+    short_name: 'kiss: person, medium-light skin tone, medium-dark skin tone',
   },
   {
     icon: '🧑🏼‍❤️‍💋‍🧑🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, medium-light skin tone, dark skin tone',
+    short_name: 'kiss: person, medium-light skin tone, dark skin tone',
   },
   {
     icon: '🧑🏽‍❤️‍💋‍🧑🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, medium skin tone, light skin tone',
+    short_name: 'kiss: person, medium skin tone, light skin tone',
   },
   {
     icon: '🧑🏽‍❤️‍💋‍🧑🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name:
-      'kiss: person, person, medium skin tone, medium-light skin tone',
+    short_name: 'kiss: person, medium skin tone, medium-light skin tone',
   },
   {
     icon: '🧑🏽‍❤️‍💋‍🧑🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, medium skin tone, medium-dark skin tone',
+    short_name: 'kiss: person, medium skin tone, medium-dark skin tone',
   },
   {
     icon: '🧑🏽‍❤️‍💋‍🧑🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, medium skin tone, dark skin tone',
+    short_name: 'kiss: person, medium skin tone, dark skin tone',
   },
   {
     icon: '🧑🏾‍❤️‍💋‍🧑🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, medium-dark skin tone, light skin tone',
+    short_name: 'kiss: person, medium-dark skin tone, light skin tone',
   },
   {
     icon: '🧑🏾‍❤️‍💋‍🧑🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name:
-      'kiss: person, person, medium-dark skin tone, medium-light skin tone',
+    short_name: 'kiss: person, medium-dark skin tone, medium-light skin tone',
   },
   {
     icon: '🧑🏾‍❤️‍💋‍🧑🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, medium-dark skin tone, medium skin tone',
+    short_name: 'kiss: person, medium-dark skin tone, medium skin tone',
   },
   {
     icon: '🧑🏾‍❤️‍💋‍🧑🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, medium-dark skin tone, dark skin tone',
+    short_name: 'kiss: person, medium-dark skin tone, dark skin tone',
   },
   {
     icon: '🧑🏿‍❤️‍💋‍🧑🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, dark skin tone, light skin tone',
+    short_name: 'kiss: person, dark skin tone, light skin tone',
   },
   {
     icon: '🧑🏿‍❤️‍💋‍🧑🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, dark skin tone, medium-light skin tone',
+    short_name: 'kiss: person, dark skin tone, medium-light skin tone',
   },
   {
     icon: '🧑🏿‍❤️‍💋‍🧑🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, dark skin tone, medium skin tone',
+    short_name: 'kiss: person, dark skin tone, medium skin tone',
   },
   {
     icon: '🧑🏿‍❤️‍💋‍🧑🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: person, person, dark skin tone, medium-dark skin tone',
+    short_name: 'kiss: person, dark skin tone, medium-dark skin tone',
   },
   {
     icon: '👩🏻‍❤️‍💋‍👨🏻',
@@ -20764,303 +20595,301 @@ export const Emojis: Emoji[] = [
     icon: '👨🏻‍❤️‍💋‍👨🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, light skin tone',
+    short_name: 'kiss: man, light skin tone',
   },
   {
     icon: '👨🏻‍❤️‍💋‍👨🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, light skin tone, medium-light skin tone',
+    short_name: 'kiss: man, light skin tone, medium-light skin tone',
   },
   {
     icon: '👨🏻‍❤️‍💋‍👨🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, light skin tone, medium skin tone',
+    short_name: 'kiss: man, light skin tone, medium skin tone',
   },
   {
     icon: '👨🏻‍❤️‍💋‍👨🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, light skin tone, medium-dark skin tone',
+    short_name: 'kiss: man, light skin tone, medium-dark skin tone',
   },
   {
     icon: '👨🏻‍❤️‍💋‍👨🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, light skin tone, dark skin tone',
+    short_name: 'kiss: man, light skin tone, dark skin tone',
   },
   {
     icon: '👨🏼‍❤️‍💋‍👨🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium-light skin tone, light skin tone',
+    short_name: 'kiss: man, medium-light skin tone, light skin tone',
   },
   {
     icon: '👨🏼‍❤️‍💋‍👨🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium-light skin tone',
+    short_name: 'kiss: man, medium-light skin tone',
   },
   {
     icon: '👨🏼‍❤️‍💋‍👨🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium-light skin tone, medium skin tone',
+    short_name: 'kiss: man, medium-light skin tone, medium skin tone',
   },
   {
     icon: '👨🏼‍❤️‍💋‍👨🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium-light skin tone, medium-dark skin tone',
+    short_name: 'kiss: man, medium-light skin tone, medium-dark skin tone',
   },
   {
     icon: '👨🏼‍❤️‍💋‍👨🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium-light skin tone, dark skin tone',
+    short_name: 'kiss: man, medium-light skin tone, dark skin tone',
   },
   {
     icon: '👨🏽‍❤️‍💋‍👨🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium skin tone, light skin tone',
+    short_name: 'kiss: man, medium skin tone, light skin tone',
   },
   {
     icon: '👨🏽‍❤️‍💋‍👨🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium skin tone, medium-light skin tone',
+    short_name: 'kiss: man, medium skin tone, medium-light skin tone',
   },
   {
     icon: '👨🏽‍❤️‍💋‍👨🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium skin tone',
+    short_name: 'kiss: man, medium skin tone',
   },
   {
     icon: '👨🏽‍❤️‍💋‍👨🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium skin tone, medium-dark skin tone',
+    short_name: 'kiss: man, medium skin tone, medium-dark skin tone',
   },
   {
     icon: '👨🏽‍❤️‍💋‍👨🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium skin tone, dark skin tone',
+    short_name: 'kiss: man, medium skin tone, dark skin tone',
   },
   {
     icon: '👨🏾‍❤️‍💋‍👨🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium-dark skin tone, light skin tone',
+    short_name: 'kiss: man, medium-dark skin tone, light skin tone',
   },
   {
     icon: '👨🏾‍❤️‍💋‍👨🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium-dark skin tone, medium-light skin tone',
+    short_name: 'kiss: man, medium-dark skin tone, medium-light skin tone',
   },
   {
     icon: '👨🏾‍❤️‍💋‍👨🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium-dark skin tone, medium skin tone',
+    short_name: 'kiss: man, medium-dark skin tone, medium skin tone',
   },
   {
     icon: '👨🏾‍❤️‍💋‍👨🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium-dark skin tone',
+    short_name: 'kiss: man, medium-dark skin tone',
   },
   {
     icon: '👨🏾‍❤️‍💋‍👨🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, medium-dark skin tone, dark skin tone',
+    short_name: 'kiss: man, medium-dark skin tone, dark skin tone',
   },
   {
     icon: '👨🏿‍❤️‍💋‍👨🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, dark skin tone, light skin tone',
+    short_name: 'kiss: man, dark skin tone, light skin tone',
   },
   {
     icon: '👨🏿‍❤️‍💋‍👨🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, dark skin tone, medium-light skin tone',
+    short_name: 'kiss: man, dark skin tone, medium-light skin tone',
   },
   {
     icon: '👨🏿‍❤️‍💋‍👨🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, dark skin tone, medium skin tone',
+    short_name: 'kiss: man, dark skin tone, medium skin tone',
   },
   {
     icon: '👨🏿‍❤️‍💋‍👨🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, dark skin tone, medium-dark skin tone',
+    short_name: 'kiss: man, dark skin tone, medium-dark skin tone',
   },
   {
     icon: '👨🏿‍❤️‍💋‍👨🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: man, man, dark skin tone',
+    short_name: 'kiss: man, dark skin tone',
   },
   {
     icon: '👩🏻‍❤️‍💋‍👩🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, light skin tone',
+    short_name: 'kiss: woman, light skin tone',
   },
   {
     icon: '👩🏻‍❤️‍💋‍👩🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, light skin tone, medium-light skin tone',
+    short_name: 'kiss: woman, light skin tone, medium-light skin tone',
   },
   {
     icon: '👩🏻‍❤️‍💋‍👩🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, light skin tone, medium skin tone',
+    short_name: 'kiss: woman, light skin tone, medium skin tone',
   },
   {
     icon: '👩🏻‍❤️‍💋‍👩🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, light skin tone, medium-dark skin tone',
+    short_name: 'kiss: woman, light skin tone, medium-dark skin tone',
   },
   {
     icon: '👩🏻‍❤️‍💋‍👩🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, light skin tone, dark skin tone',
+    short_name: 'kiss: woman, light skin tone, dark skin tone',
   },
   {
     icon: '👩🏼‍❤️‍💋‍👩🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium-light skin tone, light skin tone',
+    short_name: 'kiss: woman, medium-light skin tone, light skin tone',
   },
   {
     icon: '👩🏼‍❤️‍💋‍👩🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium-light skin tone',
+    short_name: 'kiss: woman, medium-light skin tone',
   },
   {
     icon: '👩🏼‍❤️‍💋‍👩🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium-light skin tone, medium skin tone',
+    short_name: 'kiss: woman, medium-light skin tone, medium skin tone',
   },
   {
     icon: '👩🏼‍❤️‍💋‍👩🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name:
-      'kiss: woman, woman, medium-light skin tone, medium-dark skin tone',
+    short_name: 'kiss: woman, medium-light skin tone, medium-dark skin tone',
   },
   {
     icon: '👩🏼‍❤️‍💋‍👩🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium-light skin tone, dark skin tone',
+    short_name: 'kiss: woman, medium-light skin tone, dark skin tone',
   },
   {
     icon: '👩🏽‍❤️‍💋‍👩🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium skin tone, light skin tone',
+    short_name: 'kiss: woman, medium skin tone, light skin tone',
   },
   {
     icon: '👩🏽‍❤️‍💋‍👩🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium skin tone, medium-light skin tone',
+    short_name: 'kiss: woman, medium skin tone, medium-light skin tone',
   },
   {
     icon: '👩🏽‍❤️‍💋‍👩🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium skin tone',
+    short_name: 'kiss: woman, medium skin tone',
   },
   {
     icon: '👩🏽‍❤️‍💋‍👩🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium skin tone, medium-dark skin tone',
+    short_name: 'kiss: woman, medium skin tone, medium-dark skin tone',
   },
   {
     icon: '👩🏽‍❤️‍💋‍👩🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium skin tone, dark skin tone',
+    short_name: 'kiss: woman, medium skin tone, dark skin tone',
   },
   {
     icon: '👩🏾‍❤️‍💋‍👩🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium-dark skin tone, light skin tone',
+    short_name: 'kiss: woman, medium-dark skin tone, light skin tone',
   },
   {
     icon: '👩🏾‍❤️‍💋‍👩🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name:
-      'kiss: woman, woman, medium-dark skin tone, medium-light skin tone',
+    short_name: 'kiss: woman, medium-dark skin tone, medium-light skin tone',
   },
   {
     icon: '👩🏾‍❤️‍💋‍👩🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium-dark skin tone, medium skin tone',
+    short_name: 'kiss: woman, medium-dark skin tone, medium skin tone',
   },
   {
     icon: '👩🏾‍❤️‍💋‍👩🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium-dark skin tone',
+    short_name: 'kiss: woman, medium-dark skin tone',
   },
   {
     icon: '👩🏾‍❤️‍💋‍👩🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, medium-dark skin tone, dark skin tone',
+    short_name: 'kiss: woman, medium-dark skin tone, dark skin tone',
   },
   {
     icon: '👩🏿‍❤️‍💋‍👩🏻',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, dark skin tone, light skin tone',
+    short_name: 'kiss: woman, dark skin tone, light skin tone',
   },
   {
     icon: '👩🏿‍❤️‍💋‍👩🏼',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, dark skin tone, medium-light skin tone',
+    short_name: 'kiss: woman, dark skin tone, medium-light skin tone',
   },
   {
     icon: '👩🏿‍❤️‍💋‍👩🏽',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, dark skin tone, medium skin tone',
+    short_name: 'kiss: woman, dark skin tone, medium skin tone',
   },
   {
     icon: '👩🏿‍❤️‍💋‍👩🏾',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, dark skin tone, medium-dark skin tone',
+    short_name: 'kiss: woman, dark skin tone, medium-dark skin tone',
   },
   {
     icon: '👩🏿‍❤️‍💋‍👩🏿',
     parent_cat: 'people',
     child_cat: 'kiss',
-    short_name: 'kiss: woman, woman, dark skin tone',
+    short_name: 'kiss: woman, dark skin tone',
   },
 
   {
@@ -21098,140 +20927,134 @@ export const Emojis: Emoji[] = [
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, light skin tone, medium-light skin tone',
+      'couple with heart: person, light skin tone, medium-light skin tone',
   },
   {
     icon: '🧑🏻‍❤️‍🧑🏽',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: person, person, light skin tone, medium skin tone',
+    short_name: 'couple with heart: person, light skin tone, medium skin tone',
   },
   {
     icon: '🧑🏻‍❤️‍🧑🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, light skin tone, medium-dark skin tone',
+      'couple with heart: person, light skin tone, medium-dark skin tone',
   },
   {
     icon: '🧑🏻‍❤️‍🧑🏿',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: person, person, light skin tone, dark skin tone',
+    short_name: 'couple with heart: person, light skin tone, dark skin tone',
   },
   {
     icon: '🧑🏼‍❤️‍🧑🏻',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, medium-light skin tone, light skin tone',
+      'couple with heart: person, medium-light skin tone, light skin tone',
   },
   {
     icon: '🧑🏼‍❤️‍🧑🏽',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, medium-light skin tone, medium skin tone',
+      'couple with heart: person, medium-light skin tone, medium skin tone',
   },
   {
     icon: '🧑🏼‍❤️‍🧑🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, medium-light skin tone, medium-dark skin tone',
+      'couple with heart: person, medium-light skin tone, medium-dark skin tone',
   },
   {
     icon: '🧑🏼‍❤️‍🧑🏿',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, medium-light skin tone, dark skin tone',
+      'couple with heart: person, medium-light skin tone, dark skin tone',
   },
   {
     icon: '🧑🏽‍❤️‍🧑🏻',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: person, person, medium skin tone, light skin tone',
+    short_name: 'couple with heart: person, medium skin tone, light skin tone',
   },
   {
     icon: '🧑🏽‍❤️‍🧑🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, medium skin tone, medium-light skin tone',
+      'couple with heart: person, medium skin tone, medium-light skin tone',
   },
   {
     icon: '🧑🏽‍❤️‍🧑🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, medium skin tone, medium-dark skin tone',
+      'couple with heart: person, medium skin tone, medium-dark skin tone',
   },
   {
     icon: '🧑🏽‍❤️‍🧑🏿',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: person, person, medium skin tone, dark skin tone',
+    short_name: 'couple with heart: person, medium skin tone, dark skin tone',
   },
   {
     icon: '🧑🏾‍❤️‍🧑🏻',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, medium-dark skin tone, light skin tone',
+      'couple with heart: person, medium-dark skin tone, light skin tone',
   },
   {
     icon: '🧑🏾‍❤️‍🧑🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, medium-dark skin tone, medium-light skin tone',
+      'couple with heart: person, medium-dark skin tone, medium-light skin tone',
   },
   {
     icon: '🧑🏾‍❤️‍🧑🏽',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, medium-dark skin tone, medium skin tone',
+      'couple with heart: person, medium-dark skin tone, medium skin tone',
   },
   {
     icon: '🧑🏾‍❤️‍🧑🏿',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, medium-dark skin tone, dark skin tone',
+      'couple with heart: person, medium-dark skin tone, dark skin tone',
   },
   {
     icon: '🧑🏿‍❤️‍🧑🏻',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: person, person, dark skin tone, light skin tone',
+    short_name: 'couple with heart: person, dark skin tone, light skin tone',
   },
   {
     icon: '🧑🏿‍❤️‍🧑🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, dark skin tone, medium-light skin tone',
+      'couple with heart: person, dark skin tone, medium-light skin tone',
   },
   {
     icon: '🧑🏿‍❤️‍🧑🏽',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: person, person, dark skin tone, medium skin tone',
+    short_name: 'couple with heart: person, dark skin tone, medium skin tone',
   },
   {
     icon: '🧑🏿‍❤️‍🧑🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: person, person, dark skin tone, medium-dark skin tone',
+      'couple with heart: person, dark skin tone, medium-dark skin tone',
   },
   {
     icon: '👩🏻‍❤️‍👨🏻',
@@ -21407,336 +21230,326 @@ export const Emojis: Emoji[] = [
     icon: '👨🏻‍❤️‍👨🏻',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: man, man, light skin tone',
+    short_name: 'couple with heart: man, light skin tone',
   },
   {
     icon: '👨🏻‍❤️‍👨🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, light skin tone, medium-light skin tone',
+      'couple with heart: man, light skin tone, medium-light skin tone',
   },
   {
     icon: '👨🏻‍❤️‍👨🏽',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: man, man, light skin tone, medium skin tone',
+    short_name: 'couple with heart: man, light skin tone, medium skin tone',
   },
   {
     icon: '👨🏻‍❤️‍👨🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, light skin tone, medium-dark skin tone',
+      'couple with heart: man, light skin tone, medium-dark skin tone',
   },
   {
     icon: '👨🏻‍❤️‍👨🏿',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: man, man, light skin tone, dark skin tone',
+    short_name: 'couple with heart: man, light skin tone, dark skin tone',
   },
   {
     icon: '👨🏼‍❤️‍👨🏻',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, medium-light skin tone, light skin tone',
+      'couple with heart: man, medium-light skin tone, light skin tone',
   },
   {
     icon: '👨🏼‍❤️‍👨🏼',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: man, man, medium-light skin tone',
+    short_name: 'couple with heart: man, medium-light skin tone',
   },
   {
     icon: '👨🏼‍❤️‍👨🏽',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, medium-light skin tone, medium skin tone',
+      'couple with heart: man, medium-light skin tone, medium skin tone',
   },
   {
     icon: '👨🏼‍❤️‍👨🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, medium-light skin tone, medium-dark skin tone',
+      'couple with heart: man, medium-light skin tone, medium-dark skin tone',
   },
   {
     icon: '👨🏼‍❤️‍👨🏿',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, medium-light skin tone, dark skin tone',
+      'couple with heart: man, medium-light skin tone, dark skin tone',
   },
   {
     icon: '👨🏽‍❤️‍👨🏻',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: man, man, medium skin tone, light skin tone',
+    short_name: 'couple with heart: man, medium skin tone, light skin tone',
   },
   {
     icon: '👨🏽‍❤️‍👨🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, medium skin tone, medium-light skin tone',
+      'couple with heart: man, medium skin tone, medium-light skin tone',
   },
   {
     icon: '👨🏽‍❤️‍👨🏽',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: man, man, medium skin tone',
+    short_name: 'couple with heart: man, medium skin tone',
   },
   {
     icon: '👨🏽‍❤️‍👨🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, medium skin tone, medium-dark skin tone',
+      'couple with heart: man, medium skin tone, medium-dark skin tone',
   },
   {
     icon: '👨🏽‍❤️‍👨🏿',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: man, man, medium skin tone, dark skin tone',
+    short_name: 'couple with heart: man, medium skin tone, dark skin tone',
   },
   {
     icon: '👨🏾‍❤️‍👨🏻',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, medium-dark skin tone, light skin tone',
+      'couple with heart: man, medium-dark skin tone, light skin tone',
   },
   {
     icon: '👨🏾‍❤️‍👨🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, medium-dark skin tone, medium-light skin tone',
+      'couple with heart: man, medium-dark skin tone, medium-light skin tone',
   },
   {
     icon: '👨🏾‍❤️‍👨🏽',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, medium-dark skin tone, medium skin tone',
+      'couple with heart: man, medium-dark skin tone, medium skin tone',
   },
   {
     icon: '👨🏾‍❤️‍👨🏾',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: man, man, medium-dark skin tone',
+    short_name: 'couple with heart: man, medium-dark skin tone',
   },
   {
     icon: '👨🏾‍❤️‍👨🏿',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: man, man, medium-dark skin tone, dark skin tone',
+    short_name: 'couple with heart: man, medium-dark skin tone, dark skin tone',
   },
   {
     icon: '👨🏿‍❤️‍👨🏻',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: man, man, dark skin tone, light skin tone',
+    short_name: 'couple with heart: man, dark skin tone, light skin tone',
   },
   {
     icon: '👨🏿‍❤️‍👨🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: man, man, dark skin tone, medium-light skin tone',
+      'couple with heart: man, dark skin tone, medium-light skin tone',
   },
   {
     icon: '👨🏿‍❤️‍👨🏽',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: man, man, dark skin tone, medium skin tone',
+    short_name: 'couple with heart: man, dark skin tone, medium skin tone',
   },
   {
     icon: '👨🏿‍❤️‍👨🏾',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: man, man, dark skin tone, medium-dark skin tone',
+    short_name: 'couple with heart: man, dark skin tone, medium-dark skin tone',
   },
   {
     icon: '👨🏿‍❤️‍👨🏿',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: man, man, dark skin tone',
+    short_name: 'couple with heart: man, dark skin tone',
   },
   {
     icon: '👩🏻‍❤️‍👩🏻',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: woman, woman, light skin tone',
+    short_name: 'couple with heart: woman, light skin tone',
   },
   {
     icon: '👩🏻‍❤️‍👩🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, light skin tone, medium-light skin tone',
+      'couple with heart: woman, light skin tone, medium-light skin tone',
   },
   {
     icon: '👩🏻‍❤️‍👩🏽',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: woman, woman, light skin tone, medium skin tone',
+    short_name: 'couple with heart: woman, light skin tone, medium skin tone',
   },
   {
     icon: '👩🏻‍❤️‍👩🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, light skin tone, medium-dark skin tone',
+      'couple with heart: woman, light skin tone, medium-dark skin tone',
   },
   {
     icon: '👩🏻‍❤️‍👩🏿',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: woman, woman, light skin tone, dark skin tone',
+    short_name: 'couple with heart: woman, light skin tone, dark skin tone',
   },
   {
     icon: '👩🏼‍❤️‍👩🏻',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, medium-light skin tone, light skin tone',
+      'couple with heart: woman, medium-light skin tone, light skin tone',
   },
   {
     icon: '👩🏼‍❤️‍👩🏼',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: woman, woman, medium-light skin tone',
+    short_name: 'couple with heart: woman, medium-light skin tone',
   },
   {
     icon: '👩🏼‍❤️‍👩🏽',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, medium-light skin tone, medium skin tone',
+      'couple with heart: woman, medium-light skin tone, medium skin tone',
   },
   {
     icon: '👩🏼‍❤️‍👩🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, medium-light skin tone, medium-dark skin tone',
+      'couple with heart: woman, medium-light skin tone, medium-dark skin tone',
   },
   {
     icon: '👩🏼‍❤️‍👩🏿',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, medium-light skin tone, dark skin tone',
+      'couple with heart: woman, medium-light skin tone, dark skin tone',
   },
   {
     icon: '👩🏽‍❤️‍👩🏻',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: woman, woman, medium skin tone, light skin tone',
+    short_name: 'couple with heart: woman, medium skin tone, light skin tone',
   },
   {
     icon: '👩🏽‍❤️‍👩🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, medium skin tone, medium-light skin tone',
+      'couple with heart: woman, medium skin tone, medium-light skin tone',
   },
   {
     icon: '👩🏽‍❤️‍👩🏽',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: woman, woman, medium skin tone',
+    short_name: 'couple with heart: woman, medium skin tone',
   },
   {
     icon: '👩🏽‍❤️‍👩🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, medium skin tone, medium-dark skin tone',
+      'couple with heart: woman, medium skin tone, medium-dark skin tone',
   },
   {
     icon: '👩🏽‍❤️‍👩🏿',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: woman, woman, medium skin tone, dark skin tone',
+    short_name: 'couple with heart: woman, medium skin tone, dark skin tone',
   },
   {
     icon: '👩🏾‍❤️‍👩🏻',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, medium-dark skin tone, light skin tone',
+      'couple with heart: woman, medium-dark skin tone, light skin tone',
   },
   {
     icon: '👩🏾‍❤️‍👩🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, medium-dark skin tone, medium-light skin tone',
+      'couple with heart: woman, medium-dark skin tone, medium-light skin tone',
   },
   {
     icon: '👩🏾‍❤️‍👩🏽',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, medium-dark skin tone, medium skin tone',
+      'couple with heart: woman, medium-dark skin tone, medium skin tone',
   },
   {
     icon: '👩🏾‍❤️‍👩🏾',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: woman, woman, medium-dark skin tone',
+    short_name: 'couple with heart: woman, medium-dark skin tone',
   },
   {
     icon: '👩🏾‍❤️‍👩🏿',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, medium-dark skin tone, dark skin tone',
+      'couple with heart: woman, medium-dark skin tone, dark skin tone',
   },
   {
     icon: '👩🏿‍❤️‍👩🏻',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: woman, woman, dark skin tone, light skin tone',
+    short_name: 'couple with heart: woman, dark skin tone, light skin tone',
   },
   {
     icon: '👩🏿‍❤️‍👩🏼',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, dark skin tone, medium-light skin tone',
+      'couple with heart: woman, dark skin tone, medium-light skin tone',
   },
   {
     icon: '👩🏿‍❤️‍👩🏽',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name:
-      'couple with heart: woman, woman, dark skin tone, medium skin tone',
+    short_name: 'couple with heart: woman, dark skin tone, medium skin tone',
   },
   {
     icon: '👩🏿‍❤️‍👩🏾',
     parent_cat: 'people',
     child_cat: 'heart',
     short_name:
-      'couple with heart: woman, woman, dark skin tone, medium-dark skin tone',
+      'couple with heart: woman, dark skin tone, medium-dark skin tone',
   },
   {
     icon: '👩🏿‍❤️‍👩🏿',
     parent_cat: 'people',
     child_cat: 'heart',
-    short_name: 'couple with heart: woman, woman, dark skin tone',
+    short_name: 'couple with heart: woman, dark skin tone',
   },
 ];

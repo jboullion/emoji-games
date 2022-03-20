@@ -25,7 +25,9 @@ function generateRandomEmojis() {
   }
 
   randomIndexes.forEach((index) => {
-    randomEmojis.value.push(MemoryEmojis[index]);
+    if (MemoryEmojis[index]) {
+      randomEmojis.value.push(MemoryEmojis[index]);
+    }
   });
 }
 </script>
