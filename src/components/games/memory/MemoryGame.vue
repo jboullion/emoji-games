@@ -23,11 +23,14 @@ type Guess = {
 
 const start = ref(false);
 const wrong = ref(false);
+const won = ref(false);
 const found = ref(0);
 const foundGuesses = ref<Guess[]>([]);
 const currentGuesses = ref<Guess[]>([]);
 
 let numGuesses: number = 0; // ? Currently not used
+
+const emit = defineEmits(['win']);
 
 const props = defineProps({
   memoryGame: {
@@ -37,7 +40,6 @@ const props = defineProps({
 });
 
 const remaining = computed(() => props.memoryGame.emojis.length - found.value);
-const complete = computed(() => remaining.value <= 0);
 
 // Randomize our emoji array on create
 
@@ -88,6 +90,7 @@ function guess(guessIndex: number) {
       emoji: emojiSets[guessIndex],
     });
 
+    // Full Set Matched!
     if (currentGuesses.value.length % props.memoryGame.emojiPerSet === 0) {
       found.value++;
       numGuesses++;
@@ -96,6 +99,12 @@ function guess(guessIndex: number) {
       foundGuesses.value = foundGuesses.value.concat(
         currentGuesses.value.splice(0, props.memoryGame.emojiPerSet),
       );
+
+      if (remaining.value <= 0) {
+        console.log('Won!');
+        won.value = true;
+        emit('win');
+      }
     }
   } else {
     currentGuesses.value.push({
@@ -131,7 +140,7 @@ function showWrong(cardIndex: number) {
 
 <template>
   <div class="my-4 text-center">
-    <div class="row">
+    <div class="row mb-5">
       <div class="col-sm-6 mb-3">
         <div class="card">
           <div class="card-body text-center">
@@ -154,18 +163,11 @@ function showWrong(cardIndex: number) {
       </div>
     </div>
 
-    <div class="col-12" v-if="complete">
-      <div class="alert alert-success">
-        🎉 Good Job! You Collected {{ found }} 🎫!
-      </div>
-      <!-- ✨🎆 🎫 🎊🎉 -->
-    </div>
-
     <div id="card-list" class="col-12">
       <div class="row justify-content-center">
         <MemoryFlipCard
           class="mb-3"
-          :class="{ flip: showCard(i), wrong: showWrong(i) }"
+          :class="{ flip: showCard(i), wrong: showWrong(i), won: won }"
           @click="guess(i)"
           v-for="(emoji, i) in emojiSets"
           :emoji="emoji"
@@ -177,7 +179,7 @@ function showWrong(cardIndex: number) {
     <div class="col-12 mb-3" v-if="!start">
       <button
         type="button"
-        class="btn btn-outline-secondary w-100"
+        class="btn btn-primary w-100"
         style="font-size: 50px"
         @click="start = true"
       >

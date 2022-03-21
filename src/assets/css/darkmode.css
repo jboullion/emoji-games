@@ -1,50 +1,49 @@
-#app-wrapper,
-.card,
-.modal-content {
-  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out,
-    border-color 0.1s ease-in-out;
-}
-
-#app-wrapper.bg-dark {
+body.darkmode {
   color: var(--soft-white);
+  background-color: var(--dark);
 }
 
-#app-wrapper.bg-dark .card,
-#app-wrapper.bg-dark .modal-content {
+body.darkmode .card,
+body.darkmode .modal-content {
   background-color: var(--dark);
   border-color: var(--light-gray);
   color: var(--soft-white);
 }
 
-#app-wrapper.bg-dark .modal {
-  background-color: var(--gray);
+body.darkmode .modal-backdrop.show {
+  transition: opacity 0s;
+  opacity: 0.9;
 }
 
-#app-wrapper.bg-dark h1,
-#app-wrapper.bg-dark h2,
-#app-wrapper.bg-dark h3,
-#app-wrapper.bg-dark h4,
-#app-wrapper.bg-dark h5 {
+/* body.darkmode .modal {
+  background-color: var(--gray);
+} */
+
+body.darkmode h1,
+body.darkmode h2,
+body.darkmode h3,
+body.darkmode h4,
+body.darkmode h5 {
   color: var(--soft-white);
 }
 
-#app-wrapper.bg-dark p {
+body.darkmode p {
   color: var(--soft-white);
 }
 
 /**
  * FORMS
  */
-#app-wrapper.bg-dark .form-select {
+body.darkmode .form-select {
   box-shadow: inset 0 2px 0 rgb(0 0 0 / 8%);
 }
 
-/* #app-wrapper.bg-dark .form-control,
-#app-wrapper.bg-dark .form-select {
+/* body.darkmode .form-control,
+body.darkmode .form-select {
   border: 3px solid var(--soft-white);
 } */
 
-#app-wrapper.bg-dark .btn.btn-outline-secondary {
+body.darkmode .btn.btn-outline-secondary {
   background-color: var(--dark);
   border-color: var(--light-gray);
   color: var(--soft-white);

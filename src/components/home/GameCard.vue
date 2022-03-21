@@ -1,9 +1,7 @@
 <script setup lang="ts">
-// TODO: Need to create images for these games instead of simple emoji's eventually...right?
+import { PropType } from 'vue';
 
-import { ref, onMounted, PropType } from 'vue';
-
-import { Game } from '../../../types/Games';
+import { Game } from '../../types/Games';
 
 defineProps({
   game: {
@@ -26,25 +24,6 @@ defineProps({
 </template>
 
 <style scoped>
-/* #emoji-list .emoji {
-  font-size: 64px;
-  margin: 10px;
-  padding: 0 10px;
-  flex: 1;
-  cursor: grab;
-  position: relative;
-  user-select: none;
-  border: 2px solid var(--dark);
-  border-radius: 15px;
-  box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.5);
-}
-
-#emoji-list .emoji:active {
-  cursor: grabbing;
-  top: 1px;
-  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.5);
-} */
-
 .card {
   flex: 1;
   cursor: grab;

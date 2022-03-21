@@ -1,5 +1,6 @@
 // TODO: Do we want to store emojis in a DB? Or just keep them in this file?
 // TODO: This file is nearly 0.5MB. That is a lot to load. If we do include this entire thing possible display a loading modal.
+// TODO: We could probably split this up and put the "people" into their own file to load separately? Not sure if that is better or worse since both will need to load eventually
 // ? Since this is currently only used in the search perhaps we can show a "loading" icon when opening the search the first time?
 // ? Or perhaps there is a way to set this up to be cached? Perhaps that happens already with the bundle
 // ? PWA also might help to keep things in memory

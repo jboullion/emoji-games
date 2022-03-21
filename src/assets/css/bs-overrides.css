@@ -3,7 +3,7 @@ h1 {
 }
 
 .bg-dark {
-  background-color: #222 !important;
+  background-color: var(--dark) !important;
 }
 
 /**
@@ -15,7 +15,7 @@ h1 {
   border-color: var(--gray);
   border-width: 2px 3px 5px 3px;
   padding: 8px;
-  transition: opacity 0.15s linear;
+
   font-family: 'Bangers', cursive;
   /* box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.5) !important; */
   /* transform: rotate3d(1, 0, 0, 35deg); */
@@ -24,11 +24,14 @@ h1 {
 
 .btn-primary {
   background-color: var(--emoji-yellow) !important;
+  border-color: black !important;
+  color: black;
 }
 
 .btn-primary:focus,
-.btn-primary:not(.disabled):active,
-.btn-primary:not(.disabled):hover {
+.btn-primary:active,
+.btn-primary:hover {
+  color: black;
   border-color: black !important;
 }
 
@@ -40,13 +43,13 @@ h1 {
   box-shadow: 0 0 0 0.25rem rgba(255, 200, 61, 0.5) !important;
 }
 
-.btn:not(.disabled):hover {
+.btn:hover {
   border-color: var(--gray);
   margin-top: 0;
   border-width: 2px 3px 5px 3px;
 }
 
-.btn:not(.disabled):active {
+.btn:active {
   margin-top: 1px;
   border-width: 2px 3px 4px 3px;
 }
@@ -115,9 +118,13 @@ h1 {
 }
 
 .modal {
-  background-color: #aaa;
-  opacity: 1;
 }
+
+/* .card,
+.modal-content {
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out,
+    border-color 0.1s ease-in-out;
+} */
 
 .modal-header {
   border: 0;

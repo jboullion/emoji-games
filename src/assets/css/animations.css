@@ -67,3 +67,21 @@
     transform: scale(1);
   } */
 }
+
+@keyframes winbounce {
+  0% {
+    transform: scaleY(1) rotate(0);
+  }
+  25% {
+    transform: scaleY(0.95) rotate(5deg);
+  }
+  50% {
+    transform: scaleY(1) rotate(0);
+  }
+  75% {
+    transform: scaleY(0.95) rotate(-5deg);
+  }
+  100% {
+    transform: scaleY(1) rotate(0);
+  }
+}

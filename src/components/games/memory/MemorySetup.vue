@@ -113,8 +113,7 @@ function generateRandomEmojis() {
     <div class="col-12 mb-3">
       <button
         type="button"
-        class="btn btn-outline-secondary w-100"
-        style="font-size: 50px"
+        class="btn btn-primary w-100 action-btn"
         @click="generateRandomEmojis"
       >
         ♻️ Randomize
@@ -130,8 +129,7 @@ function generateRandomEmojis() {
     <div class="col-12 mb-3" v-if="randomEmojis && randomEmojis.length">
       <button
         type="button"
-        class="btn btn-outline-secondary w-100"
-        style="font-size: 50px"
+        class="btn btn-primary w-100 action-btn"
         @click="emit('start', randomEmojis)"
       >
         ✔️ Accept
@@ -153,6 +151,11 @@ function generateRandomEmojis() {
   /* background-color: #222; */
 }
 
+.action-btn {
+  font-size: 50px;
+  font-weight: normal;
+}
+
 #emoji-list .emoji {
   font-size: 64px;
   margin: 10px;
@@ -164,7 +167,7 @@ function generateRandomEmojis() {
   border-radius: 15px;
 }
 
-#app-wrapper.bg-dark .emoji {
+body.darkmode .emoji {
   background-color: var(--light-gray);
 }
 

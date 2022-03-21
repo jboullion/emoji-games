@@ -9,10 +9,20 @@ import ModalSearch from './components/modals/Search.vue';
 // TODO: These values need to be tracked locally or in a DB so the user doesn't have to redo each visit
 const darkMode = ref(false);
 const audioEnabled = ref(false);
+
+function toggleDarkMode() {
+  darkMode.value = !darkMode.value;
+
+  if (darkMode.value) {
+    document.body.classList.add('darkmode');
+  } else {
+    document.body.classList.remove('darkmode');
+  }
+}
 </script>
 
 <template>
-  <div id="app-wrapper" :class="{ 'bg-dark': darkMode }">
+  <div id="app-wrapper">
     <div class="container d-flex flex-fill flex-column justify-content-between">
       <Header />
 
@@ -30,7 +40,7 @@ const audioEnabled = ref(false);
     <ModalSettings
       :darkMode="darkMode"
       :audioEnabled="audioEnabled"
-      @toggleDark="darkMode = !darkMode"
+      @toggleDark="toggleDarkMode"
       @toggleAudio="audioEnabled = !audioEnabled"
     />
     <ModalSearch />

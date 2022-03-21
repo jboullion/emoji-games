@@ -30,12 +30,12 @@ defineProps({
 </template>
 
 <style scoped>
-#app-wrapper.bg-dark .flip-card-front {
+body.darkmode .flip-card-front {
   background-color: var(--dark);
   border: 4px solid var(--light-gray);
 }
 
-#app-wrapper.bg-dark .flip-card-inner:before {
+body.darkmode .flip-card-inner:before {
   border-color: var(--light-gray);
 }
 
@@ -49,7 +49,17 @@ defineProps({
   perspective: 500px; /* Remove this if you don't want the 3D effect */
 }
 
+.flip-card.won {
+  cursor: default;
+  transform-origin: bottom;
+  animation-name: winbounce;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
 .flip-card.wrong .flip-card-back {
+  transition: background-color 0.3s ease-in;
   background-color: rgb(219, 46, 46);
 }
 
@@ -106,7 +116,6 @@ defineProps({
   justify-content: center;
   border-radius: 15px;
   border: 4px solid var(--gray);
-  transition: background-color 0.3s ease-in;
 }
 
 /* Style the front side */

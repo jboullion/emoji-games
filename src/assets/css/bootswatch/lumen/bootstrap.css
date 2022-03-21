@@ -11439,7 +11439,7 @@ fieldset:disabled .btn {
   border-width: 0 1px 4px 1px;
   text-transform: uppercase;
 }
-
+/* 
 .btn:not(.disabled):hover {
   margin-top: 1px;
   border-bottom-width: 3px;
@@ -11448,7 +11448,7 @@ fieldset:disabled .btn {
 .btn:not(.disabled):active {
   margin-top: 2px;
   border-bottom-width: 2px;
-}
+} */
 
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
   background-color: #158cba;
