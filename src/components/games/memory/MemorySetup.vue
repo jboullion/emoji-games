@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType, reactive, ref } from 'vue';
+import { PropType, reactive, ref, onMounted } from 'vue';
 import { MemoryGameType, MemoryEmojis } from '../../../types/Memory';
 
 const randomEmojis = ref<string[]>([]);
@@ -30,6 +30,10 @@ function generateRandomEmojis() {
     }
   });
 }
+
+onMounted(() => {
+  generateRandomEmojis();
+});
 </script>
 
 <template>
@@ -149,11 +153,6 @@ function generateRandomEmojis() {
 .btn:disabled {
   opacity: 0.3;
   /* background-color: #222; */
-}
-
-.action-btn {
-  font-size: 50px;
-  font-weight: normal;
 }
 
 #emoji-list .emoji {

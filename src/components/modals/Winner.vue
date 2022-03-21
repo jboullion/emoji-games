@@ -22,9 +22,8 @@ const props = defineProps({
           <h5>Winner!</h5>
         </div>
         <div class="modal-body d-flex flex-column justify-content-between">
-          <h3 class="mb-5 text-center">
-            🎉 Good Job! You Collected {{ tickets }} 🎫!
-          </h3>
+          <h3 class="mb-4 text-center">🎉 Good Job! 🎉</h3>
+          <h3 class="mb-5 text-center">You Collected {{ tickets }} 🎫!</h3>
 
           <button
             class="btn btn-outline-secondary mb-3"

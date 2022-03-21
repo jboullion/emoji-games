@@ -47,6 +47,7 @@ body.darkmode .flip-card-inner:before {
   height: 150px;
   font-size: 64px;
   perspective: 500px; /* Remove this if you don't want the 3D effect */
+  user-select: none;
 }
 
 .flip-card.won {

@@ -25,6 +25,7 @@ function start(emojis: string[]) {
   memoryGame.emojis = emojis;
 }
 
+// TODO: Do we want to generate / randomize emojis whenever these values are updated or wait for player to hit randomize?
 function updateSets(newSet: number) {
   if (newSet > 1 && newSet <= memoryGame.maxSets) {
     memoryGame.sets = newSet;
@@ -75,7 +76,7 @@ onMounted(() => {
   <div id="search" class="page">
     <div class="row">
       <div class="col-12 text-center">
-        <h1>🧠 Memory</h1>
+        <h1 @click="playAgain">🧠 Memory</h1>
       </div>
     </div>
 
@@ -101,4 +102,8 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  cursor: pointer;
+}
+</style>

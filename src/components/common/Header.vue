@@ -80,12 +80,13 @@
 }
 
 #profile:hover {
-  transition: transform 0.1s linear;
+  transform: scale(1.15);
+  /* transition: transform 0.1s linear;
 
   animation-name: expand;
   animation-duration: 0.5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-timing-function: linear; */
 }
 
 #settings-toggle:hover {

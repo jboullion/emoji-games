@@ -30,7 +30,7 @@ const currentGuesses = ref<Guess[]>([]);
 
 let numGuesses: number = 0; // ? Currently not used
 
-const emit = defineEmits(['win']);
+const emit = defineEmits(['win', 'playAgain']);
 
 const props = defineProps({
   memoryGame: {
@@ -101,7 +101,6 @@ function guess(guessIndex: number) {
       );
 
       if (remaining.value <= 0) {
-        console.log('Won!');
         won.value = true;
         emit('win');
       }
@@ -140,29 +139,6 @@ function showWrong(cardIndex: number) {
 
 <template>
   <div class="my-4 text-center">
-    <div class="row mb-5">
-      <div class="col-sm-6 mb-3">
-        <div class="card">
-          <div class="card-body text-center">
-            <h3 class="card-title mb-0">Remaining</h3>
-            <h2 class="flex-fill text-center">
-              {{ remaining }}
-            </h2>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 mb-3">
-        <div class="card">
-          <div class="card-body text-center">
-            <h3 class="card-title mb-0">Found</h3>
-            <h2 class="flex-fill text-center">
-              {{ found }}
-            </h2>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div id="card-list" class="col-12">
       <div class="row justify-content-center">
         <MemoryFlipCard
@@ -176,15 +152,45 @@ function showWrong(cardIndex: number) {
       </div>
     </div>
 
-    <div class="col-12 mb-3" v-if="!start">
+    <div class="col-12 mt-4" v-if="!start">
       <button
         type="button"
-        class="btn btn-primary w-100"
-        style="font-size: 50px"
+        class="btn btn-primary w-100 action-btn"
         @click="start = true"
       >
         ▶️ Start
       </button>
+    </div>
+    <div class="col-12 mt-4" v-else-if="won">
+      <button
+        type="button"
+        class="btn btn-primary w-100 action-btn"
+        @click="emit('playAgain')"
+      >
+        🔄 Play Again!
+      </button>
+    </div>
+    <div class="row mt-4" v-else>
+      <div class="col-sm-6 mb-3">
+        <div class="card">
+          <div class="card-body text-center">
+            <h2 class="flex-fill text-center">
+              {{ remaining }}
+            </h2>
+            <h3 class="card-title mb-0">Remaining</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 mb-3">
+        <div class="card">
+          <div class="card-body text-center">
+            <h2 class="flex-fill text-center">
+              {{ found }}
+            </h2>
+            <h3 class="card-title mb-0">Found</h3>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

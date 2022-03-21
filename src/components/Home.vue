@@ -3,10 +3,6 @@ import { Games } from '../types/Games';
 
 import GameCard from './home/GameCard.vue';
 import Title from './common/Title.vue';
-
-function playGame(game: String) {
-  console.log(game);
-}
 </script>
 
 <template>

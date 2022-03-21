@@ -80,11 +80,26 @@ h1 {
   outline: auto 2px -webkit-focus-ring-color;
 }
 
+.btn.action-btn {
+  font-size: 50px;
+  font-weight: normal;
+}
+
 .btn.btn-outline-secondary {
   color: var(--gray);
 }
 
 .input-group > .btn {
+  border-width: 2px 2px 4px 2px;
+}
+
+.input-group > .btn:hover {
+  border-width: 2px 2px 4px 2px;
+}
+
+.input-group > .btn:active {
+  margin-top: 1px;
+  border-width: 2px 2px 3px 2px;
 }
 
 /**
@@ -151,7 +166,6 @@ h1 {
 .form-select {
   background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔽</text></svg>');
   background-size: 20px 16px;
-  //background-image: url('data:image/svg + xml,%3csvgxmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><text font-size="16">🎲</text></svg>');
 }
 
 .form-control,

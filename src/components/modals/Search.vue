@@ -3,6 +3,7 @@
 import { onMounted, ref } from 'vue';
 import { capitalize } from '../../utilities/filters';
 import { copy } from '../../utilities/document';
+// TODO: We might want to setup a loading event since this emoji import can be quite big. If not already async, should probably make async. OR load after the initial page load
 import { Emoji, Emojis } from '../../types/Emoji';
 
 type SearchFilter = {
@@ -110,9 +111,7 @@ onMounted(() => {
                   v-model="search"
                   maxlength="30"
                 />
-                <button type="submit" class="btn btn-outline-secondary">
-                  🔎
-                </button>
+                <button type="submit" class="btn btn-primary">🔎</button>
               </div>
             </div>
 
