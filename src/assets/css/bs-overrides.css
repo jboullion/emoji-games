@@ -39,7 +39,10 @@ h1 {
 .btn-check:checked + .btn-primary:focus,
 .btn-primary.active:focus,
 .btn-primary:active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
+.show > .btn-primary.dropdown-toggle:focus,
+.input-group > .form-control:focus,
+.input-group > .form-select:focus {
+  border-color: black;
   box-shadow: 0 0 0 0.25rem rgba(255, 200, 61, 0.5) !important;
 }
 

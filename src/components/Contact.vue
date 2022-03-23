@@ -4,9 +4,7 @@ import Title from './common/Title.vue';
 
 <template>
   <div id="contact" class="page">
-    <Title />
-
-    <h2>Contact</h2>
+    <Title title="Contact" />
   </div>
 </template>
 

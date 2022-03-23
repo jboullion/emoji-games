@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import Login from '../modals/Login.vue';
+// import Login from '../modals/Login.vue';
 
-const showModal = ref(false);
+// const showModal = ref(false);
 </script>
 
 <template>
-  <div class="d-flex justify-content-between py-2">
+  <header class="d-flex justify-content-between py-2">
     <button
       id="home"
       type="button"
@@ -46,22 +46,16 @@ const showModal = ref(false);
         </span></span
       > -->
 
-      <button
-        type="button"
-        id="profile"
-        class="menus-btn"
-        @click="showModal = !showModal"
-      >
-        👤<span class="visually-hidden">Profile</span>
-      </button>
-
+      <router-link to="/login" id="login" class="menus-btn"
+        >👤<span class="visually-hidden">Login</span>
+      </router-link>
       <!-- <router-link to="/profile" id="profile" class="menus-btn"
         >👤<span class="visually-hidden">Profile</span>
       </router-link> -->
     </div>
 
     <!-- <Login v-show="showModal" @close="showModal = false" /> -->
-  </div>
+  </header>
 </template>
 
 <style scoped>

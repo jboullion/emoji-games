@@ -4,9 +4,7 @@ import Title from './common/Title.vue';
 
 <template>
   <div id="privacy" class="page">
-    <Title />
-
-    <h2>Privacy</h2>
+    <Title title="Privacy" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// TODO: Should this be turned into a modal instead? Can used to search emoji's from any page?
+// TODO: Move into a custom modal
 import { onMounted, ref } from 'vue';
 import { capitalize } from '../../utilities/filters';
 import { copy } from '../../utilities/document';

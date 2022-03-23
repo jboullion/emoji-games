@@ -1,3 +1,66 @@
+<script setup lang="ts">
+import Title from './common/Title.vue';
+
+import { ref } from 'vue';
+import BaseModal from '../modals/BaseModal.vue';
+
+const email = ref('');
+const password = ref('');
+const showPassword = ref(false);
+
+function login() {
+  console.log('login!');
+}
+</script>
+
+<template>
+  <div id="register" class="page">
+    <Title title="Register" />
+
+    <form @submit.prevent="login" class="">
+      <div class="mb-3">
+        <label class="col-form-label" for="email">Email</label>
+        <div class="input-group">
+          <input
+            id="email"
+            type="email"
+            class="form-control"
+            v-model="email"
+            maxlength="100"
+          />
+        </div>
+      </div>
+      <div class="mb-5">
+        <label class="col-form-label" for="password">Password</label>
+        <div class="input-group">
+          <input
+            id="password"
+            :type="showPassword ? 'text' : 'password'"
+            class="form-control"
+            v-model="password"
+            maxlength="32"
+          />
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="showPassword = !showPassword"
+          >
+            {{ showPassword ? '🕶️' : '👓' }}
+          </button>
+        </div>
+      </div>
+      <div class="">
+        <button class="btn btn-primary w-100 mb-3">📋 Create Account</button>
+        <router-link to="/login" class="btn btn-primary w-100"
+          >🎲 Login</router-link
+        >
+      </div>
+    </form>
+  </div>
+</template>
+
+<style></style>
+
 <!-- <template>
   <div
     class="min-h-full flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8"

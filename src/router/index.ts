@@ -5,6 +5,8 @@ import store from '../store';
 const Home = () => import('../components/Home.vue');
 const Contact = () => import('../components/Contact.vue');
 const Privacy = () => import('../components/Privacy.vue');
+const Login = () => import('../components/Login.vue');
+const Register = () => import('../components/Register.vue');
 const Profile = () => import('../components/Profile.vue');
 
 const Memory = () => import('../components/Memory.vue');
@@ -34,6 +36,16 @@ const routes = [
     path: '/privacy',
     name: 'Privacy',
     component: Privacy,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
   },
   {
     path: '/profile',
