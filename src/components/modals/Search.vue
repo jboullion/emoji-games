@@ -185,10 +185,9 @@ onMounted(() => {
   padding: 0 15px;
 }
 
-body.darkmode .emoji {
-  background-color: var(--dark);
-  box-shadow: 0 2px 0 2px rgba(255, 255, 255, 0.5);
-  border: 2px solid var(--gray);
+body.darkmode #emoji-list .emoji {
+  background-color: var(--soft-white);
+  border-color: var(--light-gray);
 }
 
 #search {

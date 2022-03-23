@@ -1,4 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import Login from '../modals/Login.vue';
+
+const showModal = ref(false);
+</script>
 
 <template>
   <div class="d-flex justify-content-between py-2">
@@ -41,10 +46,21 @@
         </span></span
       > -->
 
-      <router-link to="/profile" id="profile" class="menus-btn"
+      <button
+        type="button"
+        id="profile"
+        class="menus-btn"
+        @click="showModal = !showModal"
+      >
+        👤<span class="visually-hidden">Profile</span>
+      </button>
+
+      <!-- <router-link to="/profile" id="profile" class="menus-btn"
         >👤<span class="visually-hidden">Profile</span>
-      </router-link>
+      </router-link> -->
     </div>
+
+    <!-- <Login v-show="showModal" @close="showModal = false" /> -->
   </div>
 </template>
 

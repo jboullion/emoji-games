@@ -1,4 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router';
+import store from '../store';
 
 // Lazy Load pages
 const Home = () => import('../components/Home.vue');
@@ -16,7 +17,7 @@ const Memory = () => import('../components/Memory.vue');
 // const Simon = () => import("../components/games/Simon.vue");
 // const GameOfLife = () => import("../components/games/GameOfLife.vue");
 
-// const NotFound = () => import("../components/pages/NotFound.vue");
+const NotFound = () => import('../components/NotFound.vue');
 
 const routes = [
   {
@@ -78,29 +79,30 @@ const routes = [
   // //   path: '/games/simon',
   // //   component: Simon,
   // // },
-  // {
-  //   path: "/:catchAll(.*)",
-  //   component: NotFound,
-  // },
+  {
+    path: '/:catchAll(.*)',
+    component: NotFound,
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    // if (to.hash) {
-    //   return {
-    //     selector: to.hash,
-    //     // , offset: { x: 0, y: 10 }
-    //   };
-    // }
-
+  scrollBehavior(_to, _from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
     } else {
       return { left: 0, top: 0 };
     }
   },
+});
+
+// https://next.router.vuejs.org/guide/advanced/navigation-guards.html
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) next('/login');
+  else if (to.meta.redirectAuth && store.getters.isAuthenticated)
+    next('/dashboard');
+  else next();
 });
 
 export default router;

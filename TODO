@@ -1,0 +1,27 @@
+MUST DOs
+1. Setup Signup and Login Modals
+  a. If user is not logged in show silouette emoji and have it open up a login modal
+  b. If create account transition in another modal
+  c. On error display message
+  d. On success go to profile Page
+
+
+2. Setup a custom modal
+  a. The bootstrap modals are too limiting and I forsee a lot of use of modals around the site.
+  b. Can we remove bootstrap js?
+
+3. Winning a game? Add tickets to users ticket count
+  a. Also setup a test premium user who can win premium tickets
+
+
+4. Setup a sound manager
+  a. Clicks, card flips, modal opening / close, etc. Basically game sounds.
+  b. 
+
+
+
+
+
+OPTIONAL Improvements
+
+1. Download bootstrap SCSS and only take the parts we need?
