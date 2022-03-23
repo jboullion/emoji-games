@@ -27,7 +27,7 @@ const form = reactive({
   password: '',
 });
 
-function onSubmit() {
+function validateLogin() {
   let valid = true;
   errors.value = [];
 
@@ -92,7 +92,7 @@ async function signin() {
   <div id="login" class="page">
     <Title title="Login" />
 
-    <form @submit.prevent="onSubmit" class="" novalidate>
+    <form @submit.prevent="" class="" novalidate>
       <template v-if="errors.length">
         <div v-for="error in errors" class="alert alert-danger mb-4">
           ⚠️ {{ error }}
@@ -130,12 +130,24 @@ async function signin() {
         </div>
       </div>
       <div class="">
-        <button class="btn btn-primary w-100 mb-3" :disabled="loading">
+        <button
+          type="button"
+          class="btn btn-primary w-100 mb-3"
+          @click="validateLogin"
+          :disabled="loading"
+        >
           🎲 {{ loading ? 'Loading' : 'Login' }}
         </button>
-        <button class="btn btn-primary w-100" :disabled="loading">
+        <router-link
+          to="/forgot-password"
+          class="w-100 mb-3 text-center d-block text-dark text-decoration-none"
+          :disabled="loading"
+        >
+          ❔ Forgot Password
+        </router-link>
+        <!-- <button class="btn btn-primary w-100" @click="validateRegister" :disabled="loading">
           📋 Register
-        </button>
+        </button> -->
         <!-- <router-link to="/register" class="btn btn-primary w-100"
           >📋 Create Account</router-link
         > -->

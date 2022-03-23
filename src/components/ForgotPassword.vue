@@ -3,8 +3,8 @@ import Title from './common/Title.vue';
 </script>
 
 <template>
-  <div id="error" class="page">
-    <Title title="Not Found" />
+  <div id="forgot" class="page">
+    <Title title="Forgot Password" />
   </div>
 </template>
 

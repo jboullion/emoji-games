@@ -5,8 +5,11 @@ import store from '../store';
 const Home = () => import('../components/Home.vue');
 const Contact = () => import('../components/Contact.vue');
 const Privacy = () => import('../components/Privacy.vue');
+
 const Login = () => import('../components/Login.vue');
 const Register = () => import('../components/Register.vue');
+const ForgotPassword = () => import('../components/ForgotPassword.vue');
+
 const Profile = () => import('../components/Profile.vue');
 
 const Memory = () => import('../components/Memory.vue');
@@ -46,6 +49,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
+  },
+  {
+    path: '/forgot-password',
+    name: 'ForgotPassword',
+    component: ForgotPassword,
   },
   {
     path: '/profile',

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// TODO: Add Accessibility? Keyboard controls for flipping cards?
 import { onMounted, reactive, ref } from 'vue';
 import MemorySetup from './games/memory/MemorySetup.vue';
 import MemoryGame from './games/memory/MemoryGame.vue';
@@ -76,7 +77,7 @@ onMounted(() => {
   <div id="search" class="page">
     <div class="row">
       <div class="col-12 text-center">
-        <h1 @click="playAgain">🧠 Memory</h1>
+        <h1>🧠 Memory</h1>
       </div>
     </div>
 
@@ -102,8 +103,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-h1 {
-  cursor: pointer;
-}
-</style>
+<style scoped></style>
