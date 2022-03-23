@@ -124,6 +124,7 @@ async function signin() {
             type="button"
             class="btn btn-primary"
             @click="showPassword = !showPassword"
+            aria-label="Toggle Show Password"
           >
             {{ showPassword ? '🕶️' : '👓' }}
           </button>

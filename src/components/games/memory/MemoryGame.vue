@@ -144,6 +144,7 @@ function showWrong(cardIndex: number) {
         <MemoryFlipCard
           class="mb-3"
           :class="{ flip: showCard(i), wrong: showWrong(i), won: won }"
+          :showing="showCard(i)"
           @click="guess(i)"
           v-for="(emoji, i) in emojiSets"
           :emoji="emoji"

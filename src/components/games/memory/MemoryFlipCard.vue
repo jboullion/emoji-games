@@ -10,6 +10,10 @@ defineProps({
     type: String,
     required: true,
   },
+  showing: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 // function flip() {
@@ -19,14 +23,14 @@ defineProps({
 </script>
 
 <template>
-  <div class="flip-card">
+  <a href="#" @click.prevent="" class="flip-card">
     <div class="flip-card-inner">
-      <div class="flip-card-front">🧠</div>
-      <div class="flip-card-back">
+      <div class="flip-card-front" aria-hidden="true">🧠</div>
+      <div class="flip-card-back" :aria-hidden="showing">
         {{ emoji }}
       </div>
     </div>
-  </div>
+  </a>
 </template>
 
 <style scoped>

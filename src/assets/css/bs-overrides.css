@@ -77,7 +77,7 @@ h1 {
   box-shadow: none !important;
 } */
 
-a:focus,
+a:focus-visible,
 .btn:focus,
 .btn-close:focus {
   outline: auto 2px Highlight;
