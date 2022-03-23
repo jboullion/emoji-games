@@ -85,11 +85,11 @@ import { ref } from 'vue';
   transform: rotate(45deg);
 }
 
-#profile {
+#login {
   display: inline-block;
 }
 
-#profile:hover {
+#login:hover {
   transform: scale(1.15);
   /* transition: transform 0.1s linear;
 

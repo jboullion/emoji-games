@@ -86,18 +86,31 @@
   }
 }
 
+/* TODO: Is there a way to move in an actual circle? */
 @keyframes shadowdance {
   0% {
     text-shadow: -3px 3px 0px var(--emoji-yellow);
   }
+  12.5% {
+    text-shadow: -4px 0px 0px var(--emoji-yellow);
+  }
   25% {
     text-shadow: -3px -3px 0px var(--emoji-yellow);
+  }
+  37.5% {
+    text-shadow: 0px -4px 0px var(--emoji-yellow);
   }
   50% {
     text-shadow: 3px -3px 0px var(--emoji-yellow);
   }
+  62.5% {
+    text-shadow: 4px 0px 0px var(--emoji-yellow);
+  }
   75% {
     text-shadow: 3px 3px 0px var(--emoji-yellow);
+  }
+  87.5% {
+    text-shadow: 0px 4px 0px var(--emoji-yellow);
   }
   100% {
     text-shadow: -3px 3px 0px var(--emoji-yellow);

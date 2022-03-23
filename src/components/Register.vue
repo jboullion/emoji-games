@@ -2,7 +2,6 @@
 import Title from './common/Title.vue';
 
 import { ref } from 'vue';
-import BaseModal from '../modals/BaseModal.vue';
 
 const email = ref('');
 const password = ref('');
