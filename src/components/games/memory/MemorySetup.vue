@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropType, reactive, ref, onMounted } from 'vue';
+import { PropType, reactive, ref, onMounted, watch } from 'vue';
 import { MemoryGameType, MemoryEmojis } from '../../../types/Memory';
 
 const randomEmojis = ref<string[]>([]);
@@ -31,6 +31,16 @@ function generateRandomEmojis() {
   });
 }
 
+function updateSet(newSet: number) {
+  emit('updateSets', newSet);
+  generateRandomEmojis();
+}
+
+// watch(reactiveProps, (selection, prevSelection) => {
+//   console.log('selection', selection);
+//   generateRandomEmojis();
+// });
+
 onMounted(() => {
   generateRandomEmojis();
 });
@@ -49,7 +59,7 @@ onMounted(() => {
               type="button"
               class="btn btn-primary decrement"
               :disabled="reactiveProps.memoryGame.sets === 2"
-              @click="emit('updateSets', reactiveProps.memoryGame.sets - 1)"
+              @click="updateSet(reactiveProps.memoryGame.sets - 1)"
             >
               ➖
             </button>
@@ -61,10 +71,10 @@ onMounted(() => {
               type="button"
               class="btn btn-primary increment"
               :disabled="
-                reactiveProps.memoryGame.sets ===
+                reactiveProps.memoryGame.sets >=
                 reactiveProps.memoryGame.maxSets
               "
-              @click="emit('updateSets', reactiveProps.memoryGame.sets + 1)"
+              @click="updateSet(reactiveProps.memoryGame.sets + 1)"
             >
               ➕
             </button>
@@ -166,8 +176,9 @@ onMounted(() => {
   border-radius: 15px;
 }
 
-body.darkmode .emoji {
-  background-color: var(--light-gray);
+body.darkmode #emoji-list .emoji {
+  background-color: var(--soft-white);
+  border-color: var(--light-gray);
 }
 
 @media (max-width: 576px) {

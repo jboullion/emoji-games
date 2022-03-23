@@ -14,7 +14,7 @@ let winnerModal: { show: () => void; hide: () => void } | null = null;
 
 const memoryGame = reactive<MemoryGameType>({
   sets: 10,
-  maxSets: 100,
+  maxSets: 50,
   emojiPerSet: 2,
   maxEmojiPerSet: 10,
   emojis: [],

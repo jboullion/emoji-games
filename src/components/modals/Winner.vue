@@ -25,14 +25,11 @@ const props = defineProps({
           <h3 class="mb-4 text-center">🎉 Good Job! 🎉</h3>
           <h3 class="mb-5 text-center">You Collected {{ tickets }} 🎫!</h3>
 
-          <button
-            class="btn btn-outline-secondary mb-3"
-            @click="emit('playAgain')"
-          >
+          <button class="btn btn-primary mb-3" @click="emit('playAgain')">
             🔄 Play Again!
           </button>
 
-          <button class="btn btn-outline-secondary" @click="emit('close')">
+          <button class="btn btn-primary" @click="emit('close')">
             🏠 More Games!
           </button>
         </div>
