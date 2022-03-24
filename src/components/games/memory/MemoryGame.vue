@@ -120,15 +120,16 @@ function guess(guessIndex: number) {
   }
 }
 
-function showCard(cardIndex: number) {
+function showCard(cardIndex: number): boolean {
   return (
     !start.value ||
-    currentGuesses.value.find((guess) => guess.index === cardIndex) ||
-    foundGuesses.value.find((guess) => guess.index === cardIndex)
+    currentGuesses.value.find((guess) => guess.index === cardIndex) !=
+      undefined ||
+    foundGuesses.value.find((guess) => guess.index === cardIndex) != undefined
   );
 }
 
-function showWrong(cardIndex: number) {
+function showWrong(cardIndex: number): boolean {
   return (
     wrong.value &&
     currentGuesses.value[currentGuesses.value.length - 1].index === cardIndex

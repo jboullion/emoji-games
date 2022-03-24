@@ -66,8 +66,7 @@ async function signin() {
     const res: ISignInResponse = await _authService.signin(credentials);
 
     if (res.accessToken) {
-      console.log('res', res);
-      $router.push({ path: '/' });
+      $router.push({ path: '/profile' });
     } else {
       //Bugsnag.notify(new Error('No access token returned'));
     }
@@ -130,7 +129,7 @@ async function signin() {
           </button>
         </div>
       </div>
-      <div class="">
+      <div class="form-btns">
         <button
           type="button"
           class="btn btn-primary w-100 mb-3"
@@ -161,5 +160,9 @@ async function signin() {
 form {
   max-width: 500px;
   margin: 0 auto;
+}
+
+.form-btns .btn {
+  font-size: 20px;
 }
 </style>

@@ -1,4 +1,5 @@
 import { createStore } from 'vuex';
+import { parseJwt } from '../utilities/common';
 
 export default createStore({
   state: {
@@ -15,6 +16,9 @@ export default createStore({
     },
     jwt(state) {
       return state.accessToken;
+    },
+    userInfo(state) {
+      return parseJwt(state.accessToken);
     },
   },
   actions: {},

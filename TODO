@@ -1,4 +1,6 @@
 MUST DOs
+0. Setup a trello / codecks.io board
+
 1. Setup Signup and Login Modals
   a. If user is not logged in show silouette emoji and have it open up a login modal
   b. If create account transition in another modal
@@ -19,9 +21,17 @@ MUST DOs
   b. 
 
 
+5. Forgot Password
+
 
 
 
 OPTIONAL Improvements
 
 1. Download bootstrap SCSS and only take the parts we need?
+
+
+
+
+KNOWN BUGS
+1. When a user's session times out we need to update our state

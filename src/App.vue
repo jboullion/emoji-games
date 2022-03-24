@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { inject, onBeforeUnmount, onMounted, ref } from 'vue';
 
 import ModalSettings from './components/modals/Settings.vue';
 import Footer from './components/common/Footer.vue';
 import Header from './components/common/Header.vue';
 import ModalSearch from './components/modals/Search.vue';
+import { parseJwt, throttle } from './utilities/common';
+import { useStore } from 'vuex';
+import AuthService from './services/AuthService';
+import { IAuthRefreshCredentials } from './types/Auth';
 
 // TODO: These values need to be tracked locally or in a DB so the user doesn't have to redo each visit
 const darkMode = ref(false);
@@ -19,6 +23,61 @@ function toggleDarkMode() {
     document.body.classList.remove('darkmode');
   }
 }
+
+/**
+ * MANAGE SESSION
+ */
+const $store = useStore();
+const sessionExpired = ref(false);
+
+const _authService: AuthService = inject('authService') as AuthService;
+
+const tHandler = throttle(60 * 1000, reAuth);
+const focusListener = (_e: Event) => {
+  if (document.visibilityState === 'visible' && !sessionExpired.value) {
+    checkAuth();
+  }
+};
+
+function checkAuth() {
+  const now = new Date();
+  const accessExpires = new Date($store.state.accessExpires);
+
+  if (now.getTime() > accessExpires.getTime()) {
+    document.removeEventListener('click', tHandler);
+    document.removeEventListener('visibilitychange', focusListener);
+    sessionExpired.value = true;
+    setInterval(() => {
+      _authService.signout();
+    }, 10 * 1000);
+  }
+}
+
+function reAuth() {
+  const accessToken: string = localStorage.getItem('accessToken') as string;
+  const refreshToken: string = localStorage.getItem('refreshToken') as string;
+
+  const decodedToken = parseJwt(accessToken);
+
+  if (!decodedToken) return;
+
+  const credentials: IAuthRefreshCredentials = {
+    email: decodedToken?.email,
+    refreshToken: refreshToken,
+  };
+  _authService.refresh(credentials);
+}
+
+onMounted(() => {
+  document.addEventListener('click', tHandler);
+  document.addEventListener('visibilitychange', focusListener);
+  setInterval(checkAuth, 60 * 1000 * 10);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', tHandler);
+  document.removeEventListener('visibilitychange', focusListener);
+});
 </script>
 
 <template>

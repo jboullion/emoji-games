@@ -24,6 +24,14 @@ const Memory = () => import('../components/Memory.vue');
 
 const NotFound = () => import('../components/NotFound.vue');
 
+const requiresAuth = {
+  requiresAuth: true,
+};
+
+const redirectAuth = {
+  redirectAuth: true,
+};
+
 const routes = [
   {
     path: '/',
@@ -58,6 +66,7 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
+    meta: requiresAuth,
     component: Profile,
   },
   {
@@ -120,8 +129,7 @@ const router = createRouter({
 // https://next.router.vuejs.org/guide/advanced/navigation-guards.html
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !store.getters.isAuthenticated) next('/login');
-  else if (to.meta.redirectAuth && store.getters.isAuthenticated)
-    next('/dashboard');
+  else if (to.meta.redirectAuth && store.getters.isAuthenticated) next('/');
   else next();
 });
 

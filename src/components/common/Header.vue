@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-// import Login from '../modals/Login.vue';
-
-// const showModal = ref(false);
+import store from '../../store';
 </script>
 
 <template>
@@ -11,7 +8,7 @@ import { ref } from 'vue';
       id="home"
       type="button"
       @click="$router.push('/')"
-      class="menus-btn"
+      class="menus-btn ms-0"
     >
       🏠 <span class="visually-hidden">Home</span>
     </button>
@@ -46,8 +43,17 @@ import { ref } from 'vue';
         </span></span
       > -->
 
-      <router-link to="/login" id="login" class="menus-btn"
+      <router-link
+        v-if="!store.getters.isAuthenticated"
+        to="/login"
+        id="login"
+        class="menus-btn user-btn"
         >👤<span class="visually-hidden">Login</span>
+      </router-link>
+      <router-link v-else to="/profile" id="profile" class="menus-btn user-btn"
+        >{{
+          store.getters.userInfo.avatar ? store.getters.userInfo.avatar : '😶'
+        }}<span class="visually-hidden">Profile</span>
       </router-link>
       <!-- <router-link to="/profile" id="profile" class="menus-btn"
         >👤<span class="visually-hidden">Profile</span>
@@ -85,11 +91,11 @@ import { ref } from 'vue';
   transform: rotate(45deg);
 }
 
-#login {
+.user-btn {
   display: inline-block;
 }
 
-#login:hover {
+.user-btn:hover {
   transform: scale(1.15);
   /* transition: transform 0.1s linear;
 
@@ -106,7 +112,7 @@ import { ref } from 'vue';
 #home:hover {
   transform-origin: bottom;
   animation-name: bounce;
-  animation-duration: 0.45s;
+  animation-duration: 0.6s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
