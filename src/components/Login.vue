@@ -91,7 +91,7 @@ async function signin() {
   <div id="login" class="page">
     <Title title="Login" />
 
-    <form @submit.prevent="" class="" novalidate>
+    <form @submit.prevent="validateLogin" class="" novalidate>
       <template v-if="errors.length">
         <div v-for="error in errors" class="alert alert-danger mb-4">
           ⚠️ {{ error }}
@@ -106,6 +106,7 @@ async function signin() {
             class="form-control"
             v-model="form.email"
             maxlength="100"
+            :disabled="loading"
           />
         </div>
       </div>
@@ -118,6 +119,7 @@ async function signin() {
             class="form-control"
             v-model="form.password"
             maxlength="32"
+            :disabled="loading"
           />
           <button
             type="button"
@@ -131,13 +133,18 @@ async function signin() {
       </div>
       <div class="form-btns">
         <button
-          type="button"
-          class="btn btn-primary w-100 mb-3"
-          @click="validateLogin"
+          type="submit"
+          class="btn btn-primary w-100 mb-3 fs-5"
           :disabled="loading"
         >
           🎲 {{ loading ? 'Loading' : 'Login' }}
         </button>
+
+        <router-link
+          to="/register"
+          class="btn btn-outline-secondary w-100 mb-3 fs-5"
+          >📋 Create Account</router-link
+        >
         <router-link
           to="/forgot-password"
           class="w-100 mb-3 text-center d-block text-dark text-decoration-none"
@@ -145,12 +152,6 @@ async function signin() {
         >
           ❔ Forgot Password
         </router-link>
-        <!-- <button class="btn btn-primary w-100" @click="validateRegister" :disabled="loading">
-          📋 Register
-        </button> -->
-        <!-- <router-link to="/register" class="btn btn-primary w-100"
-          >📋 Create Account</router-link
-        > -->
       </div>
     </form>
   </div>
@@ -160,9 +161,5 @@ async function signin() {
 form {
   max-width: 500px;
   margin: 0 auto;
-}
-
-.form-btns .btn {
-  font-size: 20px;
 }
 </style>

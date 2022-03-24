@@ -32,13 +32,17 @@ const sessionExpired = ref(false);
 
 const _authService: AuthService = inject('authService') as AuthService;
 
+// Only need to re auth once a minute, maybe less
 const tHandler = throttle(60 * 1000, reAuth);
+
+// returning from a tab we need to check if we are still authenticated
 const focusListener = (_e: Event) => {
   if (document.visibilityState === 'visible' && !sessionExpired.value) {
     checkAuth();
   }
 };
 
+// Check if we are still authenticated. If not, signout
 function checkAuth() {
   const now = new Date();
   const accessExpires = new Date($store.state.accessExpires);
@@ -46,13 +50,17 @@ function checkAuth() {
   if (now.getTime() > accessExpires.getTime()) {
     document.removeEventListener('click', tHandler);
     document.removeEventListener('visibilitychange', focusListener);
+    // TODO: Do we want to show an alert to the user about this? Or just log them out?
     sessionExpired.value = true;
-    setInterval(() => {
-      _authService.signout();
-    }, 10 * 1000);
+    _authService.signout();
+
+    // setInterval(() => {
+    //   _authService.signout();
+    // }, 10 * 1000);
   }
 }
 
+// Refresh our accessToken. Run in our tHandler. tHandler will fire when a user takes action on the site
 function reAuth() {
   const accessToken: string = localStorage.getItem('accessToken') as string;
   const refreshToken: string = localStorage.getItem('refreshToken') as string;
@@ -71,6 +79,7 @@ function reAuth() {
 onMounted(() => {
   document.addEventListener('click', tHandler);
   document.addEventListener('visibilitychange', focusListener);
+  // Check we are still authenticated every 10 minutes
   setInterval(checkAuth, 60 * 1000 * 10);
 });
 

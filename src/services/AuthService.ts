@@ -35,34 +35,18 @@ export default class AuthService implements IAuthService {
   constructor(private _axios: any) {}
 
   async signin(credentials: IAuthCredentials): Promise<ISignInResponse> {
-    const { email, password } = credentials;
-
-    const res = await this._axios.post(`${BASE_URL}/signin`, {
-      email,
-      password,
-    });
-
+    const res = await this._axios.post(`${BASE_URL}/signin`, credentials);
     this.updateAccess(res.data);
     return res.data;
   }
 
   async signup(credentials: IAuthCredentials): Promise<IUser> {
-    const { email, password } = credentials;
-
-    const res = await this._axios.post(`${BASE_URL}/signup`, {
-      email,
-      password,
-    });
+    const res = await this._axios.post(`${BASE_URL}/signup`, credentials);
     return res.data;
   }
 
   async refresh(credentials: IAuthRefreshCredentials): Promise<IUser> {
-    const { email, refreshToken } = credentials;
-
-    const res = await this._axios.post(`${BASE_URL}/refresh`, {
-      email,
-      refreshToken,
-    });
+    const res = await this._axios.post(`${BASE_URL}/refresh`, credentials);
     this.updateAccess(res.data);
     return res.data;
   }
