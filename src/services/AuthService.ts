@@ -87,9 +87,6 @@ export default class AuthService implements IAuthService {
     store.commit('setRefreshToken', tokens.refreshToken);
     localStorage.setItem('refreshToken', tokens.refreshToken);
 
-    const decodedToken = parseJwt(tokens.accessToken);
-    localStorage.setItem('avatar', decodedToken.avatar);
-
     const expires = new Date();
     expires.setHours(expires.getHours() + 1);
     store.commit('setAccessExpires', expires.toString());

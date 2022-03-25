@@ -9,6 +9,7 @@ export enum UserStatus {
 
 export interface IUser {
   id: number;
+  uuid: string;
   email: string;
   username: string;
   avatar: string;
@@ -18,4 +19,11 @@ export interface IUser {
   status: UserStatus;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface IUserUpdate {
+  username?: string;
+  email?: string;
+  password: string;
+  passwordNew: string | null;
 }

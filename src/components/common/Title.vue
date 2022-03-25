@@ -4,6 +4,10 @@ defineProps({
     type: String,
     default: 'Emoji Games',
   },
+  subtitle: {
+    type: String,
+    default: 'Simple games for simple people',
+  },
 });
 </script>
 
@@ -11,7 +15,7 @@ defineProps({
   <div class="row mb-5">
     <div class="col-12 text-center">
       <h1>{{ title }}</h1>
-      <p>Simple games for simple people</p>
+      <p>{{ subtitle }}</p>
     </div>
   </div>
 </template>

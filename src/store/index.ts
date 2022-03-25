@@ -34,8 +34,5 @@ export default createStore({
     setAccessExpires(state, payload) {
       state.accessExpires = payload;
     },
-    updateAvatar(state, payload) {
-      state.userInfo.avatar = payload;
-    },
   },
 });
