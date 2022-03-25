@@ -109,6 +109,8 @@ async function signup() {
         errors.value = error.response.data.message;
       } else if (error.response.data?.statusCode === 401) {
         errors.value.push(error.response.data.message);
+      } else if (error.response.data?.statusCode === 409) {
+        errors.value.push(error.response.data.message);
       }
     } else {
       //Bugsnag.notify(new Error(error));

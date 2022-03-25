@@ -3,15 +3,19 @@ import Title from './common/Title.vue';
 import { inject, reactive, ref } from 'vue';
 import AuthService from '../services/AuthService';
 import store from '../store';
+import CustomField from './common/CustomField.vue';
 
 const _authService: AuthService = inject('authService') as AuthService;
 
-const showPassword = ref(false);
+const showPasswordOld = ref(false);
+const showPasswordNew = ref(false);
+
 const loading = ref(false);
 const errors = ref<String[]>([]);
 const form = reactive({
   email: store.getters.userInfo.email,
-  password: '',
+  passwordOld: '',
+  passwordNew: '',
 });
 
 function logout() {
@@ -43,85 +47,69 @@ function logout() {
                 : '😶'
             }} </span
           ><br />
-
-          <!-- <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 100 100"
-            class="w-100"
-          >
-            <text y="72px" font-size="72">
-              {{
-                store.getters.userInfo.avatar
-                  ? store.getters.userInfo.avatar
-                  : '😶'
-              }}
-            </text>
-          </svg> -->
-
           Change Avatar
         </button>
       </div>
       <div class="col-sm-6 mb-5">
-        <form @submit.prevent="" class="" novalidate>
+        <form @submit.prevent="" class="">
           <template v-if="errors.length">
             <div v-for="error in errors" class="alert alert-danger mb-4">
               ⚠️ {{ error }}
             </div>
           </template>
-          <div class="mb-2">
-            <label class="col-form-label" for="email">Email</label>
-            <div class="input-group">
-              <input
-                id="email"
-                type="email"
-                class="form-control"
-                v-model="form.email"
-                maxlength="100"
-                :disabled="loading"
-              />
-            </div>
-          </div>
-          <div class="mb-2">
-            <label class="col-form-label" for="password-old"
-              >Old Password</label
-            >
-            <div class="input-group">
-              <input
-                id="password-old"
-                type="text"
-                class="form-control"
-                v-model="form.password"
-                maxlength="32"
-                :disabled="loading"
-              />
-            </div>
-          </div>
-          <div class="mb-4">
-            <label class="col-form-label" for="password-new"
-              >New Password</label
-            >
-            <div class="input-group">
-              <input
-                id="password"
-                :type="showPassword ? 'text' : 'password'"
-                class="form-control"
-                v-model="form.password"
-                maxlength="32"
-                :disabled="loading"
-              />
+
+          <CustomField
+            class="mb-4"
+            label="Email"
+            id="email"
+            type="email"
+            v-model="form.email"
+            :disabled="loading"
+            required
+          />
+
+          <CustomField
+            class="mb-4"
+            label="Old Password"
+            id="password-old"
+            type="password"
+            v-model="form.passwordOld"
+            :disabled="loading"
+            required
+          >
+            <template #button>
               <button
                 type="button"
                 class="btn btn-primary"
-                @click="showPassword = !showPassword"
-                aria-label="Toggle Show Password"
+                @click="showPasswordOld = !showPasswordOld"
+                aria-label="Toggle Show Old Password"
               >
-                {{ showPassword ? '🕶️' : '👓' }}
+                {{ showPasswordOld ? '🕶️' : '👓' }}
               </button>
-            </div>
-            <div id="emailHelp" class="form-text">
-              Leave blank to only update email
-            </div>
-          </div>
+            </template>
+          </CustomField>
+
+          <CustomField
+            class="mb-4"
+            label="New Password"
+            id="password-new"
+            type="password"
+            v-model="form.passwordNew"
+            :disabled="loading"
+            description="Leave blank to only update email"
+          >
+            <template #button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="showPasswordNew = !showPasswordNew"
+                aria-label="Toggle Show New Password"
+              >
+                {{ showPasswordNew ? '🕶️' : '👓' }}
+              </button>
+            </template>
+          </CustomField>
+
           <div class="form-btns">
             <button
               type="submit"
