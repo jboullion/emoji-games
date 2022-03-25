@@ -31,7 +31,7 @@ export function validateUsername(username: string) {
   } else if (username.length < 3) {
     error = 'Username must be at least 3 characters long';
   } else if (username.length > 20) {
-    error = 'Username must less than 20 characters long';
+    error = 'Username must be less than 20 characters long';
   }
 
   return error;

@@ -5,6 +5,8 @@ import Title from './common/Title.vue';
 <template>
   <div id="forgot" class="page">
     <Title title="Forgot Password" />
+
+    <h2>Don't forget your password!</h2>
   </div>
 </template>
 

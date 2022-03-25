@@ -11,10 +11,6 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  type: {
-    type: String,
-    required: true,
-  },
   modelValue: {
     type: String,
   },
@@ -38,7 +34,6 @@ const value = ref(props.modelValue);
 
 const describedBy = computed(() => props.id + '-help');
 const describedByError = computed(() => props.id + '-error');
-// autocomplete="off"
 </script>
 
 <template>
@@ -46,28 +41,20 @@ const describedByError = computed(() => props.id + '-error');
     <label class="col-form-label" :for="id"
       ><span v-if="required"> ❗</span> {{ label }}</label
     >
-    <div class="input-group" :class="{ 'has-validation': $slots.button }">
-      <input
-        :id="id"
-        :type="type"
-        class="form-control"
-        :class="{ 'is-invalid': error }"
-        v-model="value"
-        maxlength="32"
-        :disabled="disabled"
-        :required="required"
-        @input="emit('update:modelValue', value)"
-        :aria-describedby="
-          (description ? describedBy : '') +
-          ' ' +
-          (error ? describedByError : '')
-        "
-      />
-      <slot name="button"></slot>
-      <div class="invalid-feedback" :id="describedByError" v-if="error">
-        {{ error }}
-      </div>
-    </div>
+    <select
+      class="form-select"
+      aria-label="Select Category"
+      placeholder="Category"
+      v-model="value"
+      @change="emit('update:modelValue', value)"
+    >
+      <slot name="options"></slot>
+    </select>
+
+    <!-- <div class="invalid-feedback" :id="describedByError" v-if="error">
+      {{ error }}
+    </div> -->
+
     <div v-if="description" :id="describedBy" class="form-text">
       {{ description }}
     </div>

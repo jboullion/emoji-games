@@ -3,7 +3,6 @@
 import { onMounted, ref } from 'vue';
 import { capitalize } from '../../utilities/filters';
 import { copy } from '../../utilities/document';
-// TODO: We might want to setup a loading event since this emoji import can be quite big. If not already async, should probably make async. OR load after the initial page load
 import {
   Emoji,
   EmojiFilter,
@@ -13,6 +12,8 @@ import {
 import CustomField from '../common/CustomField.vue';
 import CustomDropdown from '../common/CustomDropdown.vue';
 import EmojiList from '../common/EmojiList.vue';
+
+const emit = defineEmits(['updateAvatar']);
 
 const search = ref('');
 const emojiResults = ref<Emoji[]>([]);
@@ -30,30 +31,34 @@ function findEmojis() {
   );
 }
 
-// When updating our parent filter, we need to clear our childFilter so it doesn't affect the search
+// When updating our parent filter, we need to clear our childFilter so it doesn't affect the avatar
 function updateParentFilter() {
   childFilter.value = null;
   findEmojis();
 }
 
-onMounted(() => {
-  const searchModal = document.getElementById('search-modal');
-  const searchInput = document.getElementById('search');
+function updateAvatar(emoji: string) {
+  emit('updateAvatar', emoji);
+}
 
-  if (searchModal && searchInput) {
-    searchModal.addEventListener('shown.bs.modal', function () {
-      searchInput.focus();
+onMounted(() => {
+  const avatarModal = document.getElementById('avatar-modal');
+  const avatarInput = document.getElementById('avatar');
+
+  if (avatarModal && avatarInput) {
+    avatarModal.addEventListener('shown.bs.modal', function () {
+      avatarInput.focus();
     });
   }
 });
 </script>
 
 <template>
-  <div id="search-modal" class="modal fade" tabindex="-1">
+  <div id="avatar-modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5>Emoji Search</h5>
+          <h5>Change Avatar!</h5>
           <button
             type="button"
             class="btn-close"
@@ -68,7 +73,7 @@ onMounted(() => {
             <CustomField
               class="col-md-4 mb-3"
               label="Search"
-              id="search"
+              id="avatar"
               type="search"
               v-model="search"
             >
@@ -117,7 +122,7 @@ onMounted(() => {
             Different devices use different emojis.
           </p>
 
-          <EmojiList :emojis="emojiResults" @update="copy" />
+          <EmojiList :emojis="emojiResults" @update="updateAvatar" />
         </div>
       </div>
     </div>
@@ -135,58 +140,7 @@ body.darkmode #emoji-list .emoji {
   border-color: var(--light-gray);
 }
 
-#search {
-}
-
-#emoji-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-#emoji-list .emoji {
-  font-size: 64px;
-  margin: 10px;
-  padding: 0 10px;
-  flex: 1;
-  cursor: grab;
-  position: relative;
-  user-select: none;
-  border: 2px solid var(--dark);
-  border-radius: 15px;
-  border-width: 1px 2px 4px 2px;
-}
-
-#emoji-list .emoji:active {
-  cursor: grabbing; /* 'copy' is an option as well, but grabbing looks nicer imo  */
-  top: 1px;
-  border-width: 1px 2px 3px 2px;
-}
-
-#emoji-list .emoji:active:after {
-  content: 'Copied: ' attr(title);
-  font-size: 16px;
-  background: #fff;
-  color: black;
-  padding: 5px;
-  border: 2px solid var(--gray);
-  border-radius: 15px;
-  position: absolute;
-  bottom: 95%;
-  left: 50%;
-  width: 150%;
-  max-width: 320px;
-  transform: translate(-50%, 0);
-  z-index: 10;
-}
-
-@media (max-width: 768px) {
-  #emoji-list .emoji {
-    font-size: 50px;
-  }
-
-  #emoji-list .emoji:active:after {
-    width: 200%;
-  }
+#avatar {
 }
 
 @media (max-width: 576px) {

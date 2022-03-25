@@ -4,25 +4,18 @@
 import AuthService from '../services/AuthService';
 import { AxiosError } from 'axios';
 import { inject, reactive, ref } from 'vue';
-import {
-  IAuthCredentials,
-  IAuthForm,
-  ISignInResponse,
-  IUser,
-} from '../types/Auth';
+import { IAuthCredentials } from '../types/Auth';
 import {
   validateEmail,
   validatePassword,
   validateUsername,
 } from '../utilities/validation';
-//import AuthError from '../../components/auth/AuthError.vue';
 
 import { useRouter } from 'vue-router';
 import CustomField from './common/CustomField.vue';
-// import AuthForm from '../../components/auth/AuthForm.vue';
-// import AuthSocialLogin from '../../components/auth/AuthSocialLogin.vue';
 
 import Title from './common/Title.vue';
+import { IUser } from '../types/User';
 
 const showPassword = ref(false);
 
@@ -131,6 +124,7 @@ async function signup() {
         :disabled="loading"
         required
         :error="fieldErrors.username"
+        description="3-20 characters long"
       />
 
       <CustomField
@@ -148,11 +142,12 @@ async function signup() {
         class="mb-4"
         label="Password"
         id="password"
-        type="password"
+        :type="showPassword ? 'text' : 'password'"
         v-model="form.password"
         :disabled="loading"
         required
         :error="fieldErrors.password"
+        description="8-32 characters long"
       >
         <template #button>
           <button
@@ -172,7 +167,7 @@ async function signup() {
           class="btn btn-primary w-100 mb-3 fs-5"
           :disabled="loading"
         >
-          📋 {{ loading ? 'Loading' : 'Register' }}
+          📋 {{ loading ? 'Loading...' : 'Register' }}
         </button>
 
         <router-link

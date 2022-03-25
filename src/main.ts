@@ -5,6 +5,7 @@ import store from './store';
 
 import axios from 'axios';
 import AuthService from './services/AuthService';
+import UserService from './services/UserService';
 // import EmojiService from './services/EmojiService';
 
 // import Bugsnag from '@bugsnag/js';
@@ -16,7 +17,7 @@ import AuthService from './services/AuthService';
 
 const $axios = axios.create({
   baseURL: import.meta.env.PROD
-    ? 'https://diy-backend.herokuapp.com'
+    ? 'https://emoji.herokuapp.com'
     : 'http://localhost:3001',
   headers: {
     'Content-type': 'application/json',
@@ -24,6 +25,7 @@ const $axios = axios.create({
 });
 
 const authService = new AuthService($axios);
+const userService = new UserService($axios);
 // const emojiService = new EmojiService($axios);
 
 // Bugsnag.start({
@@ -40,6 +42,7 @@ app.use(router).use(store).mount('#app'); // .use(bugsnagVue)
 
 app.provide('axios', $axios);
 app.provide('authService', authService);
+app.provide('userService', userService);
 //app.provide('emojiService', emojiService);
 
 // const updateSW = registerSW({

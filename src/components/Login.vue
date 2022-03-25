@@ -1,21 +1,13 @@
 <script setup lang="ts">
-// TODO: Setup loader
-// TODO: Break down form into reusable components? At least errors
+// TODO: Setup loader?
 import AuthService from '../services/AuthService';
 import { AxiosError } from 'axios';
 import { inject, reactive, ref } from 'vue';
-import { IAuthCredentials, IAuthForm, ISignInResponse } from '../types/Auth';
-import {
-  EMAIL_REGEX,
-  validateEmail,
-  validatePassword,
-} from '../utilities/validation';
-//import AuthError from '../../components/auth/AuthError.vue';
+import { IAuthCredentials, ISignInResponse } from '../types/Auth';
+import { validateEmail, validatePassword } from '../utilities/validation';
 
 import { useRouter } from 'vue-router';
 import CustomField from './common/CustomField.vue';
-// import AuthForm from '../../components/auth/AuthForm.vue';
-// import AuthSocialLogin from '../../components/auth/AuthSocialLogin.vue';
 
 import Title from './common/Title.vue';
 import { getQueryVar } from '../utilities/common';
@@ -97,7 +89,12 @@ async function signin() {
   <div id="login" class="page">
     <Title title="Login" />
 
-    <form @submit.prevent="validateLogin" class="" novalidate>
+    <form
+      @submit.prevent="validateLogin"
+      class=""
+      novalidate
+      autocomplete="off"
+    >
       <template v-if="errors.length">
         <div v-for="error in errors" class="alert alert-danger mb-4">
           ⚠️ {{ error }}
@@ -106,7 +103,7 @@ async function signin() {
       <CustomField
         class="mb-3"
         label="Email"
-        id="email"
+        id="emoji-email"
         type="email"
         v-model="form.email"
         :disabled="loading"
@@ -135,13 +132,14 @@ async function signin() {
           </button>
         </template>
       </CustomField>
+
       <div class="form-btns">
         <button
           type="submit"
           class="btn btn-primary w-100 mb-3 fs-5"
           :disabled="loading"
         >
-          🎲 {{ loading ? 'Loading' : 'Login' }}
+          🎲 {{ loading ? 'Loading...' : 'Login' }}
         </button>
 
         <router-link

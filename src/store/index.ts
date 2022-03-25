@@ -6,6 +6,7 @@ export default createStore({
     accessToken: localStorage.getItem('accessToken') as string,
     refreshToken: localStorage.getItem('refreshToken') as string,
     accessExpires: localStorage.getItem('accessExpires') as string,
+    userInfo: parseJwt(localStorage.getItem('accessToken') as string),
   },
   getters: {
     isAuthenticated(state) {
@@ -18,19 +19,23 @@ export default createStore({
       return state.accessToken;
     },
     userInfo(state) {
-      return parseJwt(state.accessToken);
+      return state.userInfo;
     },
   },
   actions: {},
   mutations: {
     setAccessToken(state, payload) {
       state.accessToken = payload;
+      state.userInfo = parseJwt(payload);
     },
     setRefreshToken(state, payload) {
       state.refreshToken = payload;
     },
     setAccessExpires(state, payload) {
       state.accessExpires = payload;
+    },
+    updateAvatar(state, payload) {
+      state.userInfo.avatar = payload;
     },
   },
 });

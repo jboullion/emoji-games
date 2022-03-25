@@ -31,7 +31,9 @@ h1 {
 
 .btn-primary:focus,
 .btn-primary:active,
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary.disabled,
+.btn-primary:disabled {
   color: black;
   border-color: black !important;
 }
@@ -212,4 +214,9 @@ a:focus-visible,
 .input-group.has-validation > .form-control {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+}
+.input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n + 3),
+.input-group:not(.has-validation)
+  > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+  border-radius: 15px;
 }

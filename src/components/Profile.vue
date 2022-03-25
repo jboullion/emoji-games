@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import Title from './common/Title.vue';
-import { inject, reactive, ref } from 'vue';
+import { inject, onMounted, reactive, ref } from 'vue';
 import AuthService from '../services/AuthService';
 import store from '../store';
 import CustomField from './common/CustomField.vue';
+import ChangeAvatar from './modals/ChangeAvatar.vue';
+import UserService from '../services/UserService';
+import { parseJwt } from '../utilities/common';
+import { IAuthRefreshCredentials } from '../types/Auth';
 
 const _authService: AuthService = inject('authService') as AuthService;
+const _userService: UserService = inject('userService') as UserService;
+
+let avatarModal: { show: () => void; hide: () => void } | null = null;
 
 const showPasswordOld = ref(false);
 const showPasswordNew = ref(false);
@@ -18,9 +25,27 @@ const form = reactive({
   passwordNew: '',
 });
 
+async function updateAvatar(emoji: string) {
+  // TODO: Return a more structured result?
+  const newEmoji = await _userService.updateAvatar(emoji);
+
+  if (newEmoji) {
+    await _authService.refresh();
+    if (avatarModal) {
+      // @ts-ignore
+      avatarModal.hide();
+    }
+  }
+}
+
 function logout() {
   _authService.signout();
 }
+
+onMounted(() => {
+  // @ts-ignore
+  avatarModal = new bootstrap.Modal(document.getElementById('avatar-modal'));
+});
 </script>
 
 <template>
@@ -39,7 +64,12 @@ function logout() {
 
     <div class="row">
       <div id="change-avatar" class="col-sm-6 mb-5 text-center">
-        <button type="button" class="btn btn-outline-secondary fs-3">
+        <button
+          type="button"
+          class="btn btn-outline-secondary fs-3"
+          data-bs-toggle="modal"
+          data-bs-target="#avatar-modal"
+        >
           <span>
             {{
               store.getters.userInfo.avatar
@@ -72,7 +102,7 @@ function logout() {
             class="mb-4"
             label="Old Password"
             id="password-old"
-            type="password"
+            :type="showPasswordOld ? 'text' : 'password'"
             v-model="form.passwordOld"
             :disabled="loading"
             required
@@ -93,7 +123,7 @@ function logout() {
             class="mb-4"
             label="New Password"
             id="password-new"
-            type="password"
+            :type="showPasswordNew ? 'text' : 'password'"
             v-model="form.passwordNew"
             :disabled="loading"
             description="Leave blank to only update email"
@@ -122,6 +152,8 @@ function logout() {
         </form>
       </div>
     </div>
+
+    <ChangeAvatar @updateAvatar="updateAvatar" />
   </div>
 </template>
 

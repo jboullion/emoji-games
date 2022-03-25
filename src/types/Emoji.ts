@@ -4,6 +4,67 @@
 // https://unicode.org/emoji/charts/full-emoji-list.html
 // https://www.kaggle.com/eliasdabbas/emoji-data-descriptions-codepoints?select=emoji-test.txt
 
+export function emojiFilters() {
+  let filters: EmojiFilter[] = [];
+
+  // setup filters
+  Emojis.forEach((emoji) => {
+    const parentID = filters.findIndex(
+      (filter) => filter.name === emoji.parent_cat,
+    );
+
+    if (parentID === -1) {
+      filters.push({
+        name: emoji.parent_cat,
+        children: [emoji.child_cat],
+      });
+    } else {
+      if (!filters[parentID].children.includes(emoji.child_cat)) {
+        filters[parentID].children.push(emoji.child_cat);
+      }
+    }
+  });
+
+  filters.sort((a, b) => (a.name > b.name ? 1 : -1));
+
+  return filters;
+}
+
+export function searchEmojis(
+  search: string,
+  parentFilter: EmojiFilter,
+  childFilter: string,
+) {
+  const avatarTerms = search.split(' ');
+
+  return Emojis.filter((emoji: Emoji) => {
+    let valid = true;
+
+    if (avatarTerms) {
+      // avatar by multiple terms
+      avatarTerms.forEach((term) => {
+        if (!valid) return;
+        valid = emoji.short_name.includes(term);
+      });
+    }
+
+    if (valid && parentFilter) {
+      valid = emoji.parent_cat === parentFilter.name;
+    }
+
+    if (valid && childFilter) {
+      valid = emoji.child_cat === childFilter;
+    }
+
+    return valid;
+  });
+}
+
+export type EmojiFilter = {
+  name: string;
+  children: string[];
+};
+
 export type Emoji = {
   icon: string;
   parent_cat: string;
