@@ -37,7 +37,10 @@ export default class AuthService implements IAuthService {
 
   async signin(credentials: IAuthCredentials): Promise<ISignInResponse> {
     const res = await this._axios.post(`${BASE_URL}/signin`, credentials);
-    this.updateAccess(res.data);
+    if (res.data.accessToken) {
+      router.push({ path: '/' });
+      this.updateAccess(res.data);
+    }
     return res.data;
   }
 

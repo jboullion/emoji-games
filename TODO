@@ -1,13 +1,6 @@
 MUST DOs
 0. Setup a trello / codecks.io board
 
-1. Setup Signup and Login Modals
-  a. If user is not logged in show silouette emoji and have it open up a login modal
-  b. If create account transition in another modal
-  c. On error display message
-  d. On success go to profile Page
-
-
 2. Setup a custom modal
   a. The bootstrap modals are too limiting and I forsee a lot of use of modals around the site.
   b. Can we remove bootstrap js?
@@ -24,6 +17,8 @@ MUST DOs
 5. Forgot Password
 
 
+6. Save Settings for the user. These are localStorage settings and do not need to be synced to the user...or do they? If multiple users use one browser they could get mixed up. 
+  a. Perhaps we could save a different settings object for each user? localStorage.set('settings-uuid', {settings})
 
 
 OPTIONAL Improvements

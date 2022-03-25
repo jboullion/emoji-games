@@ -64,7 +64,7 @@ async function signin() {
     const res: ISignInResponse = await _authService.signin(credentials);
 
     if (res.accessToken) {
-      $router.push({ path: '/profile' });
+      //$router.push({ path: '/' }); // '/profile'
     } else {
       //Bugsnag.notify(new Error('No access token returned'));
     }
