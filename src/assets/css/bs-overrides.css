@@ -188,3 +188,7 @@ a:focus-visible,
   border-color: var(--gray);
   border-left: 0;
 } */
+
+.col-form-label {
+  padding: 0;
+}
