@@ -18,6 +18,7 @@ import CustomField from './common/CustomField.vue';
 // import AuthSocialLogin from '../../components/auth/AuthSocialLogin.vue';
 
 import Title from './common/Title.vue';
+import { getQueryVar } from '../utilities/common';
 
 const showPassword = ref(false);
 
@@ -28,7 +29,7 @@ const _authService: AuthService = inject('authService') as AuthService;
 const loading = ref(false);
 const errors = ref<String[]>([]);
 const form = reactive({
-  email: '',
+  email: getQueryVar('email'),
   password: '',
 });
 const fieldErrors = reactive({

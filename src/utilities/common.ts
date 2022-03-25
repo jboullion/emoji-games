@@ -73,3 +73,15 @@ export function parseJwt(token: string) {
 
   return JSON.parse(jsonPayload);
 }
+
+/**
+ *
+ * @param varName Get a single parameter from the URL query string
+ * @returns
+ */
+export function getQueryVar(varName: string): string {
+  let urlParams = new URLSearchParams(window.location.search);
+
+  if (!urlParams.has(varName)) return '';
+  return urlParams.get(varName) as string;
+}

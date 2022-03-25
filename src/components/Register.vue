@@ -88,7 +88,7 @@ async function signup() {
 
     if (res.id) {
       // TODO: Should we automatically login a user when they register?
-      $router.push({ path: '/login' });
+      $router.push({ path: '/login?email=' + form.email });
     } else {
       //Bugsnag.notify(new Error('No access token returned'));
     }
