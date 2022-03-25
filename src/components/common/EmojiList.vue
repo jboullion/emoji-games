@@ -28,6 +28,11 @@ defineProps({
 </template>
 
 <style>
+body.darkmode #emoji-list .emoji {
+  background-color: var(--soft-white);
+  border-color: var(--light-gray);
+}
+
 #emoji-list {
   display: flex;
   flex-wrap: wrap;

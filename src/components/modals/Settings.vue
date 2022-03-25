@@ -1,21 +1,24 @@
 <script setup lang="ts">
-import { toRefs, reactive } from 'vue';
-import { toggleFullscreen } from '../../utilities/document';
+import { ref } from 'vue';
+import { toggleFullscreen, updateDarkMode } from '../../utilities/document';
 
-const emit = defineEmits(['toggleDark', 'toggleAudio']);
+// TODO: Do we want to tie darkmode and audio to a user? Or is it good enough to be browser specific
+// TODO: We do not currently track fullscreen as a setting. Should we?
+const darkMode = ref(localStorage.getItem('darkMode') ? true : false);
+const audioEnabled = ref(localStorage.getItem('audio') ? true : false);
 
-const props = defineProps({
-  darkMode: {
-    type: Boolean,
-    required: true,
-  },
-  audioEnabled: {
-    type: Boolean,
-    required: true,
-  },
-});
+updateDarkMode(darkMode.value);
 
-const reactiveProps = reactive(props);
+function toggleDarkMode() {
+  darkMode.value = !darkMode.value;
+  localStorage.setItem('darkMode', darkMode.value ? '1' : '');
+  updateDarkMode(darkMode.value);
+}
+
+function toggleAudio() {
+  audioEnabled.value = !audioEnabled.value;
+  localStorage.setItem('audio', audioEnabled.value ? '1' : '');
+}
 </script>
 
 <template>
@@ -34,18 +37,18 @@ const reactiveProps = reactive(props);
           </button>
         </div>
         <div class="modal-body d-flex justify-content-between">
-          <button class="menus-btn dark-mode" @click="emit('toggleDark')">
-            <span v-show="reactiveProps.darkMode">☀️</span>
-            <span v-show="!reactiveProps.darkMode">🌑</span>
+          <button class="menus-btn dark-mode" @click="toggleDarkMode">
+            <span v-show="darkMode">☀️</span>
+            <span v-show="!darkMode">🌑</span>
           </button>
 
           <button
             class="menus-btn audio-toggle"
             style="width: 82px; text-align: left"
-            @click="emit('toggleAudio')"
+            @click="toggleAudio"
           >
-            <span v-show="reactiveProps.audioEnabled">🔈</span>
-            <span v-show="!reactiveProps.audioEnabled">🔊</span>
+            <span v-show="audioEnabled">🔈</span>
+            <span v-show="!audioEnabled">🔊</span>
           </button>
 
           <button class="menus-btn fullscreen" @click="toggleFullscreen">

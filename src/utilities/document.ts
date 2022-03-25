@@ -12,6 +12,14 @@ export function toggleFullscreen() {
   }
 }
 
+export function updateDarkMode(darkmode: boolean) {
+  if (darkmode) {
+    document.body.classList.add('darkmode');
+  } else {
+    document.body.classList.remove('darkmode');
+  }
+}
+
 // copy an emoji to the users clipboard!
 export function copy(string: string) {
   navigator.clipboard.writeText(string);

@@ -130,14 +130,6 @@ onMounted(() => {
   padding: 0 15px;
 }
 
-body.darkmode #emoji-list .emoji {
-  background-color: var(--soft-white);
-  border-color: var(--light-gray);
-}
-
-#search {
-}
-
 #emoji-list {
   display: flex;
   flex-wrap: wrap;
