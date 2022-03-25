@@ -10,10 +10,15 @@ import {
   ISignInResponse,
   IUser,
 } from '../types/Auth';
-import { EMAIL_REGEX } from '../utilities/validation';
+import {
+  validateEmail,
+  validatePassword,
+  validateUsername,
+} from '../utilities/validation';
 //import AuthError from '../../components/auth/AuthError.vue';
 
 import { useRouter } from 'vue-router';
+import CustomField from './common/CustomField.vue';
 // import AuthForm from '../../components/auth/AuthForm.vue';
 // import AuthSocialLogin from '../../components/auth/AuthSocialLogin.vue';
 
@@ -47,33 +52,18 @@ function validateRegister() {
   fieldErrors.email = '';
   fieldErrors.password = '';
 
-  if (!form.username) {
-    fieldErrors.username = 'Username is Required';
-    valid = false;
-  } else if (form.username.length < 3) {
-    fieldErrors.username = 'Username must be at least 3 characters long';
-    valid = false;
-  } else if (form.username.length > 20) {
-    fieldErrors.username = 'Username must less than 20 characters long';
+  fieldErrors.username = validateUsername(form.username);
+  if (fieldErrors.username) {
     valid = false;
   }
 
-  if (!form.email) {
-    fieldErrors.email = 'Email is Required';
-    valid = false;
-  } else if (!EMAIL_REGEX.test(form.email)) {
-    fieldErrors.email = 'Email must be a valid email address';
+  fieldErrors.email = validateEmail(form.email);
+  if (fieldErrors.email) {
     valid = false;
   }
 
-  if (!form.password) {
-    fieldErrors.password = 'Password is Required';
-    valid = false;
-  } else if (form.password.length < 8) {
-    fieldErrors.password = 'Password must be at least 8 characters long';
-    valid = false;
-  } else if (form.password.length > 32) {
-    fieldErrors.password = 'Password must be less than 32 characters long';
+  fieldErrors.password = validatePassword(form.password);
+  if (fieldErrors.password) {
     valid = false;
   }
 
@@ -131,65 +121,51 @@ async function signup() {
           ⚠️ {{ error }}
         </div>
       </template>
-      <div class="mb-3">
-        <label class="col-form-label" for="username">Username</label>
-        <div class="input-group has-validation">
-          <input
-            id="username"
-            type="text"
-            class="form-control"
-            :class="{ 'is-invalid': fieldErrors.username }"
-            v-model="form.username"
-            maxlength="20"
-            :disabled="loading"
-          />
-          <div class="invalid-feedback" v-if="fieldErrors.username">
-            {{ fieldErrors.username }}
-          </div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label class="col-form-label" for="email">Email</label>
-        <div class="input-group has-validation">
-          <input
-            id="email"
-            type="email"
-            class="form-control"
-            :class="{ 'is-invalid': fieldErrors.email }"
-            v-model="form.email"
-            maxlength="100"
-            :disabled="loading"
-          />
-          <div class="invalid-feedback" v-if="fieldErrors.email">
-            {{ fieldErrors.email }}
-          </div>
-        </div>
-      </div>
-      <div class="mb-5">
-        <label class="col-form-label" for="password">Password</label>
-        <div class="input-group has-validation">
-          <input
-            id="password"
-            :type="showPassword ? 'text' : 'password'"
-            class="form-control"
-            :class="{ 'is-invalid': fieldErrors.password }"
-            v-model="form.password"
-            maxlength="32"
-            :disabled="loading"
-          />
+
+      <CustomField
+        class="mb-3"
+        label="Username"
+        id="username"
+        type="text"
+        v-model="form.username"
+        :disabled="loading"
+        required
+        :error="fieldErrors.username"
+      />
+
+      <CustomField
+        class="mb-3"
+        label="Email"
+        id="email"
+        type="email"
+        v-model="form.email"
+        :disabled="loading"
+        required
+        :error="fieldErrors.email"
+      />
+
+      <CustomField
+        class="mb-4"
+        label="Password"
+        id="password"
+        type="password"
+        v-model="form.password"
+        :disabled="loading"
+        required
+        :error="fieldErrors.password"
+      >
+        <template #button>
           <button
             type="button"
             class="btn btn-primary"
             @click="showPassword = !showPassword"
-            aria-label="Toggle Show Password"
+            aria-label="Toggle Show Old Password"
           >
             {{ showPassword ? '🕶️' : '👓' }}
           </button>
-          <div class="invalid-feedback" v-if="fieldErrors.password">
-            {{ fieldErrors.password }}
-          </div>
-        </div>
-      </div>
+        </template>
+      </CustomField>
+
       <div class="form-btns">
         <button
           type="submit"
@@ -213,11 +189,5 @@ async function signup() {
 form {
   max-width: 500px;
   margin: 0 auto;
-}
-
-.form-control.is-invalid,
-.was-validated .form-control:invalid {
-  background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚠️</text></svg>');
-  background-size: 20px 16px;
 }
 </style>

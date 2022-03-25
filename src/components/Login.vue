@@ -5,10 +5,15 @@ import AuthService from '../services/AuthService';
 import { AxiosError } from 'axios';
 import { inject, reactive, ref } from 'vue';
 import { IAuthCredentials, IAuthForm, ISignInResponse } from '../types/Auth';
-import { EMAIL_REGEX } from '../utilities/validation';
+import {
+  EMAIL_REGEX,
+  validateEmail,
+  validatePassword,
+} from '../utilities/validation';
 //import AuthError from '../../components/auth/AuthError.vue';
 
 import { useRouter } from 'vue-router';
+import CustomField from './common/CustomField.vue';
 // import AuthForm from '../../components/auth/AuthForm.vue';
 // import AuthSocialLogin from '../../components/auth/AuthSocialLogin.vue';
 
@@ -26,24 +31,24 @@ const form = reactive({
   email: '',
   password: '',
 });
+const fieldErrors = reactive({
+  email: '',
+  password: '',
+});
 
 function validateLogin() {
   let valid = true;
   errors.value = [];
+  fieldErrors.email = '';
+  fieldErrors.password = '';
 
-  if (!form.email) {
-    errors.value.push('Email is Required');
-    valid = false;
-  } else if (!EMAIL_REGEX.test(form.email)) {
-    errors.value.push('Email must be a valid email address');
+  fieldErrors.email = validateEmail(form.email);
+  if (fieldErrors.email) {
     valid = false;
   }
 
-  if (!form.password) {
-    errors.value.push('Password is Required');
-    valid = false;
-  } else if (form.password.length < 8) {
-    errors.value.push('Password must be at least 8 characters long');
+  fieldErrors.password = validatePassword(form.password);
+  if (fieldErrors.password) {
     valid = false;
   }
 
@@ -97,40 +102,38 @@ async function signin() {
           ⚠️ {{ error }}
         </div>
       </template>
-      <div class="mb-3">
-        <label class="col-form-label" for="email">Email</label>
-        <div class="input-group">
-          <input
-            id="email"
-            type="email"
-            class="form-control"
-            v-model="form.email"
-            maxlength="100"
-            :disabled="loading"
-          />
-        </div>
-      </div>
-      <div class="mb-5">
-        <label class="col-form-label" for="password">Password</label>
-        <div class="input-group">
-          <input
-            id="password"
-            :type="showPassword ? 'text' : 'password'"
-            class="form-control"
-            v-model="form.password"
-            maxlength="32"
-            :disabled="loading"
-          />
+      <CustomField
+        class="mb-3"
+        label="Email"
+        id="email"
+        type="email"
+        v-model="form.email"
+        :disabled="loading"
+        required
+        :error="fieldErrors.email"
+      />
+
+      <CustomField
+        class="mb-4"
+        label="Password"
+        id="password"
+        type="password"
+        v-model="form.password"
+        :disabled="loading"
+        required
+        :error="fieldErrors.password"
+      >
+        <template #button>
           <button
             type="button"
             class="btn btn-primary"
             @click="showPassword = !showPassword"
-            aria-label="Toggle Show Password"
+            aria-label="Toggle Show Old Password"
           >
             {{ showPassword ? '🕶️' : '👓' }}
           </button>
-        </div>
-      </div>
+        </template>
+      </CustomField>
       <div class="form-btns">
         <button
           type="submit"

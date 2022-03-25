@@ -165,11 +165,6 @@ a:focus-visible,
   }
 }
 
-.alert-danger {
-  background-color: #e81224;
-  border-color: #af0d1a;
-}
-
 /**
  * FORMS
  */
@@ -196,4 +191,25 @@ a:focus-visible,
 
 .col-form-label {
   padding: 0;
+}
+
+.invalid-feedback {
+  color: #af0d1a;
+}
+
+.alert-danger {
+  background-color: #e81224;
+  border-color: #af0d1a;
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚠️</text></svg>');
+  background-size: 20px 16px;
+  border-color: #af0d1a;
+}
+
+.input-group.has-validation > .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
