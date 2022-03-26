@@ -3,7 +3,7 @@ import store from '../store';
 import { IUserUpdate, IUser } from '../types/User';
 
 export interface IUserService {
-  updateUser(uuid: string, userUpdate: IUserUpdate): Promise<IUser>;
+  updateUser(userUpdate: IUserUpdate): Promise<IUser>;
   updateAvatar(avatar: string): Promise<string>;
 }
 
@@ -16,9 +16,9 @@ export default class UserService implements IUserService {
     };
   }
 
-  async updateUser(uuid: string, userUpdate: IUserUpdate): Promise<IUser> {
+  async updateUser(userUpdate: IUserUpdate): Promise<IUser> {
     const res = await this._axios.patch(
-      `${BASE_URL}/${uuid}`,
+      `${BASE_URL}/update`,
       userUpdate,
       this.setHeaders(),
     );

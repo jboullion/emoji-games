@@ -100,10 +100,7 @@ async function updateUser() {
       passwordNew: form.passwordNew ? form.passwordNew : null,
     };
 
-    const res: IUser = await _userService.updateUser(
-      store.getters.userInfo.uuid,
-      userUpdate,
-    );
+    const res: IUser = await _userService.updateUser(userUpdate);
 
     if (res.id) {
       // success
@@ -156,24 +153,29 @@ onMounted(() => {
     </div>
 
     <div class="row">
-      <div id="change-avatar" class="col-sm-6 mb-5 text-center">
+      <div id="change-avatar" class="col-md-6 mb-5 text-center">
         <button
           type="button"
           class="btn btn-outline-secondary fs-3"
           data-bs-toggle="modal"
           data-bs-target="#avatar-modal"
         >
-          <span>
+          <span
+            :class="{
+              'avatar-wide': store.getters.userInfo.avatar.length > 3,
+            }"
+          >
             {{
               store.getters.userInfo.avatar
                 ? store.getters.userInfo.avatar
                 : '😶'
-            }} </span
-          ><br />
+            }}
+          </span>
+          <br />
           Change Avatar
         </button>
       </div>
-      <div class="col-sm-6 mb-5">
+      <div class="col-md-6 mb-5">
         <div class="alert alert-light" v-if="success">{{ success }}</div>
         <form @submit.prevent="updateUser" class="" novalidate>
           <template v-if="errors.length">
@@ -268,9 +270,17 @@ onMounted(() => {
   font-size: 200px;
 }
 
+#change-avatar button span.avatar-wide {
+  font-size: 110px;
+}
+
 @media (max-width: 768px) {
   #change-avatar button span {
     font-size: 150px;
+  }
+
+  #change-avatar button span.avatar-wide {
+    font-size: 100px;
   }
 }
 </style>

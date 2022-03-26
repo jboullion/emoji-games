@@ -2,7 +2,6 @@
 // TODO: Move into a custom modal
 import { onMounted, ref } from 'vue';
 import { capitalize } from '../../utilities/filters';
-import { copy } from '../../utilities/document';
 import {
   Emoji,
   EmojiFilter,
@@ -29,6 +28,11 @@ function findEmojis() {
     parentFilter.value,
     childFilter.value,
   );
+
+  emojiResults.value = emojiResults.value.filter((emoji: Emoji) => {
+    //console.log('emoji.icon.length', emoji.icon.length);
+    return emoji.icon.length < 8;
+  });
 }
 
 // When updating our parent filter, we need to clear our childFilter so it doesn't affect the avatar
