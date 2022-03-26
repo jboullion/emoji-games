@@ -142,6 +142,20 @@ a:focus-visible,
 .modal {
 }
 
+/* Custom animation for BS modal, could be better */
+/* .modal.fade .modal-dialog {
+  transform: scale(0.1);
+  top: -200px;
+  opacity: 0;
+  transition: all 0.25s ease-in;
+}
+
+.modal.fade.show .modal-dialog {
+  transform: scale(1);
+  transform: translate3d(0, 200px, 0);
+  opacity: 1;
+} */
+
 /* .card,
 .modal-content {
   transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out,

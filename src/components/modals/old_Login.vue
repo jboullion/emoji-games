@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import BaseModal from '../modals/BaseModal.vue';
+import BaseModal from './vfm_BaseModal.vue';
 
 const email = ref('');
 const password = ref('');

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, PropType, ref } from 'vue';
+import { EmojiFilter } from '../../types/Emoji';
 
 const emit = defineEmits(['update:modelValue']);
 
@@ -12,7 +13,7 @@ const props = defineProps({
     required: true,
   },
   modelValue: {
-    type: String,
+    type: Object as PropType<EmojiFilter>,
   },
   disabled: {
     type: Boolean,
