@@ -27,7 +27,7 @@ defineProps({
   </div>
 </template>
 
-<style>
+<style scoped>
 body.darkmode #emoji-list .emoji {
   background-color: var(--soft-white);
   border-color: var(--light-gray);

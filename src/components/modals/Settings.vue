@@ -19,11 +19,12 @@ function toggleAudio() {
   audioEnabled.value = !audioEnabled.value;
   localStorage.setItem('audio', audioEnabled.value ? '1' : '');
 }
+// modal-dialog-centered
 </script>
 
 <template>
   <div id="settings-modal" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5>Settings</h5>

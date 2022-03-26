@@ -124,7 +124,13 @@ onMounted(() => {
       </div>
     </div>
 
-    <div class="col-12 mb-3">
+    <div id="emoji-list" class="col-12 text-center d-flex flex-wrap mb-3">
+      <div class="emoji" v-for="(emoji, i) in randomEmojis" :key="i">
+        {{ emoji }}
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
       <button
         type="button"
         class="btn btn-primary w-100 action-btn"
@@ -134,13 +140,7 @@ onMounted(() => {
       </button>
     </div>
 
-    <div id="emoji-list" class="col-12 text-center d-flex flex-wrap mb-3">
-      <div class="emoji" v-for="(emoji, i) in randomEmojis" :key="i">
-        {{ emoji }}
-      </div>
-    </div>
-
-    <div class="col-12 mb-3" v-if="randomEmojis && randomEmojis.length">
+    <div class="col-md-6 mb-3" v-if="randomEmojis && randomEmojis.length">
       <button
         type="button"
         class="btn btn-primary w-100 action-btn"
