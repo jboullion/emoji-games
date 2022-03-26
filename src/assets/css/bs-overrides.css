@@ -27,6 +27,11 @@ h1 {
   background-color: var(--emoji-yellow) !important;
   border-color: black !important;
   color: black;
+  transition: filter 0.2s linear;
+}
+
+.btn-primary:hover {
+  filter: brightness(110%);
 }
 
 .btn-primary:focus,
@@ -53,6 +58,14 @@ h1 {
   border-color: var(--gray);
   margin-top: 0;
   border-width: 2px 3px 5px 3px;
+}
+
+.btn:hover span {
+  display: inline-block;
+  animation-name: bob;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 
 .btn:active {

@@ -53,7 +53,7 @@ onMounted(() => {
             data-bs-dismiss="modal"
             aria-label="Close"
           >
-            ✖️
+            <span>✖️</span>
           </button>
         </div>
         <div class="modal-body">
@@ -66,7 +66,9 @@ onMounted(() => {
               v-model="search"
             >
               <template #button>
-                <button type="submit" class="btn btn-primary">🔎</button>
+                <button type="submit" class="btn btn-primary">
+                  <span>🔎</span>
+                </button>
               </template>
             </CustomField>
 

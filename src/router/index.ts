@@ -11,6 +11,7 @@ const Register = () => import('../components/Register.vue');
 const ForgotPassword = () => import('../components/ForgotPassword.vue');
 
 const Profile = () => import('../components/Profile.vue');
+const Shop = () => import('../components/Shop.vue');
 
 const Memory = () => import('../components/Memory.vue');
 
@@ -68,6 +69,12 @@ const routes = [
     name: 'Profile',
     meta: requiresAuth,
     component: Profile,
+  },
+  {
+    path: '/shop',
+    name: 'Shop',
+    // meta: requiresAuth,
+    component: Shop,
   },
   {
     path: '/games/memory',

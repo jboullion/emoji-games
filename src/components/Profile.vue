@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// TODO: Do we want to store all of the user info in the store? If so should we be saving tickets and such in the localstorage / access token?
 import Title from './common/Title.vue';
 import { inject, onMounted, reactive, ref } from 'vue';
 import AuthService from '../services/AuthService';
@@ -18,6 +19,8 @@ const _authService: AuthService = inject('authService') as AuthService;
 const _userService: UserService = inject('userService') as UserService;
 
 let avatarModal: { show: () => void; hide: () => void } | null = null;
+
+const user = ref();
 
 const showPasswordOld = ref(false);
 const showPasswordNew = ref(false);
@@ -129,9 +132,15 @@ function logout() {
   _authService.signout();
 }
 
+async function setupUser() {
+  user.value = await _userService.getUser();
+}
+
 onMounted(() => {
   // @ts-ignore
   avatarModal = new bootstrap.Modal(document.getElementById('avatar-modal'));
+
+  setupUser();
 });
 </script>
 
@@ -156,7 +165,7 @@ onMounted(() => {
       <div id="change-avatar" class="col-md-6 mb-5 text-center">
         <button
           type="button"
-          class="btn btn-outline-secondary fs-3"
+          class="btn btn-outline-secondary fs-3 w-100 mb-3"
           data-bs-toggle="modal"
           data-bs-target="#avatar-modal"
         >
@@ -174,6 +183,15 @@ onMounted(() => {
           <br />
           Change Avatar
         </button>
+        <router-link
+          to="/shop"
+          class="btn btn-outline-secondary fs-3 w-100 mb-3"
+          ><span>🎫</span> Tickets: {{ user ? user.tickets : '' }}</router-link
+        >
+        <router-link to="/shop" class="btn btn-outline-secondary fs-3 w-100"
+          ><span>🎟️</span> Premium Tickets:
+          {{ user ? user.premium_tickets : '' }}</router-link
+        >
       </div>
       <div class="col-md-6 mb-5">
         <div class="alert alert-light" v-if="success">{{ success }}</div>
@@ -221,7 +239,7 @@ onMounted(() => {
                 @click="showPasswordNew = !showPasswordNew"
                 aria-label="Toggle Show New Password"
               >
-                {{ showPasswordNew ? '🕶️' : '👓' }}
+                <span>{{ showPasswordNew ? '🕶️' : '👓' }}</span>
               </button>
             </template>
           </CustomField>
@@ -243,7 +261,7 @@ onMounted(() => {
                 @click="showPasswordOld = !showPasswordOld"
                 aria-label="Toggle Show Old Password"
               >
-                {{ showPasswordOld ? '🕶️' : '👓' }}
+                <span>{{ showPasswordOld ? '🕶️' : '👓' }}</span>
               </button>
             </template>
           </CustomField>
@@ -254,7 +272,7 @@ onMounted(() => {
               class="btn btn-primary w-100 mb-3 fs-5"
               :disabled="loading"
             >
-              📲 {{ loading ? 'Loading' : 'Update' }}
+              <span>📲</span> {{ loading ? 'Loading' : 'Update' }}
             </button>
           </div>
         </form>

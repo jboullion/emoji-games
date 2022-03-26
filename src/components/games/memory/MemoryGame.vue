@@ -160,7 +160,7 @@ function showWrong(cardIndex: number): boolean {
         class="btn btn-primary w-100 action-btn"
         @click="start = true"
       >
-        ▶️ Start
+        <span>▶️</span> Start
       </button>
     </div>
     <div class="col-12 mt-4" v-else-if="won">
@@ -169,7 +169,7 @@ function showWrong(cardIndex: number): boolean {
         class="btn btn-primary w-100 action-btn"
         @click="emit('playAgain')"
       >
-        🔄 Play Again!
+        <span>🔄</span> Play Again!
       </button>
     </div>
     <div class="row mt-4" v-else>

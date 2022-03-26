@@ -26,11 +26,11 @@ const props = defineProps({
           <h3 class="mb-5 text-center">You Collected {{ tickets }} 🎫!</h3>
 
           <button class="btn btn-primary mb-3" @click="emit('playAgain')">
-            🔄 Play Again!
+            <span>🔄</span> Play Again!
           </button>
 
           <button class="btn btn-primary" @click="emit('close')">
-            🏠 More Games!
+            <span>🏠</span> More Games!
           </button>
         </div>
       </div>

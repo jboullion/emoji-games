@@ -136,7 +136,7 @@ onMounted(() => {
         class="btn btn-primary w-100 action-btn"
         @click="generateRandomEmojis"
       >
-        ♻️ Randomize
+        <span>♻️</span> Randomize
       </button>
     </div>
 
@@ -146,7 +146,7 @@ onMounted(() => {
         class="btn btn-primary w-100 action-btn"
         @click="emit('start', randomEmojis)"
       >
-        ✔️ Accept
+        <span>✔️</span> Accept
       </button>
     </div>
   </div>

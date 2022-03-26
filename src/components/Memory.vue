@@ -1,11 +1,14 @@
 <script setup lang="ts">
 // TODO: Add Accessibility? Keyboard controls for flipping cards?
-import { onMounted, reactive, ref } from 'vue';
+import { computed, inject, onMounted, reactive, ref } from 'vue';
 import MemorySetup from './games/memory/MemorySetup.vue';
 import MemoryGame from './games/memory/MemoryGame.vue';
 import { MemoryGameType } from '../types/Memory';
 import ModalWinner from './modals/Winner.vue';
 import { useRouter } from 'vue-router';
+import UserService from '../services/UserService';
+
+const _userService: UserService = inject('userService') as UserService;
 
 const $router = useRouter();
 
@@ -20,6 +23,8 @@ const memoryGame = reactive<MemoryGameType>({
   maxEmojiPerSet: 10,
   emojis: [],
 });
+
+const tickets = computed(() => memoryGame.sets * memoryGame.emojiPerSet);
 
 function start(emojis: string[]) {
   setup.value = false;
@@ -41,10 +46,13 @@ function updateEmojiPerSet(newSetCount: number) {
 
 function winGame() {
   playerWins.value = true;
+
   if (winnerModal) {
     // @ts-ignore
     winnerModal.show();
   }
+
+  _userService.updateTickets(tickets.value);
 }
 
 function playAgain() {
@@ -61,9 +69,9 @@ function closeWinner() {
   if (winnerModal) {
     // @ts-ignore
     winnerModal.hide();
-    setTimeout(() => {
-      $router.push('/');
-    }, 150);
+    // setTimeout(() => {
+    //   $router.push('/');
+    // }, 150);
   }
 }
 
