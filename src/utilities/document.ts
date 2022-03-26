@@ -24,3 +24,15 @@ export function updateDarkMode(darkmode: boolean) {
 export function copy(string: string) {
   navigator.clipboard.writeText(string);
 }
+
+// Target the
+export function trapFocus(inputID: string, modalID: string) {
+  const modal = document.getElementById(modalID);
+  const input = document.getElementById(inputID);
+
+  if (modal && input) {
+    modal.addEventListener('shown.bs.modal', function () {
+      input.focus();
+    });
+  }
+}

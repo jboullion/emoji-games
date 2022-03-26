@@ -2,7 +2,7 @@
 // TODO: Move into a custom modal
 import { onMounted, ref } from 'vue';
 import { capitalize } from '../../utilities/filters';
-import { copy } from '../../utilities/document';
+import { copy, trapFocus } from '../../utilities/document';
 // TODO: We might want to setup a loading event since this emoji import can be quite big. If not already async, should probably make async. OR load after the initial page load
 import {
   Emoji,
@@ -37,14 +37,7 @@ function updateParentFilter() {
 }
 
 onMounted(() => {
-  const searchModal = document.getElementById('search-modal');
-  const searchInput = document.getElementById('search');
-
-  if (searchModal && searchInput) {
-    searchModal.addEventListener('shown.bs.modal', function () {
-      searchInput.focus();
-    });
-  }
+  trapFocus('search', 'search-modal');
 });
 </script>
 

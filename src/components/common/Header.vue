@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import store from '../../store';
-import TestModal from '../modals/TestModal.vue';
-
-const showModal = ref(false);
 </script>
 
 <template>
@@ -26,15 +22,6 @@ const showModal = ref(false);
         data-bs-target="#search-modal"
       >
         🔍 <span class="visually-hidden">Search</span>
-      </button>
-
-      <button
-        id="search-toggle"
-        type="button"
-        class="menus-btn"
-        @click="showModal = !showModal"
-      >
-        🚺
       </button>
 
       <button
@@ -73,28 +60,10 @@ const showModal = ref(false);
         >👤<span class="visually-hidden">Profile</span>
       </router-link> -->
     </div>
-
-    <!-- <Login v-show="showModal" @close="showModal = false" /> -->
   </header>
-  <TestModal v-show="showModal" @close="showModal = false" />
-  <div
-    class="e-modal-backdrop"
-    v-show="showModal"
-    @click="showModal = false"
-  ></div>
 </template>
 
 <style scoped>
-.e-modal-backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1;
-}
-
 .menus-btn {
   position: relative;
   font-size: 34px;

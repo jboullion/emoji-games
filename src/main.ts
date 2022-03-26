@@ -6,6 +6,8 @@ import store from './store';
 import axios from 'axios';
 import AuthService from './services/AuthService';
 import UserService from './services/UserService';
+//import vfmPlugin from 'vue-final-modal';
+
 // import EmojiService from './services/EmojiService';
 
 // import Bugsnag from '@bugsnag/js';
@@ -39,6 +41,7 @@ const app = createApp(App);
 
 // @ts-ignore
 app.use(router).use(store).mount('#app'); // .use(bugsnagVue)
+// .use(vfmPlugin)
 
 app.provide('axios', $axios);
 app.provide('authService', authService);

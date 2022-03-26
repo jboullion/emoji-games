@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import BaseModal from './BaseModal.vue';
 
 const emit = defineEmits(['close']);
+
+const props = defineProps({
+  showModal: {
+    type: Boolean,
+    required: true,
+  },
+});
+
+const reactiveProps = reactive(props);
 
 const email = ref('');
 const password = ref('');
@@ -14,8 +23,8 @@ function submit() {
 </script>
 
 <template>
-  <BaseModal @close="emit('close')">
-    <template #header><h3 class="mb-0">Login</h3></template>
+  <BaseModal v-model="reactiveProps.showModal" @close="emit('close')">
+    <template #title><h3 class="fs-1">Login</h3></template>
     <template #default>
       <form @submit.prevent="submit" class="">
         <div class="mb-3">
@@ -54,7 +63,6 @@ function submit() {
         </div>
       </form>
     </template>
-    <template #footer></template>
   </BaseModal>
 </template>
 

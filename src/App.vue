@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { inject, onBeforeUnmount, onMounted, ref } from 'vue';
-
 import ModalSettings from './components/modals/Settings.vue';
 import Footer from './components/common/Footer.vue';
 import Header from './components/common/Header.vue';
