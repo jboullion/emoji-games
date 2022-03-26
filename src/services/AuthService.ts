@@ -67,7 +67,7 @@ export default class AuthService implements IAuthService {
   }
 
   signout(): void {
-    router.push({ path: '/login' });
+    router.push({ path: '/' });
 
     store.commit('setAccessToken', '');
     store.commit('setRefreshToken', '');
