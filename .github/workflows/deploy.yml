@@ -29,7 +29,6 @@ jobs:
         run: npm run build
         env:
           HTTPS: 'true'
-          BASE_URL: ${{ secrets.EMOJI_GAMES_BASE_URL }}
           PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
 
       - name: Deploy to GitHub Pages
