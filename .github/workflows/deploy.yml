@@ -15,11 +15,11 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Build React App
+      - name: Build Emoji Games
         run: yarn build
         env:
           HTTPS: 'true'
-          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+          BASE_URL: ${{ secrets.EMOJI_GAMES_BASE_URL }}
           PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
 
       - name: Deploy to GitHub Pages
