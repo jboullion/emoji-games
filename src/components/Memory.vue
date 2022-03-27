@@ -65,13 +65,11 @@ function playAgain() {
   }
 }
 
-function closeWinner() {
+function moreGames() {
   if (winnerModal) {
     // @ts-ignore
     winnerModal.hide();
-    // setTimeout(() => {
-    //   $router.push('/');
-    // }, 150);
+    $router.push('/');
   }
 }
 
@@ -96,6 +94,7 @@ onMounted(() => {
       @updateEmojiPerSet="updateEmojiPerSet"
       @start="start"
     />
+
     <MemoryGame
       v-else
       :memoryGame="memoryGame"
@@ -105,7 +104,7 @@ onMounted(() => {
 
     <ModalWinner
       :tickets="memoryGame.sets * memoryGame.emojiPerSet"
-      @close="closeWinner"
+      @moreGames="moreGames"
       @playAgain="playAgain"
     />
   </div>

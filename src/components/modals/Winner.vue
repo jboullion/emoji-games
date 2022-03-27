@@ -1,17 +1,14 @@
 <script setup lang="ts">
-// import { toRefs, reactive } from 'vue';
-// import { toggleFullscreen } from '../../utilities/document';
+import store from '../../store';
 
-const emit = defineEmits(['close', 'playAgain']);
+const emit = defineEmits(['moreGames', 'playAgain']);
 
-const props = defineProps({
+defineProps({
   tickets: {
     type: Number,
     required: true,
   },
 });
-
-// const reactiveProps = reactive(props);
 </script>
 
 <template>
@@ -23,13 +20,16 @@ const props = defineProps({
         </div>
         <div class="modal-body d-flex flex-column justify-content-between">
           <h3 class="mb-4 text-center">🎉 Good Job! 🎉</h3>
-          <h3 class="mb-5 text-center">You Collected {{ tickets }} 🎫!</h3>
 
-          <button class="btn btn-primary mb-3" @click="emit('playAgain')">
+          <h3 v-if="store.getters.isAuthenticated" class="mb-5 text-center">
+            You Collected {{ tickets }} 🎫!
+          </h3>
+
+          <button class="btn btn-primary fs-4 mb-3" @click="emit('playAgain')">
             <span>🔄</span> Play Again!
           </button>
 
-          <button class="btn btn-primary" @click="emit('close')">
+          <button class="btn btn-primary fs-4" @click="emit('moreGames')">
             <span>🏠</span> More Games!
           </button>
         </div>
@@ -38,9 +38,4 @@ const props = defineProps({
   </div>
 </template>
 
-<style scoped>
-.btn {
-  font-size: 30px;
-  font-weight: normal;
-}
-</style>
+<style scoped></style>

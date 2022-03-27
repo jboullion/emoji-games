@@ -18,8 +18,9 @@ import UserService from './services/UserService';
 // const swIntervalMS = 60 * 60 * 1000;
 
 const $axios = axios.create({
+  //baseURL: 'https://emoji-games.herokuapp.com',
   baseURL: import.meta.env.PROD
-    ? 'https://emoji.herokuapp.com'
+    ? 'https://emoji-games.herokuapp.com'
     : 'http://localhost:3001',
   headers: {
     'Content-type': 'application/json',
