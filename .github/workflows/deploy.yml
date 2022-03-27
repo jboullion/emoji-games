@@ -26,7 +26,7 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm build
+        run: npm run build
         env:
           HTTPS: 'true'
           BASE_URL: ${{ secrets.EMOJI_GAMES_BASE_URL }}
