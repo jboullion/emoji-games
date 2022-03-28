@@ -81,7 +81,7 @@ onMounted(() => {
 
 <template>
   <div id="search" class="page">
-    <div class="row">
+    <div class="row my-3">
       <div class="col-12 text-center">
         <h1>🧠 Memory</h1>
       </div>

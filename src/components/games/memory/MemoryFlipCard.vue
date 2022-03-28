@@ -82,13 +82,14 @@ body.darkmode .flip-card-inner:before {
 
 @media (max-width: 768px) {
   .flip-card {
-    width: 33%;
+    height: 125px;
   }
 }
 
 @media (max-width: 576px) {
   .flip-card {
-    width: 50%;
+    font-size: 38px;
+    height: 75px;
   }
 }
 

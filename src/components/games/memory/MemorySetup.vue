@@ -124,9 +124,19 @@ onMounted(() => {
       </div>
     </div>
 
-    <div id="emoji-list" class="col-12 text-center d-flex flex-wrap mb-3">
-      <div class="emoji" v-for="(emoji, i) in randomEmojis" :key="i">
-        {{ emoji }}
+    <div id="emoji-list" class="col-12 text-center">
+      <div
+        class="d-flex flex-wrap mb-5 justify-content-center align-items-center"
+      >
+        <div
+          class="emoji-wrapper mb-3"
+          v-for="(emoji, i) in randomEmojis"
+          :key="i"
+        >
+          <div class="emoji">
+            {{ emoji }}
+          </div>
+        </div>
       </div>
     </div>
 
@@ -165,15 +175,21 @@ onMounted(() => {
   /* background-color: #222; */
 }
 
+#emoji-list .emoji-wrapper {
+  padding: 0 10px;
+  width: 16.6%;
+}
 #emoji-list .emoji {
   font-size: 64px;
-  margin: 10px;
-  padding: 0 10px;
-  flex: 1;
+  padding: 10px;
+
   position: relative;
   user-select: none;
   border: 4px solid var(--dark);
   border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 body.darkmode #emoji-list .emoji {
@@ -181,9 +197,33 @@ body.darkmode #emoji-list .emoji {
   border-color: var(--light-gray);
 }
 
+@media (max-width: 992px) {
+  #emoji-list .emoji {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  #emoji-list .emoji-wrapper {
+    width: 20%;
+  }
+  #emoji-list .emoji {
+    font-size: 44px;
+  }
+}
+
 @media (max-width: 576px) {
   .card-body {
     padding: 10px;
+  }
+
+  #emoji-list .emoji-wrapper {
+    width: 25%;
+  }
+
+  #emoji-list .emoji {
+    font-size: 36px;
+    padding: 5px 10px;
   }
 }
 </style>

@@ -13,7 +13,7 @@ import ModalSearch from './components/modals/Search.vue';
       <router-view></router-view>
 
       <!-- <router-view v-slot="{ Component }">
-        <transition name="slide">
+        <transition name="fade">
           <component :is="Component" />
         </transition>
       </router-view> -->
@@ -30,7 +30,7 @@ import ModalSearch from './components/modals/Search.vue';
 /* TODO: Should we be setting up modules or some other CSS bundle for import? */
 /* TODO: Or perhaps we should at least move into SCSS?
 /* @import './assets/css/bootswatch/sketchy/bootstrap.min.css'; */
-@import './assets/css/bootswatch/lumen/bootstrap.min.css';
+@import './assets/css/bootswatch/lumen/bootstrap.css';
 
 @import './assets/css/variables.css';
 @import './assets/css/utilities.css';
@@ -60,5 +60,32 @@ body,
   border: none;
 }
 
+/* .fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+} */
+
 /* TODO: Do we want to animate our routes? */
+/* @keyframes rotate {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.rotate-enter-active {
+  animation: rotate 0.2s;
+}
+
+.rotate-leave-active {
+  animation: rotate 0.2s reverse;
+} */
 </style>

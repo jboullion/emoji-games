@@ -1,14 +1,13 @@
 <script setup lang="ts">
 // TODOS:
-// 1. Victory display and animation
-// 2. New Game / Reset Game Buttons
 
 // ! Bugs:
 
 // ? Improvements
 // 1. Add Audio: Flip Card, Wrong Guess, Matched Set, Victory
 // 2. Save tickets to database
-// 3. Track games played
+// 3. Analytics: Track games played
+// 4.
 
 import { computed, PropType, reactive, ref } from 'vue';
 import { MemoryGameType } from '../../../types/Memory';
@@ -139,7 +138,7 @@ function showWrong(cardIndex: number): boolean {
 </script>
 
 <template>
-  <div class="my-4 text-center">
+  <div class="my-5 text-center">
     <div id="card-list" class="col-12">
       <div class="row justify-content-center">
         <MemoryFlipCard
@@ -173,7 +172,7 @@ function showWrong(cardIndex: number): boolean {
       </button>
     </div>
     <div class="row mt-4" v-else>
-      <div class="col-sm-6 mb-3">
+      <div class="col-6 mb-3">
         <div class="card">
           <div class="card-body text-center">
             <h2 class="flex-fill text-center">
@@ -183,7 +182,7 @@ function showWrong(cardIndex: number): boolean {
           </div>
         </div>
       </div>
-      <div class="col-sm-6 mb-3">
+      <div class="col-6 mb-3">
         <div class="card">
           <div class="card-body text-center">
             <h2 class="flex-fill text-center">

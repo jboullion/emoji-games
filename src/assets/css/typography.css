@@ -1,7 +1,12 @@
+/* @font-face {
+  font-family: 'Comic Sans MS';
+  src: url('./assets/fonts/comic.ttf');
+} */
+
 body,
 p {
   /* font-family: 'Poppins', sans-serif; */
-  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  font-family: 'Comic Sans MS', 'Comic Neue', cursive;
 }
 
 h1 {

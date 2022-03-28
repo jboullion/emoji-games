@@ -128,7 +128,7 @@ async function signin() {
             @click="showPassword = !showPassword"
             aria-label="Toggle Show Old Password"
           >
-            {{ showPassword ? '🕶️' : '👓' }}
+            <span>{{ showPassword ? '🕶️' : '👓' }}</span>
           </button>
         </template>
       </CustomField>
@@ -139,13 +139,13 @@ async function signin() {
           class="btn btn-primary w-100 mb-3 fs-5"
           :disabled="loading"
         >
-          🎲 {{ loading ? 'Loading...' : 'Login' }}
+          <span>🎲</span> {{ loading ? 'Loading...' : 'Login' }}
         </button>
 
         <router-link
           to="/register"
           class="btn btn-outline-secondary w-100 mb-3 fs-5"
-          >📋 Create Account</router-link
+          ><span>📋</span> Create Account</router-link
         >
         <router-link
           to="/forgot-password"

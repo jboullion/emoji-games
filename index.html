@@ -27,11 +27,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue&display=swap"
       rel="stylesheet"
     />
+
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+    /> -->
   </head>
   <body>
+    <script
+      src="https://cdn.socket.io/4.4.1/socket.io.min.js"
+      integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      var socket = io('http://localhost:3001');
+    </script>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
