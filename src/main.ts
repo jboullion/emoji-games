@@ -4,8 +4,10 @@ import router from './router';
 import store from './store';
 
 import axios from 'axios';
+
 import AuthService from './services/AuthService';
 import UserService from './services/UserService';
+import { io, Socket } from 'socket.io-client';
 
 // import VueSocketIO from 'vue-3-socket.io';
 
@@ -25,11 +27,13 @@ import UserService from './services/UserService';
 
 // const swIntervalMS = 60 * 60 * 1000;
 
+const baseURL = import.meta.env.PROD
+  ? 'https://emoji-games.herokuapp.com'
+  : 'http://localhost:3001';
+
 const $axios = axios.create({
   //baseURL: 'https://emoji-games.herokuapp.com',
-  baseURL: import.meta.env.PROD
-    ? 'https://emoji-games.herokuapp.com'
-    : 'http://localhost:3001',
+  baseURL: baseURL,
   headers: {
     'Content-type': 'application/json',
   },
@@ -37,7 +41,7 @@ const $axios = axios.create({
 
 const authService = new AuthService($axios);
 const userService = new UserService($axios);
-// const emojiService = new EmojiService($axios);
+const socket = io(baseURL);
 
 // Bugsnag.start({
 //   apiKey: import.meta.env.VITE_BUGSNAG_APIKEY as string,
@@ -70,6 +74,7 @@ app
 app.provide('axios', $axios);
 app.provide('authService', authService);
 app.provide('userService', userService);
+app.provide('socket', socket);
 //app.provide('emojiService', emojiService);
 
 // const updateSW = registerSW({
