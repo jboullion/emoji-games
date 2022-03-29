@@ -12,6 +12,8 @@ import ChatWindow from './ChatWindow.vue';
 
 const _socket: Socket = inject('socket') as Socket;
 
+console.log('_socket.id', _socket.id);
+
 const chatMessages = ref<ChatMessage[]>([]);
 
 _socket.on('broadcastMessage', (message) => {
