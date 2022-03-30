@@ -145,7 +145,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="profile" class="page">
+  <div id="profile" class="page" v-if="store.getters.userInfo">
     <Title
       title="Profile"
       :subtitle="`Welcome ${store.getters.userInfo.username}!`"

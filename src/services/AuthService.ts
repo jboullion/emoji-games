@@ -24,7 +24,7 @@ export interface IAuthService {
   /**
    * Refresh our authentication
    */
-  refresh(): Promise<IUser>;
+  refresh(): Promise<IUser | void>;
 
   /**
    * Log a user out
@@ -49,9 +49,12 @@ export default class AuthService implements IAuthService {
     return res.data;
   }
 
-  async refresh(): Promise<IUser> {
+  async refresh(): Promise<IUser | void> {
     const accessToken: string = localStorage.getItem('accessToken') as string;
+
     const refreshToken: string = localStorage.getItem('refreshToken') as string;
+
+    if (!accessToken || !refreshToken) return;
 
     const decodedToken = parseJwt(accessToken);
 

@@ -50,6 +50,9 @@ app.provide('authService', authService);
 app.provide('userService', userService);
 app.provide('socket', socket);
 
+// On load setup user if they exist
+authService.refresh();
+
 // const updateSW = registerSW({
 //   onRegistered(r) {
 //     r &&

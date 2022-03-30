@@ -51,6 +51,7 @@ const defaultAvatar = store.getters.userInfo.avatar
 
 // Room
 const roomID = ref('');
+const currentRoom = ref(roomID.value);
 
 const joinRoom = useDebounceFn((newRoom: string, oldRoom: string | null) => {
   _socket.emit('changeRoom', {
@@ -58,12 +59,15 @@ const joinRoom = useDebounceFn((newRoom: string, oldRoom: string | null) => {
     leave: oldRoom,
     avatar: defaultAvatar,
   });
+
+  chatMessages.value = [];
+  currentRoom.value = newRoom;
 }, 1000);
 
 _socket.on('roomJoin', (user: RoomPayload) => {
   chatMessages.value.push({
     avatar: user.username,
-    text: 'Joined the room',
+    text: `Joined room: ${currentRoom.value}`,
     userID: 'join',
     roomID: roomID.value,
   });
@@ -172,6 +176,9 @@ watch(roomID, (newRoom, oldRoom) => {
         </div>
         <div class="card mb-3">
           <div id="messages" class="card-block">
+            <div v-if="currentRoom">
+              <h3>Room: {{ currentRoom }}</h3>
+            </div>
             <ChatMessage
               v-for="(message, index) of chatMessages"
               :message="message"
@@ -220,9 +227,15 @@ watch(roomID, (newRoom, oldRoom) => {
 </template>
 
 <style scoped>
+.card {
+  overflow: hidden;
+}
+
 #messages {
   padding: 15px;
   min-height: 200px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 #messages ul {

@@ -2,7 +2,7 @@
 import { Socket } from 'socket.io-client';
 import { inject, PropType, ref, watch } from 'vue';
 import store from '../../../store';
-import { ChatMessage } from '../../../types/Chat';
+import { IChatMessage } from '../../../types/Chat';
 
 import { copy } from '../../../utilities/document';
 import CustomField from '../../common/CustomField.vue';
@@ -47,7 +47,7 @@ const defaultAvatar = store.getters.userInfo.avatar
   ? store.getters.userInfo.avatar
   : exampleAvatars[randomAvatarIndex];
 
-const message = ref<ChatMessage>({
+const message = ref<IChatMessage>({
   avatar: defaultAvatar,
   text: '',
   userID: _socket.id,
@@ -56,7 +56,7 @@ const message = ref<ChatMessage>({
 
 const maxTextLength = 255;
 
-const chatMessages = ref<ChatMessage[]>([]);
+const chatMessages = ref<IChatMessage[]>([]);
 
 _socket.on('broadcastMessage', (message) => {
   chatMessages.value.push(message);
@@ -70,11 +70,11 @@ function sendMessage() {
   }
 }
 
-function validateMessage(message: ChatMessage) {
+function validateMessage(message: IChatMessage) {
   return message.avatar.length > 0 && message.text.length > 0;
 }
 
-function messageClasses(message: ChatMessage) {
+function messageClasses(message: IChatMessage) {
   return message.userID === _socket.id ? 'local' : 'server';
 }
 
