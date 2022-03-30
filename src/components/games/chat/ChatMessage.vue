@@ -51,6 +51,11 @@ function messageClasses(message: IChatMessage) {
   margin-right: 5px;
 }
 
+.chat-message.server span {
+  margin-right: 0;
+  margin-left: 5px;
+}
+
 .chat-message > div {
   border: 1px solid black;
   padding: 5px;

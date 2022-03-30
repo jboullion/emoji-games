@@ -6,10 +6,6 @@ export const fieldProps = {
     type: String,
     required: true,
   },
-  type: {
-    type: String,
-    required: true,
-  },
 
   disabled: {
     type: Boolean,

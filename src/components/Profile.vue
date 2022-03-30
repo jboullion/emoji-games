@@ -279,7 +279,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- <ChangeAvatar @updateAvatar="updateAvatar" /> -->
+    <ChangeAvatar @updateAvatar="updateAvatar" />
   </div>
 </template>
 

@@ -7,14 +7,15 @@
 // 1. Break up this component
 
 import { Socket } from 'socket.io-client';
-import { inject, onMounted, onUnmounted, PropType, ref, watch } from 'vue';
+import { inject, onMounted, onUnmounted, nextTick, ref, watch } from 'vue';
 import store from '../../../store';
-import { IChatMessage, RoomPayload } from '../../../types/Chat';
+import { IChatMessage, RoomUser } from '../../../types/Chat';
 
-import { copy } from '../../../utilities/document';
+import { copy, scrollToBottom } from '../../../utilities/document';
 import CustomField from '../../common/CustomField.vue';
 import { useDebounceFn } from '@vueuse/core';
 import ChatMessage from './ChatMessage.vue';
+import ChangeAvatar from '../../modals/ChangeAvatar.vue';
 
 const _socket: Socket = inject('socket') as Socket;
 
@@ -50,6 +51,7 @@ const defaultAvatar = store.getters.userInfo.avatar
   : exampleAvatars[randomAvatarIndex];
 
 // Room
+const usersInRoom = ref<RoomUser[]>([]);
 const roomID = ref('');
 const currentRoom = ref(roomID.value);
 
@@ -57,28 +59,40 @@ const joinRoom = useDebounceFn((newRoom: string, oldRoom: string | null) => {
   _socket.emit('changeRoom', {
     join: newRoom,
     leave: oldRoom,
-    avatar: defaultAvatar,
+    avatar: message.value.avatar,
   });
 
   chatMessages.value = [];
   currentRoom.value = newRoom;
+  usersInRoom.value = [];
 }, 1000);
 
-_socket.on('roomJoin', (user: RoomPayload) => {
+_socket.on('roomJoin', async (user: RoomUser) => {
   chatMessages.value.push({
     avatar: user.username,
     text: `Joined room: ${currentRoom.value}`,
-    userID: 'join',
+    userID: user.userID,
     roomID: roomID.value,
+  });
+
+  await nextTick();
+  scrollToBottom('messages');
+  usersInRoom.value.push({
+    userID: user.userID,
+    username: user.username,
   });
 });
 
-_socket.on('roomLeave', (user: RoomPayload) => {
+_socket.on('roomLeave', (user: RoomUser) => {
   chatMessages.value.push({
     avatar: user.username,
     text: 'Left the room',
-    userID: 'join',
+    userID: user.userID,
     roomID: roomID.value,
+  });
+
+  usersInRoom.value = usersInRoom.value.filter((chatUser) => {
+    return chatUser.userID != user.userID;
   });
 });
 
@@ -94,8 +108,11 @@ const maxTextLength = 255;
 
 const chatMessages = ref<IChatMessage[]>([]);
 
-_socket.on('broadcastMessage', (message) => {
+_socket.on('broadcastMessage', async (message) => {
   chatMessages.value.push(message);
+
+  await nextTick();
+  scrollToBottom('messages');
 });
 
 function sendMessage() {
@@ -116,9 +133,12 @@ onMounted(() => {
   window.onbeforeunload = function () {
     _socket.emit('changeRoom', {
       leave: roomID.value,
-      avatar: defaultAvatar,
+      avatar: message.value.avatar,
     });
   };
+
+  // @ts-ignore
+  avatarModal = new bootstrap.Modal(document.getElementById('avatar-modal'));
 });
 
 onUnmounted(() => {
@@ -129,7 +149,7 @@ onUnmounted(() => {
 function leaveRoom() {
   _socket.emit('changeRoom', {
     leave: roomID.value,
-    avatar: defaultAvatar,
+    avatar: message.value.avatar,
   });
 }
 
@@ -138,11 +158,26 @@ watch(roomID, (newRoom, oldRoom) => {
     joinRoom(newRoom, oldRoom);
   }
 });
+
+// Avatar Updates
+let avatarModal: { show: () => void; hide: () => void } | null = null;
+
+function updateAvatar(emoji: string) {
+  message.value.avatar = emoji;
+
+  if (avatarModal) {
+    // @ts-ignore
+    avatarModal.hide();
+  }
+
+  // TODO: Setup this socket endpoint
+  // _socket.emit('updateAvatar', message.value);
+}
 </script>
 
 <template>
-  <div class="row">
-    <div class="col-lg-8 offset-lg-2">
+  <div class="d-flex">
+    <div class="flex-fill">
       <div id="chat">
         <div class="d-flex align-items-center mb-3 justify-content-between">
           <!-- TODO: Can we use the same ChangeAvatar modal we use for profile? -->
@@ -170,6 +205,8 @@ watch(roomID, (newRoom, oldRoom) => {
             type="button"
             id="chat-avatar"
             class="btn btn-primary fs-1 ms-3"
+            data-bs-toggle="modal"
+            data-bs-target="#avatar-modal"
           >
             {{ message.avatar }}
           </button>
@@ -209,20 +246,12 @@ watch(roomID, (newRoom, oldRoom) => {
         </div>
       </div>
     </div>
-    <!-- <div class="col-lg-4">
+    <!-- <div class="ms-4">
       <div class="participants card p-3">
-        <ul>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-        </ul>
+        <div class="fs-1" v-for="user in usersInRoom">{{ user.username }}</div>
       </div>
     </div> -->
+    <ChangeAvatar @updateAvatar="updateAvatar" />
   </div>
 </template>
 

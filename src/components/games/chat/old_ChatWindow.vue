@@ -4,7 +4,7 @@ import { inject, PropType, ref, watch } from 'vue';
 import store from '../../../store';
 import { IChatMessage } from '../../../types/Chat';
 
-import { copy } from '../../../utilities/document';
+import { copy, scrollToBottom } from '../../../utilities/document';
 import CustomField from '../../common/CustomField.vue';
 import { useDebounceFn } from '@vueuse/core';
 import ChangeAvatar from '../../modals/ChangeAvatar.vue';

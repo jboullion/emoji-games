@@ -5,7 +5,7 @@ export interface IChatMessage {
   roomID: string;
 }
 
-export type RoomPayload = {
+export type RoomUser = {
   username: string;
   userID: string;
 };
