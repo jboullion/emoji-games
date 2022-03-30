@@ -6,20 +6,16 @@ import { ChatMessage } from '../../../types/Chat';
 
 import { copy } from '../../../utilities/document';
 import CustomField from '../../common/CustomField.vue';
+import { useDebounceFn } from '@vueuse/core';
 
 const _socket: Socket = inject('socket') as Socket;
+const roomID = ref('Room 123');
 
-const emit = defineEmits(['sendMessage']);
-defineProps({
-  messages: {
-    type: Array as PropType<ChatMessage[]>,
-    required: true,
-  },
-});
+const joinRoom = useDebounceFn((newRoom: string, oldRoom: string | null) => {
+  _socket.emit('joinRoom', { join: newRoom, leave: oldRoom });
+}, 1000);
 
-const lobbyID = ref('LOBBY123');
-
-_socket.emit('joinLobby', { join: lobbyID.value });
+joinRoom(roomID.value, null);
 
 const exampleAvatars = [
   '😄',
@@ -55,15 +51,21 @@ const message = ref<ChatMessage>({
   avatar: defaultAvatar,
   text: '',
   userID: _socket.id,
-  lobbyID: lobbyID.value,
+  roomID: roomID.value,
 });
 
 const maxTextLength = 255;
 
+const chatMessages = ref<ChatMessage[]>([]);
+
+_socket.on('broadcastMessage', (message) => {
+  chatMessages.value.push(message);
+});
+
 function sendMessage() {
   if (validateMessage(message.value)) {
-    message.value.lobbyID = lobbyID.value;
-    emit('sendMessage', message.value);
+    message.value.roomID = roomID.value;
+    _socket.emit('sendMessage', message.value);
     message.value.text = '';
   }
 }
@@ -76,8 +78,8 @@ function messageClasses(message: ChatMessage) {
   return message.userID === _socket.id ? 'local' : 'server';
 }
 
-watch(lobbyID, (newLobby, oldLobby) => {
-  _socket.emit('joinLobby', { join: newLobby, leave: oldLobby });
+watch(roomID, (newRoom, oldRoom) => {
+  joinRoom(newRoom, oldRoom);
 });
 </script>
 
@@ -85,28 +87,33 @@ watch(lobbyID, (newLobby, oldLobby) => {
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
       <div id="chat">
-        <CustomField
-          class="mb-3"
-          label=""
-          id="lobby"
-          type="text"
-          v-model="lobbyID"
-        >
-          <template #button>
-            <button
-              type="button"
-              class="btn btn-primary copy"
-              @click="copy(lobbyID)"
-              aria-label="Copy Lobby ID"
-            >
-              <span>📋</span>
-            </button>
-          </template>
-        </CustomField>
+        <div class="d-flex align-items-center mb-3 justify-content-between">
+          <!-- TODO: Can we use the same ChangeAvatar modal we use for profile? -->
+
+          <CustomField class="" label="" id="room" type="text" v-model="roomID">
+            <template #button>
+              <button
+                type="button"
+                class="btn btn-primary copy"
+                @click="copy(roomID)"
+                aria-label="Copy Room ID"
+              >
+                <span>📋</span>
+              </button>
+            </template>
+          </CustomField>
+
+          <button type="button" id="chat-avatar" class="btn btn-primary fs-1">
+            {{ message.avatar }}
+          </button>
+        </div>
         <div class="card mb-3">
           <div id="messages" class="card-block">
             <ul>
-              <li v-for="message of messages" :class="messageClasses(message)">
+              <li
+                v-for="message of chatMessages"
+                :class="messageClasses(message)"
+              >
                 <template v-if="message.userID === _socket.id">
                   {{ message.avatar }}: {{ message.text }}
                 </template>
@@ -118,27 +125,24 @@ watch(lobbyID, (newLobby, oldLobby) => {
           </div>
         </div>
         <div class="d-flex mb-3">
-          <!-- TODO: Can we use the same ChangeAvatar modal we use for profile? -->
-          <div class="text-center text-nowrap">
-            <div id="chat-avatar" class="fs-1">{{ message.avatar }}</div>
-            <div>{{ message.text.length }} / {{ maxTextLength }}</div>
-          </div>
-
           <textarea
             id="textarea"
-            class="form-control mx-3"
+            class="form-control me-3"
             v-model="message.text"
             placeholder="Enter message..."
           ></textarea>
 
-          <button
-            id="send"
-            class="btn btn-primary fs-3 text-center"
-            @click.prevent="sendMessage"
-            :disabled="!message.text.length"
-          >
-            <span>✉️</span>
-          </button>
+          <div class="text-nowrap">
+            <button
+              id="send"
+              class="btn btn-primary fs-3 text-center"
+              @click.prevent="sendMessage"
+              :disabled="!message.text.length"
+            >
+              <span>✉️</span>
+            </button>
+            <div>{{ message.text.length }} / {{ maxTextLength }}</div>
+          </div>
         </div>
       </div>
     </div>

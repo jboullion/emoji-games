@@ -43,7 +43,7 @@ const describedByError = computed(() => props.id + '-error');
 
 <template>
   <div>
-    <label class="col-form-label" :for="id"
+    <label class="col-form-label" :for="id" v-if="label"
       ><span v-if="required"> ❗</span> {{ label }}</label
     >
     <div class="input-group" :class="{ 'has-validation': $slots.button }">

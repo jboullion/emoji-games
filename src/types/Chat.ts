@@ -1,6 +1,11 @@
-export type ChatMessage = {
+export interface IChatMessage {
   avatar: string;
   text: string;
   userID: string;
-  lobbyID: string;
+  roomID: string;
+}
+
+export type RoomPayload = {
+  username: string;
+  userID: string;
 };
