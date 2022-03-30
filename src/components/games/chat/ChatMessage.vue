@@ -14,7 +14,6 @@ const props = defineProps({
 });
 
 function messageClasses(message: IChatMessage) {
-  console.log('message', message);
   switch (message.userID) {
     case props.userID:
       return 'local';

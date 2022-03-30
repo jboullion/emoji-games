@@ -7,7 +7,7 @@
 // 1. Break up this component
 
 import { Socket } from 'socket.io-client';
-import { inject, onMounted, PropType, ref, watch } from 'vue';
+import { inject, onMounted, onUnmounted, PropType, ref, watch } from 'vue';
 import store from '../../../store';
 import { IChatMessage, RoomPayload } from '../../../types/Chat';
 
@@ -50,7 +50,7 @@ const defaultAvatar = store.getters.userInfo.avatar
   : exampleAvatars[randomAvatarIndex];
 
 // Room
-const roomID = ref('Room 123');
+const roomID = ref('');
 
 const joinRoom = useDebounceFn((newRoom: string, oldRoom: string | null) => {
   _socket.emit('changeRoom', {
@@ -59,8 +59,6 @@ const joinRoom = useDebounceFn((newRoom: string, oldRoom: string | null) => {
     avatar: defaultAvatar,
   });
 }, 1000);
-
-joinRoom(roomID.value, null);
 
 _socket.on('roomJoin', (user: RoomPayload) => {
   chatMessages.value.push({
@@ -119,8 +117,22 @@ onMounted(() => {
   };
 });
 
+onUnmounted(() => {
+  // If we unmount this component we are leaving the room
+  leaveRoom();
+});
+
+function leaveRoom() {
+  _socket.emit('changeRoom', {
+    leave: roomID.value,
+    avatar: defaultAvatar,
+  });
+}
+
 watch(roomID, (newRoom, oldRoom) => {
-  joinRoom(newRoom, oldRoom);
+  if (newRoom) {
+    joinRoom(newRoom, oldRoom);
+  }
 });
 </script>
 
@@ -131,7 +143,13 @@ watch(roomID, (newRoom, oldRoom) => {
         <div class="d-flex align-items-center mb-3 justify-content-between">
           <!-- TODO: Can we use the same ChangeAvatar modal we use for profile? -->
 
-          <CustomField class="" label="" id="room" type="text" v-model="roomID">
+          <CustomField
+            label=""
+            id="room"
+            type="text"
+            v-model="roomID"
+            placeholder="Room ID"
+          >
             <template #button>
               <button
                 type="button"
@@ -144,7 +162,11 @@ watch(roomID, (newRoom, oldRoom) => {
             </template>
           </CustomField>
 
-          <button type="button" id="chat-avatar" class="btn btn-primary fs-1">
+          <button
+            type="button"
+            id="chat-avatar"
+            class="btn btn-primary fs-1 ms-3"
+          >
             {{ message.avatar }}
           </button>
         </div>

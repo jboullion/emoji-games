@@ -48,6 +48,7 @@ const describedByError = computed(() => props.id + '-error');
     >
     <div class="input-group" :class="{ 'has-validation': $slots.button }">
       <input
+        v-bind="$attrs"
         :id="id"
         :type="type"
         class="form-control"
