@@ -7,6 +7,7 @@ import { IChatMessage } from '../../../types/Chat';
 import { copy } from '../../../utilities/document';
 import CustomField from '../../common/CustomField.vue';
 import { useDebounceFn } from '@vueuse/core';
+import ChangeAvatar from '../../modals/ChangeAvatar.vue';
 
 const _socket: Socket = inject('socket') as Socket;
 const roomID = ref('Room 123');
@@ -81,6 +82,10 @@ function messageClasses(message: IChatMessage) {
 watch(roomID, (newRoom, oldRoom) => {
   joinRoom(newRoom, oldRoom);
 });
+
+function updateAvatar(emoji: string) {
+  message.value.avatar = emoji;
+}
 </script>
 
 <template>
@@ -88,8 +93,6 @@ watch(roomID, (newRoom, oldRoom) => {
     <div class="col-lg-8 offset-lg-2">
       <div id="chat">
         <div class="d-flex align-items-center mb-3 justify-content-between">
-          <!-- TODO: Can we use the same ChangeAvatar modal we use for profile? -->
-
           <CustomField class="" label="" id="room" type="text" v-model="roomID">
             <template #button>
               <button
@@ -103,7 +106,13 @@ watch(roomID, (newRoom, oldRoom) => {
             </template>
           </CustomField>
 
-          <button type="button" id="chat-avatar" class="btn btn-primary fs-1">
+          <button
+            type="button"
+            id="chat-avatar"
+            class="btn btn-primary fs-1"
+            data-bs-toggle="modal"
+            data-bs-target="#avatar-modal"
+          >
             {{ message.avatar }}
           </button>
         </div>
@@ -146,20 +155,7 @@ watch(roomID, (newRoom, oldRoom) => {
         </div>
       </div>
     </div>
-    <!-- <div class="col-lg-4">
-      <div class="participants card p-3">
-        <ul>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-          <li class="fs-1">😍</li>
-        </ul>
-      </div>
-    </div> -->
+    <ChangeAvatar @updateAvatar="updateAvatar" />
   </div>
 </template>
 

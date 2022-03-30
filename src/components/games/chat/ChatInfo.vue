@@ -6,7 +6,7 @@ import CustomField from '../../common/CustomField.vue';
   <div class="row">
     <div class="col-md-8">
       <CustomField
-        class="mb-3"
+        wrapClass="mb-3"
         label="Email"
         id="emoji-email"
         type="email"
@@ -18,7 +18,7 @@ import CustomField from '../../common/CustomField.vue';
     </div>
     <div class="col-md-4">
       <CustomField
-        class="mb-3"
+        wrapClass="mb-3"
         label="Email"
         id="emoji-email"
         type="email"

@@ -203,7 +203,7 @@ onMounted(() => {
           </template>
 
           <CustomField
-            class="mb-4"
+            wrapClass="mb-4"
             label="Username"
             id="username"
             type="text"
@@ -213,7 +213,7 @@ onMounted(() => {
           />
 
           <CustomField
-            class="mb-4"
+            wrapClass="mb-4"
             label="Email"
             id="email"
             type="email"
@@ -223,7 +223,7 @@ onMounted(() => {
           />
 
           <CustomField
-            class="mb-4"
+            wrapClass="mb-4"
             label="New Password"
             id="password-new"
             :type="showPasswordNew ? 'text' : 'password'"
@@ -245,7 +245,7 @@ onMounted(() => {
           </CustomField>
 
           <CustomField
-            class="mb-4"
+            wrapClass="mb-4"
             label="Current Password"
             id="password-old"
             :type="showPasswordOld ? 'text' : 'password'"
@@ -279,7 +279,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <ChangeAvatar @updateAvatar="updateAvatar" />
+    <!-- <ChangeAvatar @updateAvatar="updateAvatar" /> -->
   </div>
 </template>
 

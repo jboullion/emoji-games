@@ -69,7 +69,7 @@ onMounted(() => {
         <div class="modal-body">
           <form @submit.prevent="findEmojis" class="row justify-content-center">
             <CustomField
-              class="col-md-4 mb-3"
+              wrapClass="col-md-4 mb-3"
               label="Search"
               id="avatar"
               type="search"
@@ -81,7 +81,7 @@ onMounted(() => {
             </CustomField>
 
             <CustomDropdown
-              class="col-md-4 mb-3"
+              wrapClass="col-md-4 mb-3"
               label="Category"
               id="category"
               v-model="parentFilter"
@@ -97,7 +97,7 @@ onMounted(() => {
 
             <CustomDropdown
               v-if="parentFilter && parentFilter.children[0]"
-              class="col-md-4 mb-3"
+              wrapClass="col-md-4 mb-3"
               label="Sub Category"
               id="sub-category"
               v-model="childFilter"

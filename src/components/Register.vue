@@ -116,7 +116,7 @@ async function signup() {
       </template>
 
       <CustomField
-        class="mb-3"
+        wrapClass="mb-3"
         label="Username"
         id="username"
         type="text"
@@ -128,7 +128,7 @@ async function signup() {
       />
 
       <CustomField
-        class="mb-3"
+        wrapClass="mb-3"
         label="Email"
         id="email"
         type="email"
@@ -139,7 +139,7 @@ async function signup() {
       />
 
       <CustomField
-        class="mb-4"
+        wrapClass="mb-4"
         label="Password"
         id="password"
         :type="showPassword ? 'text' : 'password'"

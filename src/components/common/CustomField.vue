@@ -1,35 +1,14 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
+import { fieldProps } from '../../types/Forms';
+import CustomFieldWrapper from './CustomFieldWrapper.vue';
+
 const emit = defineEmits(['update:modelValue']);
 
 const props = defineProps({
-  label: {
-    type: String,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
+  ...fieldProps,
   modelValue: {
-    type: String,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  required: {
-    type: Boolean,
-    default: false,
-  },
-  description: {
-    type: String,
-  },
-  error: {
     type: String,
   },
 });
@@ -42,37 +21,23 @@ const describedByError = computed(() => props.id + '-error');
 </script>
 
 <template>
-  <div>
-    <label class="col-form-label" :for="id" v-if="label"
-      ><span v-if="required"> ❗</span> {{ label }}</label
-    >
-    <div class="input-group" :class="{ 'has-validation': $slots.button }">
-      <input
-        v-bind="$attrs"
-        :id="id"
-        :type="type"
-        class="form-control"
-        :class="{ 'is-invalid': error }"
-        v-model="value"
-        maxlength="32"
-        :disabled="disabled"
-        :required="required"
-        @input="emit('update:modelValue', value)"
-        :aria-describedby="
-          (description ? describedBy : '') +
-          ' ' +
-          (error ? describedByError : '')
-        "
-      />
-      <slot name="button"></slot>
-      <div class="invalid-feedback" :id="describedByError" v-if="error">
-        {{ error }}
-      </div>
-    </div>
-    <div v-if="description" :id="describedBy" class="form-text">
-      {{ description }}
-    </div>
-  </div>
+  <CustomFieldWrapper
+    v-bind="props"
+    :class="{ 'has-validation': $slots.button }"
+  >
+    <input
+      v-bind="$attrs"
+      class="form-control"
+      :class="{ 'is-invalid': error }"
+      v-model="value"
+      maxlength="32"
+      @input="emit('update:modelValue', value)"
+      :aria-describedby="
+        (description ? describedBy : '') + ' ' + (error ? describedByError : '')
+      "
+    />
+    <slot name="button"></slot>
+  </CustomFieldWrapper>
 </template>
 
 <style></style>

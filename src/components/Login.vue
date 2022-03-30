@@ -101,7 +101,7 @@ async function signin() {
         </div>
       </template>
       <CustomField
-        class="mb-3"
+        wrapClass="mb-3"
         label="Email"
         id="emoji-email"
         type="email"
@@ -112,7 +112,7 @@ async function signin() {
       />
 
       <CustomField
-        class="mb-4"
+        wrapClass="mb-4"
         label="Password"
         id="password"
         type="password"

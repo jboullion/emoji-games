@@ -1,32 +1,14 @@
 <script setup lang="ts">
-import { computed, PropType, ref } from 'vue';
-import { EmojiFilter } from '../../types/Emoji';
+import { computed, ref } from 'vue';
+
+import { fieldProps } from '../../types/Forms';
+import CustomFieldWrapper from './CustomFieldWrapper.vue';
 
 const emit = defineEmits(['update:modelValue']);
 
 const props = defineProps({
-  label: {
-    type: String,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
+  ...fieldProps,
   modelValue: {
-    type: Object as PropType<EmojiFilter>,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  required: {
-    type: Boolean,
-    default: false,
-  },
-  description: {
-    type: String,
-  },
-  error: {
     type: String,
   },
 });
@@ -35,31 +17,28 @@ const value = ref(props.modelValue);
 
 const describedBy = computed(() => props.id + '-help');
 const describedByError = computed(() => props.id + '-error');
+// autocomplete="off"
 </script>
 
 <template>
-  <div>
-    <label class="col-form-label" :for="id"
-      ><span v-if="required"> ❗</span> {{ label }}</label
-    >
+  <CustomFieldWrapper
+    v-bind="props"
+    :class="{ 'has-validation': $slots.button }"
+  >
     <select
+      v-bind="$attrs"
       class="form-select"
       aria-label="Select Category"
       placeholder="Category"
       v-model="value"
       @change="emit('update:modelValue', value)"
+      :aria-describedby="
+        (description ? describedBy : '') + ' ' + (error ? describedByError : '')
+      "
     >
       <slot name="options"></slot>
     </select>
-
-    <!-- <div class="invalid-feedback" :id="describedByError" v-if="error">
-      {{ error }}
-    </div> -->
-
-    <div v-if="description" :id="describedBy" class="form-text">
-      {{ description }}
-    </div>
-  </div>
+  </CustomFieldWrapper>
 </template>
 
 <style></style>
