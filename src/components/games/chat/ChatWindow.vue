@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Socket } from 'socket.io-client';
-import { inject, PropType, ref } from 'vue';
+import { inject, PropType, ref, watch } from 'vue';
 import store from '../../../store';
 import { ChatMessage } from '../../../types/Chat';
 
@@ -17,7 +17,9 @@ defineProps({
   },
 });
 
-const lobbyID = 'LOBBY123';
+const lobbyID = ref('LOBBY123');
+
+_socket.emit('joinLobby', { join: lobbyID.value });
 
 const exampleAvatars = [
   '😄',
@@ -53,12 +55,14 @@ const message = ref<ChatMessage>({
   avatar: defaultAvatar,
   text: '',
   userID: _socket.id,
+  lobbyID: lobbyID.value,
 });
 
 const maxTextLength = 255;
 
 function sendMessage() {
   if (validateMessage(message.value)) {
+    message.value.lobbyID = lobbyID.value;
     emit('sendMessage', message.value);
     message.value.text = '';
   }
@@ -71,6 +75,10 @@ function validateMessage(message: ChatMessage) {
 function messageClasses(message: ChatMessage) {
   return message.userID === _socket.id ? 'local' : 'server';
 }
+
+watch(lobbyID, (newLobby, oldLobby) => {
+  _socket.emit('joinLobby', { join: newLobby, leave: oldLobby });
+});
 </script>
 
 <template>
@@ -83,7 +91,6 @@ function messageClasses(message: ChatMessage) {
           id="lobby"
           type="text"
           v-model="lobbyID"
-          disabled
         >
           <template #button>
             <button
@@ -111,6 +118,7 @@ function messageClasses(message: ChatMessage) {
           </div>
         </div>
         <div class="d-flex mb-3">
+          <!-- TODO: Can we use the same ChangeAvatar modal we use for profile? -->
           <div class="text-center text-nowrap">
             <div id="chat-avatar" class="fs-1">{{ message.avatar }}</div>
             <div>{{ message.text.length }} / {{ maxTextLength }}</div>

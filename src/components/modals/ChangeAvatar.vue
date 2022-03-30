@@ -11,6 +11,7 @@ import {
 import CustomField from '../common/CustomField.vue';
 import CustomDropdown from '../common/CustomDropdown.vue';
 import EmojiList from '../common/EmojiList.vue';
+import { trapFocus } from '../../utilities/document';
 
 const emit = defineEmits(['updateAvatar']);
 
@@ -46,14 +47,7 @@ function updateAvatar(emoji: string) {
 }
 
 onMounted(() => {
-  const avatarModal = document.getElementById('avatar-modal');
-  const avatarInput = document.getElementById('avatar');
-
-  if (avatarModal && avatarInput) {
-    avatarModal.addEventListener('shown.bs.modal', function () {
-      avatarInput.focus();
-    });
-  }
+  trapFocus('avatar', 'avatar-modal');
 });
 </script>
 

@@ -9,17 +9,6 @@ import AuthService from './services/AuthService';
 import UserService from './services/UserService';
 import { io, Socket } from 'socket.io-client';
 
-// import VueSocketIO from 'vue-3-socket.io';
-
-// import socketio from 'socket.io';
-// import VueSocketIO from 'vue-socket.io';
-
-// export const SocketInstance = socketio('http://localhost:3001');
-
-//import vfmPlugin from 'vue-final-modal';
-
-// import EmojiService from './services/EmojiService';
-
 // import Bugsnag from '@bugsnag/js';
 // import BugsnagPluginVue from '@bugsnag/plugin-vue';
 
@@ -53,29 +42,13 @@ const socket = io(baseURL);
 const app = createApp(App);
 
 // @ts-ignore
-app
-  .use(router)
-  .use(store)
-  // .use(
-  //   new VueSocketIO({
-  //     debug: true,
-  //     connection: 'http://localhost:3001',
-  //     vuex: {
-  //       store,
-  //       actionPrefix: 'SOCKET_',
-  //       mutationPrefix: 'SOCKET_',
-  //     },
-  //     //options: { path: '/my-app/' }, //Optional options
-  //   }),
-  // )
-  .mount('#app'); // .use(bugsnagVue) //.use(SocketInstance)
+app.use(router).use(store).mount('#app'); // .use(bugsnagVue)
 // .use(vfmPlugin)
 
 app.provide('axios', $axios);
 app.provide('authService', authService);
 app.provide('userService', userService);
 app.provide('socket', socket);
-//app.provide('emojiService', emojiService);
 
 // const updateSW = registerSW({
 //   onRegistered(r) {
