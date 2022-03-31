@@ -7,15 +7,15 @@ const props = defineProps({
     type: Object as PropType<IChatMessage>,
     required: true,
   },
-  userID: {
+  clientID: {
     type: String,
     required: true,
   },
 });
 
 function messageClasses(message: IChatMessage) {
-  switch (message.userID) {
-    case props.userID:
+  switch (message.clientID) {
+    case props.clientID:
       return 'local';
     case 'join':
       return 'join';

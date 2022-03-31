@@ -16,6 +16,7 @@ import CustomField from '../../common/CustomField.vue';
 import { useDebounceFn } from '@vueuse/core';
 import ChatMessage from './ChatMessage.vue';
 import ChangeAvatar from '../../modals/ChangeAvatar.vue';
+import CommonTitle from '../../common/CommonTitle.vue';
 
 const _socket: Socket = inject('socket') as Socket;
 
@@ -69,6 +70,13 @@ function joinRoom() {
   usersInRoom.value = [];
 }
 
+function leaveRoom() {
+  _socket.emit('changeRoom', {
+    leave: roomID.value,
+    avatar: message.value.avatar,
+  });
+}
+
 // const joinRoom = useDebounceFn((newRoom: string, oldRoom: string | null) => {
 //   _socket.emit('changeRoom', {
 //     join: newRoom,
@@ -81,32 +89,33 @@ function joinRoom() {
 //   usersInRoom.value = [];
 // }, 1000);
 
-_socket.on('roomJoin', async (user: RoomUser) => {
+type JoinRoomDTO = { user: RoomUser; roomUsers: RoomUser[] };
+
+_socket.on('roomJoin', async (joinRoom: JoinRoomDTO) => {
   chatMessages.value.push({
-    avatar: user.username,
+    avatar: joinRoom.user.username,
     text: `Joined room: ${currentRoom.value}`,
-    userID: user.userID,
+    clientID: joinRoom.user.clientID,
     roomID: roomID.value,
   });
 
+  usersInRoom.value = joinRoom.roomUsers;
+
   await nextTick();
+
   scrollToBottom('messages');
-  usersInRoom.value.push({
-    userID: user.userID,
-    username: user.username,
-  });
 });
 
 _socket.on('roomLeave', (user: RoomUser) => {
   chatMessages.value.push({
     avatar: user.username,
     text: 'Left the room',
-    userID: user.userID,
+    clientID: user.clientID,
     roomID: roomID.value,
   });
 
   usersInRoom.value = usersInRoom.value.filter((chatUser) => {
-    return chatUser.userID != user.userID;
+    return chatUser.clientID != user.clientID;
   });
 });
 
@@ -114,7 +123,7 @@ _socket.on('roomLeave', (user: RoomUser) => {
 const message = ref<IChatMessage>({
   avatar: defaultAvatar,
   text: '',
-  userID: _socket.id,
+  clientID: _socket.id,
   roomID: roomID.value,
 });
 
@@ -130,7 +139,7 @@ _socket.on('broadcastMessage', async (message) => {
 
 function sendMessage() {
   if (validateMessage(message.value)) {
-    message.value.userID = _socket.id;
+    message.value.clientID = _socket.id;
     message.value.roomID = roomID.value;
     _socket.emit('sendMessage', message.value);
     message.value.text = '';
@@ -145,37 +154,6 @@ function validateMessage(message: IChatMessage) {
   );
 }
 
-onMounted(() => {
-  // Inform the room when we leave. Ideally done on server on "disconnecting"
-  window.onbeforeunload = function () {
-    _socket.emit('changeRoom', {
-      leave: roomID.value,
-      avatar: message.value.avatar,
-    });
-  };
-
-  // @ts-ignore
-  avatarModal = new bootstrap.Modal(document.getElementById('avatar-modal'));
-});
-
-onUnmounted(() => {
-  // If we unmount this component we are leaving the room
-  leaveRoom();
-});
-
-function leaveRoom() {
-  _socket.emit('changeRoom', {
-    leave: roomID.value,
-    avatar: message.value.avatar,
-  });
-}
-
-// watch(roomID, (newRoom, oldRoom) => {
-//   if (newRoom) {
-//     joinRoom(newRoom, oldRoom);
-//   }
-// });
-
 // Avatar Updates
 let avatarModal: { show: () => void; hide: () => void } | null = null;
 
@@ -186,7 +164,7 @@ function updateAvatar(emoji: string) {
   _socket.emit('sendMessage', {
     avatar: emoji,
     text: `${previousAvatar} Change to ${emoji}`,
-    userID: _socket.id,
+    clientID: _socket.id,
     roomID: roomID.value,
   });
 
@@ -195,9 +173,31 @@ function updateAvatar(emoji: string) {
     avatarModal.hide();
   }
 }
+
+// Lifecycle
+onMounted(() => {
+  // @ts-ignore
+  avatarModal = new bootstrap.Modal(document.getElementById('avatar-modal'));
+});
+
+onUnmounted(() => {
+  // If we unmount this component we are leaving the room
+  leaveRoom();
+});
+
+// watch(roomID, (newRoom, oldRoom) => {
+//   if (newRoom) {
+//     joinRoom(newRoom, oldRoom);
+//   }
+// });
 </script>
 
 <template>
+  <CommonTitle
+    title="🗨️ Chat"
+    :subtitle="currentRoom ? 'Be Nice!' : 'Enter a Room ID to join a room!'"
+  />
+
   <div class="d-flex">
     <div class="flex-fill">
       <div id="chat">
@@ -238,7 +238,7 @@ function updateAvatar(emoji: string) {
             data-bs-toggle="modal"
             data-bs-target="#avatar-modal"
           >
-            {{ message.avatar }}
+            <span>{{ message.avatar }}</span>
           </button>
         </div>
         <div class="card mb-3">
@@ -249,7 +249,7 @@ function updateAvatar(emoji: string) {
             <ChatMessage
               v-for="(message, index) of chatMessages"
               :message="message"
-              :userID="_socket.id"
+              :clientID="_socket.id"
               :key="index"
             />
           </div>
@@ -283,11 +283,11 @@ function updateAvatar(emoji: string) {
         </div>
       </div>
     </div>
-    <!-- <div class="ms-4">
+    <div class="ms-4" v-if="usersInRoom.length">
       <div class="participants card p-3">
         <div class="fs-1" v-for="user in usersInRoom">{{ user.username }}</div>
       </div>
-    </div> -->
+    </div>
     <ChangeAvatar @updateAvatar="updateAvatar" />
   </div>
 </template>

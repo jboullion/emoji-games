@@ -5,8 +5,6 @@ import ChatRoom from './games/chat/ChatRoom.vue';
 
 <template>
   <div id="chat" class="page">
-    <CommonTitle title="🗨️ Chat" subtitle="Be Nice!" />
-
     <ChatRoom />
   </div>
 </template>

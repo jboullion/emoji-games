@@ -31,7 +31,6 @@ function findEmojis() {
   );
 
   emojiResults.value = emojiResults.value.filter((emoji: Emoji) => {
-    //console.log('emoji.icon.length', emoji.icon.length);
     return emoji.icon.length < 8;
   });
 }
