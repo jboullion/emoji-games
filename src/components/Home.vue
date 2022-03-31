@@ -2,12 +2,12 @@
 import { Games } from '../types/Games';
 
 import GameCard from './home/GameCard.vue';
-import Title from './common/Title.vue';
+import CommonTitle from './common/CommonTitle.vue';
 </script>
 
 <template>
   <div id="home" class="page">
-    <Title />
+    <CommonTitle />
     <div class="row justify-content-center">
       <div
         class="col-xl-3 col-lg-4 col-md-6 mb-4"

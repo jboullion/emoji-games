@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Title from './common/Title.vue';
+import CommonTitle from './common/CommonTitle.vue';
 </script>
 
 <template>
   <div id="forgot" class="page">
-    <Title title="Forgot Password" />
+    <CommonTitle title="Forgot Password" />
 
-    <h2>Don't forget your password!</h2>
+    <h2 class="text-center">TODO:<br />Don't forget your password!</h2>
   </div>
 </template>
 

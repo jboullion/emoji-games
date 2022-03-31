@@ -15,6 +15,13 @@ export const Games: Game[] = [
   //   maxPlayers: 1,
   // },
   {
+    name: 'Chat',
+    emoji: '🗨️',
+    description: 'Connect with your friends!',
+    link: '/games/chat',
+    maxPlayers: 5,
+  },
+  {
     name: 'Memory',
     emoji: '🧠',
     description: 'How many emoji can you remember?',

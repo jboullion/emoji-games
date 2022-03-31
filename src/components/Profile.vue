@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // TODO: Do we want to store all of the user info in the store? If so should we be saving tickets and such in the localstorage / access token?
-import Title from './common/Title.vue';
+import CommonTitle from './common/CommonTitle.vue';
 import { inject, onMounted, reactive, ref } from 'vue';
 import AuthService from '../services/AuthService';
 import store from '../store';
@@ -145,8 +145,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="profile" class="page">
-    <Title
+  <div id="profile" class="page" v-if="store.getters.userInfo">
+    <CommonTitle
       title="Profile"
       :subtitle="`Welcome ${store.getters.userInfo.username}!`"
     />
@@ -203,7 +203,7 @@ onMounted(() => {
           </template>
 
           <CustomField
-            class="mb-4"
+            wrapClass="mb-4"
             label="Username"
             id="username"
             type="text"
@@ -213,7 +213,7 @@ onMounted(() => {
           />
 
           <CustomField
-            class="mb-4"
+            wrapClass="mb-4"
             label="Email"
             id="email"
             type="email"
@@ -223,7 +223,7 @@ onMounted(() => {
           />
 
           <CustomField
-            class="mb-4"
+            wrapClass="mb-4"
             label="New Password"
             id="password-new"
             :type="showPasswordNew ? 'text' : 'password'"
@@ -245,7 +245,7 @@ onMounted(() => {
           </CustomField>
 
           <CustomField
-            class="mb-4"
+            wrapClass="mb-4"
             label="Current Password"
             id="password-old"
             :type="showPasswordOld ? 'text' : 'password'"
