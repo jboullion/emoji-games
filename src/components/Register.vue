@@ -14,8 +14,9 @@ import {
 import { useRouter } from 'vue-router';
 import CustomField from './common/CustomField.vue';
 
-import Title from './common/Title.vue';
+import CommonTitle from './common/CommonTitle.vue';
 import { IUser } from '../types/User';
+import { getAxiosError } from '../utilities/axios';
 
 const showPassword = ref(false);
 
@@ -86,17 +87,9 @@ async function signup() {
       //Bugsnag.notify(new Error('No access token returned'));
     }
   } catch (error: AxiosError | any) {
-    // TODO: Do we want to parse out field errors?
-    if (error.response) {
-      if (error.response.data?.statusCode === 400) {
-        errors.value = error.response.data.message;
-      } else if (error.response.data?.statusCode === 401) {
-        errors.value.push(error.response.data.message);
-      } else if (error.response.data?.statusCode === 409) {
-        errors.value.push(error.response.data.message);
-      }
-    } else {
-      //Bugsnag.notify(new Error(error));
+    const axiosError = getAxiosError(error);
+    if (axiosError) {
+      errors.value.push(axiosError);
     }
   } finally {
     loading.value = false;
@@ -106,7 +99,7 @@ async function signup() {
 
 <template>
   <div id="register" class="page">
-    <Title title="Register" />
+    <CommonTitle title="Register" />
 
     <form @submit.prevent="validateRegister" class="" novalidate>
       <template v-if="errors.length">

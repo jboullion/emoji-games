@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Title from './common/Title.vue';
+import CommonTitle from './common/CommonTitle.vue';
 </script>
 
 <template>
   <div id="contact" class="page">
-    <Title title="Contact" />
+    <CommonTitle title="Contact" />
   </div>
 </template>
 

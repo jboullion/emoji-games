@@ -63,4 +63,8 @@ function messageClasses(message: IChatMessage) {
   line-height: 1.4;
   font-size: 16px;
 }
+
+body.darkmode .chat-message > div {
+  border-color: var(--light-gray);
+}
 </style>

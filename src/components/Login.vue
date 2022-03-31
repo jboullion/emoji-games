@@ -9,8 +9,9 @@ import { validateEmail, validatePassword } from '../utilities/validation';
 import { useRouter } from 'vue-router';
 import CustomField from './common/CustomField.vue';
 
-import Title from './common/Title.vue';
+import CommonTitle from './common/CommonTitle.vue';
 import { getQueryVar } from '../utilities/common';
+import { getAxiosError } from '../utilities/axios';
 
 const showPassword = ref(false);
 
@@ -69,15 +70,9 @@ async function signin() {
       //Bugsnag.notify(new Error('No access token returned'));
     }
   } catch (error: AxiosError | any) {
-    if (error.response) {
-      if (error.response.data?.statusCode === 400) {
-        errors.value = error.response.data.message;
-      } else if (error.response.data?.statusCode === 401) {
-        // invalid credentials
-        errors.value.push(error.response.data.message);
-      }
-    } else {
-      //Bugsnag.notify(new Error(error));
+    const axiosError = getAxiosError(error);
+    if (axiosError) {
+      errors.value.push(axiosError);
     }
   } finally {
     loading.value = false;
@@ -87,7 +82,7 @@ async function signin() {
 
 <template>
   <div id="login" class="page">
-    <Title title="Login" />
+    <CommonTitle title="Login" />
 
     <form
       @submit.prevent="validateLogin"
@@ -115,7 +110,7 @@ async function signin() {
         wrapClass="mb-4"
         label="Password"
         id="password"
-        type="password"
+        :type="showPassword ? 'text' : 'password'"
         v-model="form.password"
         :disabled="loading"
         required

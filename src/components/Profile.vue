@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // TODO: Do we want to store all of the user info in the store? If so should we be saving tickets and such in the localstorage / access token?
-import Title from './common/Title.vue';
+import CommonTitle from './common/CommonTitle.vue';
 import { inject, onMounted, reactive, ref } from 'vue';
 import AuthService from '../services/AuthService';
 import store from '../store';
@@ -146,7 +146,7 @@ onMounted(() => {
 
 <template>
   <div id="profile" class="page" v-if="store.getters.userInfo">
-    <Title
+    <CommonTitle
       title="Profile"
       :subtitle="`Welcome ${store.getters.userInfo.username}!`"
     />

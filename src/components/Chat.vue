@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Title from './common/Title.vue';
+import CommonTitle from './common/CommonTitle.vue';
 import ChatRoom from './games/chat/ChatRoom.vue';
 </script>
 
 <template>
   <div id="chat" class="page">
-    <Title title="Chat" />
+    <CommonTitle title="🗨️ Chat" subtitle="Be Nice!" />
 
     <ChatRoom />
   </div>

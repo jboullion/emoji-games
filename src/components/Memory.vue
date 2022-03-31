@@ -7,6 +7,7 @@ import { MemoryGameType } from '../types/Memory';
 import ModalWinner from './modals/Winner.vue';
 import { useRouter } from 'vue-router';
 import UserService from '../services/UserService';
+import CommonTitle from './common/CommonTitle.vue';
 
 const _userService: UserService = inject('userService') as UserService;
 
@@ -81,11 +82,14 @@ onMounted(() => {
 
 <template>
   <div id="search" class="page">
-    <div class="row my-3">
-      <div class="col-12 text-center">
-        <h1>🧠 Memory</h1>
-      </div>
-    </div>
+    <CommonTitle
+      title="🧠 Memory"
+      :subtitle="
+        setup
+          ? 'Select how many sets of emojis you want to play with'
+          : 'Good Luck!'
+      "
+    />
 
     <MemorySetup
       v-if="setup"

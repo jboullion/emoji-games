@@ -55,17 +55,31 @@ const usersInRoom = ref<RoomUser[]>([]);
 const roomID = ref('');
 const currentRoom = ref(roomID.value);
 
-const joinRoom = useDebounceFn((newRoom: string, oldRoom: string | null) => {
+function joinRoom() {
+  if (currentRoom.value === roomID.value) return;
+
   _socket.emit('changeRoom', {
-    join: newRoom,
-    leave: oldRoom,
+    join: roomID.value,
+    leave: currentRoom.value,
     avatar: message.value.avatar,
   });
 
   chatMessages.value = [];
-  currentRoom.value = newRoom;
+  currentRoom.value = roomID.value;
   usersInRoom.value = [];
-}, 1000);
+}
+
+// const joinRoom = useDebounceFn((newRoom: string, oldRoom: string | null) => {
+//   _socket.emit('changeRoom', {
+//     join: newRoom,
+//     leave: oldRoom,
+//     avatar: message.value.avatar,
+//   });
+
+//   chatMessages.value = [];
+//   currentRoom.value = newRoom;
+//   usersInRoom.value = [];
+// }, 1000);
 
 _socket.on('roomJoin', async (user: RoomUser) => {
   chatMessages.value.push({
@@ -96,7 +110,7 @@ _socket.on('roomLeave', (user: RoomUser) => {
   });
 });
 
-// Message
+// Messages
 const message = ref<IChatMessage>({
   avatar: defaultAvatar,
   text: '',
@@ -105,7 +119,6 @@ const message = ref<IChatMessage>({
 });
 
 const maxTextLength = 255;
-
 const chatMessages = ref<IChatMessage[]>([]);
 
 _socket.on('broadcastMessage', async (message) => {
@@ -125,7 +138,11 @@ function sendMessage() {
 }
 
 function validateMessage(message: IChatMessage) {
-  return message.avatar.length > 0 && message.text.length > 0;
+  return (
+    message.avatar.length > 0 &&
+    message.text.length > 0 &&
+    message.text.length < maxTextLength
+  );
 }
 
 onMounted(() => {
@@ -153,25 +170,30 @@ function leaveRoom() {
   });
 }
 
-watch(roomID, (newRoom, oldRoom) => {
-  if (newRoom) {
-    joinRoom(newRoom, oldRoom);
-  }
-});
+// watch(roomID, (newRoom, oldRoom) => {
+//   if (newRoom) {
+//     joinRoom(newRoom, oldRoom);
+//   }
+// });
 
 // Avatar Updates
 let avatarModal: { show: () => void; hide: () => void } | null = null;
 
 function updateAvatar(emoji: string) {
+  const previousAvatar = message.value.avatar;
   message.value.avatar = emoji;
+
+  _socket.emit('sendMessage', {
+    avatar: emoji,
+    text: `${previousAvatar} Change to ${emoji}`,
+    userID: _socket.id,
+    roomID: roomID.value,
+  });
 
   if (avatarModal) {
     // @ts-ignore
     avatarModal.hide();
   }
-
-  // TODO: Setup this socket endpoint
-  // _socket.emit('updateAvatar', message.value);
 }
 </script>
 
@@ -181,25 +203,33 @@ function updateAvatar(emoji: string) {
       <div id="chat">
         <div class="d-flex align-items-center mb-3 justify-content-between">
           <!-- TODO: Can we use the same ChangeAvatar modal we use for profile? -->
-
-          <CustomField
-            label=""
-            id="room"
-            type="text"
-            v-model="roomID"
-            placeholder="Room ID"
-          >
-            <template #button>
-              <button
-                type="button"
-                class="btn btn-primary copy"
-                @click="copy(roomID)"
-                aria-label="Copy Room ID"
-              >
-                <span>📋</span>
-              </button>
-            </template>
-          </CustomField>
+          <form @submit.prevent="joinRoom">
+            <CustomField
+              label=""
+              id="room"
+              type="text"
+              v-model="roomID"
+              placeholder="Room ID"
+            >
+              <template #button>
+                <button
+                  type="submit"
+                  class="btn btn-primary no-border-radius"
+                  aria-label="Join Room"
+                >
+                  <span>🚀</span>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary copy"
+                  @click="copy(roomID)"
+                  aria-label="Copy Room ID"
+                >
+                  <span>📋</span>
+                </button>
+              </template>
+            </CustomField>
+          </form>
 
           <button
             type="button"
@@ -224,24 +254,31 @@ function updateAvatar(emoji: string) {
             />
           </div>
         </div>
-        <div class="d-flex mb-3">
+        <div class="d-flex mb-3" v-if="currentRoom">
           <textarea
             id="textarea"
             class="form-control me-3"
+            :class="{ 'is-invalid': message.text.length > maxTextLength }"
             v-model="message.text"
             placeholder="Enter message..."
           ></textarea>
 
-          <div class="text-nowrap">
+          <div class="text-nowrap text-center">
             <button
               id="send"
               class="btn btn-primary fs-3 text-center"
               @click.prevent="sendMessage"
-              :disabled="!message.text.length"
+              :disabled="
+                !message.text.length || message.text.length > maxTextLength
+              "
             >
               <span>✉️</span>
             </button>
-            <div>{{ message.text.length }} / {{ maxTextLength }}</div>
+            <div
+              :class="{ 'text-danger': message.text.length > maxTextLength }"
+            >
+              {{ message.text.length }} / {{ maxTextLength }}
+            </div>
           </div>
         </div>
       </div>
