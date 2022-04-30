@@ -85,3 +85,12 @@ export function getQueryVar(varName: string): string {
   if (!urlParams.has(varName)) return '';
   return urlParams.get(varName) as string;
 }
+
+/**
+ *
+ * @param string
+ * @returns
+ */
+export function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

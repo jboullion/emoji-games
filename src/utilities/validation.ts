@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios';
+
 export const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
 export function validateEmail(email: string) {

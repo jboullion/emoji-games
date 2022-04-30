@@ -10,7 +10,7 @@ import { useRouter } from 'vue-router';
 import CustomField from './common/CustomField.vue';
 
 import CommonTitle from './common/CommonTitle.vue';
-import { getQueryVar } from '../utilities/common';
+import { getQueryVar, capitalizeFirstLetter } from '../utilities/common';
 import { getAxiosError } from '../utilities/axios';
 
 const showPassword = ref(false);
@@ -74,6 +74,8 @@ async function signin() {
     if (axiosError) {
       errors.value.push(axiosError);
     }
+
+    //Bugsnag.notify(new Error(error));
   } finally {
     loading.value = false;
   }
@@ -92,7 +94,7 @@ async function signin() {
     >
       <template v-if="errors.length">
         <div v-for="error in errors" class="alert alert-danger mb-4">
-          ⚠️ {{ error }}
+          ⚠️ {{ capitalizeFirstLetter(error.toString()) }}
         </div>
       </template>
       <CustomField

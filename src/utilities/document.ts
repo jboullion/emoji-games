@@ -5,10 +5,12 @@
 export function toggleFullscreen() {
   if (document.fullscreenElement) {
     document.exitFullscreen();
+    //window.screen.orientation.unlock();
     //.then(() => console.log('Document Exited from Full screen mode'))
     //.catch((err) => console.error(err));
   } else {
     document.documentElement.requestFullscreen();
+    //window.screen.orientation.lock('landscape');
   }
 }
 

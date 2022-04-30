@@ -227,6 +227,10 @@ a:focus-visible,
   color: #af0d1a;
 }
 
+.alert:first-letter {
+  text-transform: uppercase;
+}
+
 .alert-danger {
   background-color: #e81224;
   border-color: #af0d1a;

@@ -14,6 +14,8 @@ import {
   validateEmail,
   validatePassword,
 } from '../utilities/validation';
+import { capitalizeFirstLetter } from '../utilities/common';
+import { getAxiosError } from '../utilities/axios';
 
 const _authService: AuthService = inject('authService') as AuthService;
 const _userService: UserService = inject('userService') as UserService;
@@ -112,17 +114,12 @@ async function updateUser() {
       //Bugsnag.notify(new Error('No access token returned'));
     }
   } catch (error: AxiosError | any) {
-    if (error.response) {
-      if (error.response.data?.statusCode === 400) {
-        errors.value = error.response.data.message;
-      } else if (error.response.data?.statusCode === 401) {
-        errors.value.push(error.response.data.message);
-      } else if (error.response.data?.statusCode === 409) {
-        errors.value.push(error.response.data.message);
-      }
-    } else {
-      //Bugsnag.notify(new Error(error));
+    const axiosError = getAxiosError(error);
+    if (axiosError) {
+      errors.value.push(axiosError);
     }
+
+    //Bugsnag.notify(new Error(error));
   } finally {
     loading.value = false;
   }
@@ -198,7 +195,7 @@ onMounted(() => {
         <form @submit.prevent="updateUser" class="" novalidate>
           <template v-if="errors.length">
             <div v-for="error in errors" class="alert alert-danger mb-4">
-              ⚠️ {{ error }}
+              ⚠️ {{ capitalizeFirstLetter(error.toString()) }}
             </div>
           </template>
 
