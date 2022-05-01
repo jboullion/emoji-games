@@ -1,70 +1,22 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { inject, onMounted, ref } from 'vue';
 import { IShopItem } from '../types/Shop';
 import CommonTitle from './common/CommonTitle.vue';
 import ShopItem from './ShopItem.vue';
 import ShopModal from './modals/BuyShopItem.vue';
+import ShopService from '../services/ShopService';
 
-const shopItems: IShopItem[] = [
-  {
-    id: 1,
-    emoji: '🎆',
-    name: 'Firework',
-    description: 'Clicking creates fireworks!',
-    tickets: 100,
-  },
-  {
-    id: 2,
-    emoji: '🎆',
-    name: 'Firework',
-    description: 'Clicking creates fireworks!',
-    tickets: 100,
-  },
-  {
-    id: 3,
-    emoji: '🎆',
-    name: 'Firework',
-    description: 'Clicking creates fireworks!',
-    tickets: 100,
-  },
-  {
-    id: 4,
-    emoji: '🎆',
-    name: 'Firework',
-    description: 'Clicking creates fireworks!',
-    tickets: 100,
-  },
-  {
-    id: 5,
-    emoji: '🎆',
-    name: 'Firework',
-    description: 'Clicking creates fireworks!',
-    tickets: 100,
-  },
-  {
-    id: 6,
-    emoji: '🎆',
-    name: 'Firework',
-    description: 'Clicking creates fireworks!',
-    tickets: 100,
-  },
-  {
-    id: 7,
-    emoji: '🎆',
-    name: 'Firework',
-    description: 'Clicking creates fireworks!',
-    tickets: 100,
-  },
-];
+const _shopService: ShopService = inject('shopService') as ShopService;
 
 let shopModal: { show: () => void; hide: () => void } | null = null;
 const selectedItem = ref<IShopItem>({
-  id: 1,
-  emoji: '🎆',
-  name: 'Firework',
-  description: 'Clicking creates fireworks!',
-  tickets: 100,
+  id: 0,
+  emoji: '',
+  name: '',
+  description: '',
+  tickets: 0,
 });
+const shopItems = ref<IShopItem[]>([]);
 
 function buyItem(item: IShopItem) {
   selectedItem.value = item;
@@ -79,9 +31,12 @@ function buyItem(item: IShopItem) {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   // @ts-ignore
   shopModal = new bootstrap.Modal(document.getElementById('shop-modal'));
+
+  shopItems.value = await _shopService.getItems();
+  console.log(shopItems);
 });
 </script>
 

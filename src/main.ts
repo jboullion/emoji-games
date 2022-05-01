@@ -8,6 +8,7 @@ import axios from 'axios';
 import AuthService from './services/AuthService';
 import UserService from './services/UserService';
 import { io, Socket } from 'socket.io-client';
+import ShopService from './services/ShopService';
 
 // import Bugsnag from '@bugsnag/js';
 // import BugsnagPluginVue from '@bugsnag/plugin-vue';
@@ -30,6 +31,7 @@ const $axios = axios.create({
 
 const authService = new AuthService($axios);
 const userService = new UserService($axios);
+const shopService = new ShopService($axios);
 const socket = io(baseURL);
 
 // Bugsnag.start({
@@ -48,6 +50,7 @@ app.use(router).use(store).mount('#app'); // .use(bugsnagVue)
 app.provide('axios', $axios);
 app.provide('authService', authService);
 app.provide('userService', userService);
+app.provide('shopService', shopService);
 app.provide('socket', socket);
 
 // On load setup user if they exist

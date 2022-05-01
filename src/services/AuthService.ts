@@ -8,7 +8,7 @@ import router from '../router';
 import { IUser } from '../types/User';
 import { parseJwt } from '../utilities/common';
 
-const BASE_URL = '/auth';
+const BASE_URL = '/v1/auth';
 
 export interface IAuthService {
   /**

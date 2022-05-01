@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import store from '../store';
 
 // Return Axios Errors
 export function getAxiosError(error: AxiosError | any): string | null {
@@ -17,4 +18,10 @@ export function getAxiosError(error: AxiosError | any): string | null {
   }
 
   return null;
+}
+
+export function setHeaders() {
+  return {
+    headers: { Authorization: `Bearer ${store.getters.jwt}` },
+  };
 }

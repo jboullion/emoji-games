@@ -1,6 +1,6 @@
-const BASE_URL = '/user';
 import store from '../store';
 import { IUserUpdate, IUser } from '../types/User';
+import { setHeaders } from '../utilities/axios';
 
 export interface IUserService {
   getUser(): Promise<IUser>;
@@ -9,17 +9,12 @@ export interface IUserService {
   updateTickets(tickets: number): Promise<number | null>;
 }
 
+const BASE_URL = '/v1/user';
 export default class UserService implements IUserService {
   constructor(private _axios: any) {}
 
-  private setHeaders() {
-    return {
-      headers: { Authorization: `Bearer ${store.getters.jwt}` },
-    };
-  }
-
   async getUser(): Promise<IUser> {
-    const res = await this._axios.get(`${BASE_URL}/`, this.setHeaders());
+    const res = await this._axios.get(`${BASE_URL}/`, setHeaders());
     return res.data;
   }
 
@@ -27,7 +22,7 @@ export default class UserService implements IUserService {
     const res = await this._axios.patch(
       `${BASE_URL}/update`,
       userUpdate,
-      this.setHeaders(),
+      setHeaders(),
     );
     return res.data;
   }
@@ -38,7 +33,7 @@ export default class UserService implements IUserService {
     const res = await this._axios.patch(
       `${BASE_URL}/avatar`,
       { emoji: avatar },
-      this.setHeaders(),
+      setHeaders(),
     );
     return res.data;
   }
@@ -49,7 +44,7 @@ export default class UserService implements IUserService {
     const res = await this._axios.patch(
       `${BASE_URL}/tickets`,
       { tickets },
-      this.setHeaders(),
+      setHeaders(),
     );
     return res.data;
   }
