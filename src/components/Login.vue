@@ -12,6 +12,7 @@ import CustomField from './common/CustomField.vue';
 import CommonTitle from './common/CommonTitle.vue';
 import { getQueryVar, capitalizeFirstLetter } from '../utilities/common';
 import { getAxiosError } from '../utilities/axios';
+import ErrorAlert from './common/ErrorAlert.vue';
 
 const showPassword = ref(false);
 
@@ -92,11 +93,8 @@ async function signin() {
       novalidate
       autocomplete="off"
     >
-      <template v-if="errors.length">
-        <div v-for="error in errors" class="alert alert-danger mb-4">
-          ⚠️ {{ capitalizeFirstLetter(error.toString()) }}
-        </div>
-      </template>
+      <ErrorAlert v-if="errors.length" :errors="errors" />
+
       <CustomField
         wrapClass="mb-3"
         label="Email"

@@ -16,6 +16,7 @@ import {
 } from '../utilities/validation';
 import { capitalizeFirstLetter } from '../utilities/common';
 import { getAxiosError } from '../utilities/axios';
+import ErrorAlert from './common/ErrorAlert.vue';
 
 const _authService: AuthService = inject('authService') as AuthService;
 const _userService: UserService = inject('userService') as UserService;
@@ -193,11 +194,7 @@ onMounted(() => {
       <div class="col-md-6 mb-5">
         <div class="alert alert-light" v-if="success">{{ success }}</div>
         <form @submit.prevent="updateUser" class="" novalidate>
-          <template v-if="errors.length">
-            <div v-for="error in errors" class="alert alert-danger mb-4">
-              ⚠️ {{ capitalizeFirstLetter(error.toString()) }}
-            </div>
-          </template>
+          <ErrorAlert v-if="errors.length" :errors="errors" />
 
           <CustomField
             wrapClass="mb-4"

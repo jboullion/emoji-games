@@ -17,6 +17,7 @@ import CustomField from './common/CustomField.vue';
 import CommonTitle from './common/CommonTitle.vue';
 import { IUser } from '../types/User';
 import { getAxiosError } from '../utilities/axios';
+import ErrorAlert from './common/ErrorAlert.vue';
 
 const showPassword = ref(false);
 
@@ -102,11 +103,7 @@ async function signup() {
     <CommonTitle title="Register" />
 
     <form @submit.prevent="validateRegister" class="" novalidate>
-      <template v-if="errors.length">
-        <div v-for="error in errors" class="alert alert-danger mb-4">
-          ⚠️ {{ error }}
-        </div>
-      </template>
+      <ErrorAlert v-if="errors.length" :errors="errors" />
 
       <CustomField
         wrapClass="mb-3"

@@ -14,11 +14,7 @@ export default class ShopService implements IShopService {
   constructor(private _axios: any) {}
 
   async buyItem(itemId: number): Promise<IShopItem> {
-    const res = await this._axios.post(
-      `${BASE_URL}/`,
-      { itemId },
-      setHeaders(),
-    );
+    const res = await this._axios.post(`${BASE_URL}`, { itemId }, setHeaders());
     return res.data;
   }
 
