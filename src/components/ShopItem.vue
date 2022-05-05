@@ -16,8 +16,10 @@ const emit = defineEmits(['buyItem']);
   <div class="card shop-item">
     <span class="shop-image">{{ item.emoji }}</span>
     <div class="card-body">
-      <h5 class="card-title">{{ item.name }}</h5>
-      <p class="card-text">{{ item.description }}</p>
+      <div class="mb-4">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">{{ item.description }}</p>
+      </div>
       <button
         type="button"
         class="btn btn-primary col-12"
@@ -30,8 +32,15 @@ const emit = defineEmits(['buyItem']);
 </template>
 
 <style>
+.card.shop-item {
+  height: 100%;
+}
+
 .shop-item .card-body {
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .shop-image {
