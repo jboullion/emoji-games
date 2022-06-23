@@ -1,6 +1,8 @@
 # Emoji Games
 A simple app for testing NestJS functionality.
 
-Includes JWT session strategies, user login, Socket.io chat, and a variety of other neat things!
+This is the front end repo using Vue 3 composition API and Typescript. This app uses a NestJS back end. 
 
 Demo: https://emojis.jboullion.com/
+
+Backend Repo: https://github.com/jboullion/emoji-backend
